@@ -1,0 +1,41 @@
+[
+    {
+        "name": "koenpunt/php-inflector",
+        "version": "v1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/koenpunt/php-inflector.git",
+            "reference": "6c0157f7fb6e5129743508c303dcb6b1d246b800"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/koenpunt/php-inflector/zipball/6c0157f7fb6e5129743508c303dcb6b1d246b800",
+            "reference": "6c0157f7fb6e5129743508c303dcb6b1d246b800",
+            "shasum": ""
+        },
+        "time": "2014-04-10T19:13:17+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PhpInflector\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Koen Punt",
+                "email": "me@koen.pt"
+            }
+        ],
+        "description": "PHP Inflector, ported from Rails",
+        "keywords": [
+            "inflector",
+            "php"
+        ]
+    }
+]
