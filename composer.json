@@ -5,6 +5,7 @@
         ]
     },
     "require": {
-        "koenpunt/php-inflector": "^1.0"
+        "koenpunt/php-inflector": "^1.0",
+        "phpoffice/phpspreadsheet": "^1.10"
     }
 }
