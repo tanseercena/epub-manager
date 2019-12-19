@@ -6,5 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Psr\\SimpleCache\\' => array($vendorDir . '/psr/simple-cache/src'),
+    'PhpOffice\\PhpSpreadsheet\\' => array($vendorDir . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet'),
     'PhpInflector\\' => array($vendorDir . '/koenpunt/php-inflector/lib'),
+    'Matrix\\' => array($vendorDir . '/markbaker/matrix/classes/src'),
+    'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
 );
