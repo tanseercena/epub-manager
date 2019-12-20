@@ -13,10 +13,15 @@ if($_POST){
        
         // Set Session
         if(isset($user_data['id'])){
+
             Session::set('user_id',$user_data['id']);
-            // Session::set('email',$user_data['email']);
-            //Redirect to Dashboard/home
+            
         }
-        
+        else 
+        {
+            Session::flash('error',"There was some error in login");
+            header("Location:../login.php");
+           
+        }    
     }
 }

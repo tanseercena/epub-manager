@@ -25,23 +25,27 @@ class Session{
        if(isset($_SESSION[$key])){
         return $_SESSION[$key];
        }
-       return ''; 
+       return false; 
     }
 
     public function unset_key($key){
         unset($_SESSION[$key]);
     }
+    
+    public static function has($key){
+        return self::get($key);
+    }
 
-    public function flash($key,$value='')
+    public static function flash($key,$value='')
     {
         if(empty($value))
         {
-            $value = Session::get($key);
-            $this->unset_key($key);
+            $value = self::get($key);
+            self::unset_key($key);
             return $value;    
         }
 
-        Session::set($key,$value);
+        self::set($key,$value);
     }
 
     public function destroy(){

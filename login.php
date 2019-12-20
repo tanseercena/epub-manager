@@ -1,5 +1,7 @@
 <?php 
 require_once "config/init.php";
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,6 +68,14 @@ require_once "config/init.php";
 
               <h4 class="text-dark mb-5">Sign In</h4>
               <form action="actions/user_login.php" method="post">
+              <div class="row">
+                <p>
+                  <?php 
+                  if(Session::has('error'))
+                  {
+                       echo Session::flash('error');
+                  } ?></p>
+                </div>
                 <div class="row">
                   <div class="form-group col-md-12 mb-4">
                     <input type="email" name="email" class="form-control input-lg" id="email" aria-describedby="emailHelp" placeholder="Username">
