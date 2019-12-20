@@ -65,6 +65,20 @@ require_once "config/init.php";
                 <div class="card-body p-5">
                   <h4 class="text-dark mb-5">Sign Up</h4>
                   <form action="actions/register_user.php" method="post">
+                  <div class="row">
+                  <?php 
+                  if(Session::has('errors'))
+                  {
+                       $errors = Session::flash('errors');
+                       foreach($errors as $key => $error)
+                       {
+                         foreach($error as $err)
+                         {
+                           echo '<p>'.$err.'</p>';
+                         }
+                       }
+                   } ?>
+                </div>
                     <div class="row">
                       <div class="form-group col-md-12 mb-4">
                         <input type="text"  name="firstname" class="form-control input-lg" id="firstname" aria-describedby="firstnameHelp" placeholder="First Name">
