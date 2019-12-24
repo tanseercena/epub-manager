@@ -7,7 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 {
     public static $files = array (
+<<<<<<< HEAD
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+=======
+<<<<<<< HEAD
+=======
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -66,7 +73,14 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'aa53dcba601214d17ad405b7c291b7e8' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/multiply.php',
         '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
         '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
+<<<<<<< HEAD
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+=======
+<<<<<<< HEAD
+=======
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -85,7 +99,14 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
+<<<<<<< HEAD
             'Prophecy\\' => 9,
+=======
+<<<<<<< HEAD
+=======
+            'Prophecy\\' => 9,
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PhpInflector\\' => 13,
         ),
@@ -93,11 +114,20 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         array (
             'Matrix\\' => 7,
         ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
             'DeepCopy\\' => 9,
         ),
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'C' => 
         array (
             'Complex\\' => 8,
@@ -105,6 +135,11 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
     );
 
     public static $prefixDirsPsr4 = array (
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
@@ -119,14 +154,27 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'Prophecy\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
         ),
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
@@ -139,6 +187,11 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'Doctrine\\Instantiator\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/instantiator/src/Doctrine/Instantiator',
@@ -147,10 +200,19 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
     );
 
     public static $prefixesPsr0 = array (
@@ -161,6 +223,10 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
                 0 => __DIR__ . '/../..' . '/',
             ),
         ),
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
     );
 
     public static $classMap = array (
@@ -174,6 +240,11 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'Max' => __DIR__ . '/../..' . '/classes/Validation/Max.php',
         'Min' => __DIR__ . '/../..' . '/classes/Validation/Min.php',
         'Numeric' => __DIR__ . '/../..' . '/classes/Validation/Numeric.php',
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'PHPUnit\\Exception' => __DIR__ . '/..' . '/phpunit/phpunit/src/Exception.php',
         'PHPUnit\\Framework\\Assert' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert.php',
         'PHPUnit\\Framework\\AssertionFailedError' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -614,6 +685,10 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'PharIo\\Version\\VersionConstraintParser' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintParser.php',
         'PharIo\\Version\\VersionConstraintValue' => __DIR__ . '/..' . '/phar-io/version/src/VersionConstraintValue.php',
         'PharIo\\Version\\VersionNumber' => __DIR__ . '/..' . '/phar-io/version/src/VersionNumber.php',
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'QnapTrack' => __DIR__ . '/../..' . '/classes/QnapTrack.php',
         'Query' => __DIR__ . '/../..' . '/classes/Query.php',
         'Required' => __DIR__ . '/../..' . '/classes/Validation/Required.php',
@@ -727,6 +802,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
         'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
         'Unique' => __DIR__ . '/../..' . '/classes/Validation/Unique.php',
+        'Upload' => __DIR__ . '/../..' . '/classes/Upload.php',
         'User' => __DIR__ . '/../..' . '/classes/User.php',
         'ValidationInterface' => __DIR__ . '/../..' . '/classes/Validation/ValidationInterface.php',
         'ValidationStrategy' => __DIR__ . '/../..' . '/classes/Validation/ValidationStrategy.php',

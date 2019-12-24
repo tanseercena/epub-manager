@@ -16,6 +16,11 @@ return array(
     'Max' => $baseDir . '/classes/Validation/Max.php',
     'Min' => $baseDir . '/classes/Validation/Min.php',
     'Numeric' => $baseDir . '/classes/Validation/Numeric.php',
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert.php',
     'PHPUnit\\Framework\\AssertionFailedError' => $vendorDir . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -456,6 +461,10 @@ return array(
     'PharIo\\Version\\VersionConstraintParser' => $vendorDir . '/phar-io/version/src/VersionConstraintParser.php',
     'PharIo\\Version\\VersionConstraintValue' => $vendorDir . '/phar-io/version/src/VersionConstraintValue.php',
     'PharIo\\Version\\VersionNumber' => $vendorDir . '/phar-io/version/src/VersionNumber.php',
+<<<<<<< HEAD
+=======
+>>>>>>> upstream/master
+>>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
     'QnapTrack' => $baseDir . '/classes/QnapTrack.php',
     'Query' => $baseDir . '/classes/Query.php',
     'Required' => $baseDir . '/classes/Validation/Required.php',
@@ -569,6 +578,7 @@ return array(
     'TheSeer\\Tokenizer\\Tokenizer' => $vendorDir . '/theseer/tokenizer/src/Tokenizer.php',
     'TheSeer\\Tokenizer\\XMLSerializer' => $vendorDir . '/theseer/tokenizer/src/XMLSerializer.php',
     'Unique' => $baseDir . '/classes/Validation/Unique.php',
+    'Upload' => $baseDir . '/classes/Upload.php',
     'User' => $baseDir . '/classes/User.php',
     'ValidationInterface' => $baseDir . '/classes/Validation/ValidationInterface.php',
     'ValidationStrategy' => $baseDir . '/classes/Validation/ValidationStrategy.php',
