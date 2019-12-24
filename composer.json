@@ -2,10 +2,16 @@
     "autoload": {
         "classmap": [
             "classes/"
-        ]
+        ],
+        "psr-0": {
+          "UnitTestFiles": ""
+        }
     },
     "require": {
         "koenpunt/php-inflector": "^1.0",
         "phpoffice/phpspreadsheet": "^1.10"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "^7"
     }
 }

@@ -19,7 +19,7 @@ if($_POST){
         [
             'name'  => 'password',
             'value' => $_POST['password'],
-            'rules' => 'required|confirm:confirm_password'
+            'rules' => 'required'
         ],
     ];
 
@@ -46,13 +46,16 @@ if($_POST){
         $check = $user->insert($user_data);
         if($check){
             echo "User Register";
-        }else{
+        }
+        else{
             echo "Error while Register";
         }
     }else{
         // Redirect back with errors
-        echo "<pre>";
-        print_r($errors);
+
+         Session::flash('errors',$errors);
+         header("Location: ../register.php");
+        
     }
     
 
