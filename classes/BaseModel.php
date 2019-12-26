@@ -45,17 +45,19 @@ abstract class BaseModel {
     }
 
     public function update($data = []){
+        $updated = false;
         if($this->exists){
-            $this->query->update($this->data['id'],$data);
+            $updated = $this->query->update($this->data['id'],$data);
             $this->data = $this->query->find($this->data['id']);
         }   
-
+        return $updated;
     }
 
     public function delete(){
         if($this->exists){
-         $this->query->delete($this->data['id']);
+         return $this->query->delete($this->data['id']);
         }
+        return false;
     }
 
     public function find($id){

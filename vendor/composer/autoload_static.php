@@ -8,6 +8,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 {
     public static $files = array (
 <<<<<<< HEAD
+<<<<<<< HEAD
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
 =======
 <<<<<<< HEAD
@@ -15,6 +16,8 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
         'abede361264e2ae69ec1eee813a101af' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/abs.php',
         '21a5860fbef5be28db5ddfbc3cca67c4' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acos.php',
         '1546e3f9d127f2a9bb2d1b6c31c26ef1' => __DIR__ . '/..' . '/markbaker/complex/classes/src/functions/acosh.php',
@@ -74,6 +77,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         '75c79eb1b25749b05a47976f32b0d8a2' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideby.php',
         '6ab8ad87a734f276a6bcd5a0fe1289be' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/operations/divideinto.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
 =======
 <<<<<<< HEAD
@@ -81,25 +85,16 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
     );
 
     public static $prefixLengthsPsr4 = array (
-        'p' => 
-        array (
-            'phpDocumentor\\Reflection\\' => 25,
-        ),
-        'W' => 
-        array (
-            'Webmozart\\Assert\\' => 17,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Ctype\\' => 23,
-        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
 <<<<<<< HEAD
+<<<<<<< HEAD
             'Prophecy\\' => 9,
 =======
 <<<<<<< HEAD
@@ -107,6 +102,8 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
             'Prophecy\\' => 9,
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PhpInflector\\' => 13,
         ),
@@ -114,6 +111,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         array (
             'Matrix\\' => 7,
         ),
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -128,6 +126,8 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 =======
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
         'C' => 
         array (
             'Complex\\' => 8,
@@ -135,6 +135,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
     );
 
     public static $prefixDirsPsr4 = array (
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -158,10 +159,13 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 =======
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
         ),
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -175,6 +179,8 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 =======
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
@@ -187,6 +193,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         array (
             0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -204,6 +211,8 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 =======
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
         'Complex\\' => 
         array (
             0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
@@ -234,12 +243,14 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'Book' => __DIR__ . '/../..' . '/classes/Book.php',
         'DB' => __DIR__ . '/../..' . '/classes/DB.php',
         'Database' => __DIR__ . '/../..' . '/classes/Database.php',
+        'Department' => __DIR__ . '/../..' . '/classes/AddDepartment.php',
         'Email' => __DIR__ . '/../..' . '/classes/Validation/Email.php',
         'ExcelImport' => __DIR__ . '/../..' . '/classes/Excel/ExcelImport.php',
         'Helper' => __DIR__ . '/../..' . '/classes/Helper.php',
         'Max' => __DIR__ . '/../..' . '/classes/Validation/Max.php',
         'Min' => __DIR__ . '/../..' . '/classes/Validation/Min.php',
         'Numeric' => __DIR__ . '/../..' . '/classes/Validation/Numeric.php',
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -690,117 +701,11 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
 >>>>>>> upstream/master
 >>>>>>> 37ab551e8dc8b29ee0335bde7b7ce036321de180
         'QnapTrack' => __DIR__ . '/../..' . '/classes/QnapTrack.php',
+=======
+>>>>>>> d9dad08bb2f33004ce190b4bb8a6d17209767577
         'Query' => __DIR__ . '/../..' . '/classes/Query.php',
         'Required' => __DIR__ . '/../..' . '/classes/Validation/Required.php',
-        'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
-        'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
-        'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',
-        'SebastianBergmann\\CodeCoverage\\Driver\\PHPDBG' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/PHPDBG.php',
-        'SebastianBergmann\\CodeCoverage\\Driver\\Xdebug' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Xdebug.php',
-        'SebastianBergmann\\CodeCoverage\\Exception' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/Exception.php',
-        'SebastianBergmann\\CodeCoverage\\Filter' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Filter.php',
-        'SebastianBergmann\\CodeCoverage\\InvalidArgumentException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/InvalidArgumentException.php',
-        'SebastianBergmann\\CodeCoverage\\MissingCoversAnnotationException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/MissingCoversAnnotationException.php',
-        'SebastianBergmann\\CodeCoverage\\Node\\AbstractNode' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Node/AbstractNode.php',
-        'SebastianBergmann\\CodeCoverage\\Node\\Builder' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Node/Builder.php',
-        'SebastianBergmann\\CodeCoverage\\Node\\Directory' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Node/Directory.php',
-        'SebastianBergmann\\CodeCoverage\\Node\\File' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Node/File.php',
-        'SebastianBergmann\\CodeCoverage\\Node\\Iterator' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Node/Iterator.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Clover' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Clover.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Crap4j' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Crap4j.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Html\\Dashboard' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Html/Renderer/Dashboard.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Html\\Directory' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Html/Renderer/Directory.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Html\\Facade' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Html/Facade.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Html\\File' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Html/Renderer/File.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Html\\Renderer' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Html/Renderer.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\PHP' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/PHP.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Text' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Text.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\BuildInformation' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/BuildInformation.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Coverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Coverage.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Directory' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Directory.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Facade' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Facade.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\File' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/File.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Method' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Method.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Node' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Node.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Project' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Project.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Report' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Report.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Source' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Source.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Tests' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Tests.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Totals' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Totals.php',
-        'SebastianBergmann\\CodeCoverage\\Report\\Xml\\Unit' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Report/Xml/Unit.php',
-        'SebastianBergmann\\CodeCoverage\\RuntimeException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/RuntimeException.php',
-        'SebastianBergmann\\CodeCoverage\\UnintentionallyCoveredCodeException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/UnintentionallyCoveredCodeException.php',
-        'SebastianBergmann\\CodeCoverage\\Util' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Util.php',
-        'SebastianBergmann\\CodeCoverage\\Version' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Version.php',
-        'SebastianBergmann\\CodeUnitReverseLookup\\Wizard' => __DIR__ . '/..' . '/sebastian/code-unit-reverse-lookup/src/Wizard.php',
-        'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
-        'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
-        'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',
-        'SebastianBergmann\\Comparator\\DOMNodeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DOMNodeComparator.php',
-        'SebastianBergmann\\Comparator\\DateTimeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DateTimeComparator.php',
-        'SebastianBergmann\\Comparator\\DoubleComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/DoubleComparator.php',
-        'SebastianBergmann\\Comparator\\ExceptionComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ExceptionComparator.php',
-        'SebastianBergmann\\Comparator\\Factory' => __DIR__ . '/..' . '/sebastian/comparator/src/Factory.php',
-        'SebastianBergmann\\Comparator\\MockObjectComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/MockObjectComparator.php',
-        'SebastianBergmann\\Comparator\\NumericComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/NumericComparator.php',
-        'SebastianBergmann\\Comparator\\ObjectComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ObjectComparator.php',
-        'SebastianBergmann\\Comparator\\ResourceComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ResourceComparator.php',
-        'SebastianBergmann\\Comparator\\ScalarComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ScalarComparator.php',
-        'SebastianBergmann\\Comparator\\SplObjectStorageComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/SplObjectStorageComparator.php',
-        'SebastianBergmann\\Comparator\\TypeComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/TypeComparator.php',
-        'SebastianBergmann\\Diff\\Chunk' => __DIR__ . '/..' . '/sebastian/diff/src/Chunk.php',
-        'SebastianBergmann\\Diff\\ConfigurationException' => __DIR__ . '/..' . '/sebastian/diff/src/Exception/ConfigurationException.php',
-        'SebastianBergmann\\Diff\\Diff' => __DIR__ . '/..' . '/sebastian/diff/src/Diff.php',
-        'SebastianBergmann\\Diff\\Differ' => __DIR__ . '/..' . '/sebastian/diff/src/Differ.php',
-        'SebastianBergmann\\Diff\\Exception' => __DIR__ . '/..' . '/sebastian/diff/src/Exception/Exception.php',
-        'SebastianBergmann\\Diff\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/diff/src/Exception/InvalidArgumentException.php',
-        'SebastianBergmann\\Diff\\Line' => __DIR__ . '/..' . '/sebastian/diff/src/Line.php',
-        'SebastianBergmann\\Diff\\LongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/LongestCommonSubsequenceCalculator.php',
-        'SebastianBergmann\\Diff\\MemoryEfficientLongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/MemoryEfficientLongestCommonSubsequenceCalculator.php',
-        'SebastianBergmann\\Diff\\Output\\AbstractChunkOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/AbstractChunkOutputBuilder.php',
-        'SebastianBergmann\\Diff\\Output\\DiffOnlyOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/DiffOnlyOutputBuilder.php',
-        'SebastianBergmann\\Diff\\Output\\DiffOutputBuilderInterface' => __DIR__ . '/..' . '/sebastian/diff/src/Output/DiffOutputBuilderInterface.php',
-        'SebastianBergmann\\Diff\\Output\\StrictUnifiedDiffOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/StrictUnifiedDiffOutputBuilder.php',
-        'SebastianBergmann\\Diff\\Output\\UnifiedDiffOutputBuilder' => __DIR__ . '/..' . '/sebastian/diff/src/Output/UnifiedDiffOutputBuilder.php',
-        'SebastianBergmann\\Diff\\Parser' => __DIR__ . '/..' . '/sebastian/diff/src/Parser.php',
-        'SebastianBergmann\\Diff\\TimeEfficientLongestCommonSubsequenceCalculator' => __DIR__ . '/..' . '/sebastian/diff/src/TimeEfficientLongestCommonSubsequenceCalculator.php',
-        'SebastianBergmann\\Environment\\Console' => __DIR__ . '/..' . '/sebastian/environment/src/Console.php',
-        'SebastianBergmann\\Environment\\OperatingSystem' => __DIR__ . '/..' . '/sebastian/environment/src/OperatingSystem.php',
-        'SebastianBergmann\\Environment\\Runtime' => __DIR__ . '/..' . '/sebastian/environment/src/Runtime.php',
-        'SebastianBergmann\\Exporter\\Exporter' => __DIR__ . '/..' . '/sebastian/exporter/src/Exporter.php',
-        'SebastianBergmann\\FileIterator\\Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
-        'SebastianBergmann\\FileIterator\\Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
-        'SebastianBergmann\\FileIterator\\Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
-        'SebastianBergmann\\GlobalState\\Blacklist' => __DIR__ . '/..' . '/sebastian/global-state/src/Blacklist.php',
-        'SebastianBergmann\\GlobalState\\CodeExporter' => __DIR__ . '/..' . '/sebastian/global-state/src/CodeExporter.php',
-        'SebastianBergmann\\GlobalState\\Exception' => __DIR__ . '/..' . '/sebastian/global-state/src/exceptions/Exception.php',
-        'SebastianBergmann\\GlobalState\\Restorer' => __DIR__ . '/..' . '/sebastian/global-state/src/Restorer.php',
-        'SebastianBergmann\\GlobalState\\RuntimeException' => __DIR__ . '/..' . '/sebastian/global-state/src/exceptions/RuntimeException.php',
-        'SebastianBergmann\\GlobalState\\Snapshot' => __DIR__ . '/..' . '/sebastian/global-state/src/Snapshot.php',
-        'SebastianBergmann\\ObjectEnumerator\\Enumerator' => __DIR__ . '/..' . '/sebastian/object-enumerator/src/Enumerator.php',
-        'SebastianBergmann\\ObjectEnumerator\\Exception' => __DIR__ . '/..' . '/sebastian/object-enumerator/src/Exception.php',
-        'SebastianBergmann\\ObjectEnumerator\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/object-enumerator/src/InvalidArgumentException.php',
-        'SebastianBergmann\\ObjectReflector\\Exception' => __DIR__ . '/..' . '/sebastian/object-reflector/src/Exception.php',
-        'SebastianBergmann\\ObjectReflector\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/object-reflector/src/InvalidArgumentException.php',
-        'SebastianBergmann\\ObjectReflector\\ObjectReflector' => __DIR__ . '/..' . '/sebastian/object-reflector/src/ObjectReflector.php',
-        'SebastianBergmann\\RecursionContext\\Context' => __DIR__ . '/..' . '/sebastian/recursion-context/src/Context.php',
-        'SebastianBergmann\\RecursionContext\\Exception' => __DIR__ . '/..' . '/sebastian/recursion-context/src/Exception.php',
-        'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => __DIR__ . '/..' . '/sebastian/recursion-context/src/InvalidArgumentException.php',
-        'SebastianBergmann\\ResourceOperations\\ResourceOperations' => __DIR__ . '/..' . '/sebastian/resource-operations/src/ResourceOperations.php',
-        'SebastianBergmann\\Timer\\Exception' => __DIR__ . '/..' . '/phpunit/php-timer/src/Exception.php',
-        'SebastianBergmann\\Timer\\RuntimeException' => __DIR__ . '/..' . '/phpunit/php-timer/src/RuntimeException.php',
-        'SebastianBergmann\\Timer\\Timer' => __DIR__ . '/..' . '/phpunit/php-timer/src/Timer.php',
-        'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'Session' => __DIR__ . '/../..' . '/classes/Session.php',
-        'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
-        'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
-        'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
-        'TheSeer\\Tokenizer\\NamespaceUriException' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUriException.php',
-        'TheSeer\\Tokenizer\\Token' => __DIR__ . '/..' . '/theseer/tokenizer/src/Token.php',
-        'TheSeer\\Tokenizer\\TokenCollection' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollection.php',
-        'TheSeer\\Tokenizer\\TokenCollectionException' => __DIR__ . '/..' . '/theseer/tokenizer/src/TokenCollectionException.php',
-        'TheSeer\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/theseer/tokenizer/src/Tokenizer.php',
-        'TheSeer\\Tokenizer\\XMLSerializer' => __DIR__ . '/..' . '/theseer/tokenizer/src/XMLSerializer.php',
         'Unique' => __DIR__ . '/../..' . '/classes/Validation/Unique.php',
         'Upload' => __DIR__ . '/../..' . '/classes/Upload.php',
         'User' => __DIR__ . '/../..' . '/classes/User.php',
