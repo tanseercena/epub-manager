@@ -46,6 +46,45 @@
 
 <script src="../assets/js/sleek.bundle.js"></script>
 
+
+<script>
+  toastr.options = {
+        closeButton: true,
+        debug: false,
+        newestOnTop: false,
+        progressBar: true,
+        positionClass: "toast-top-right",
+        preventDuplicates: false,
+        onclick: null,
+        showDuration: "300",
+        hideDuration: "1000",
+        timeOut: "5000",
+        extendedTimeOut: "1000",
+        showEasing: "swing",
+        hideEasing: "linear",
+        showMethod: "fadeIn",
+        hideMethod: "fadeOut"
+      };
+
+      <?php 
+      if (Session::has('errors')) {
+
+        ?>
+          toastr.error('<?php echo Session::flash('errors'); ?>', "Error!");
+        <?php
+      }
+
+      if (Session::has('success')) {
+
+        ?>
+          toastr.success('<?php echo Session::flash('success'); ?>', "Success!");
+        <?php
+      }
+    ?>
+      
+
+  </script>
+
 </body>
 
 </html>

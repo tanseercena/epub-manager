@@ -10,6 +10,7 @@ return array(
     'Book' => $baseDir . '/classes/Book.php',
     'DB' => $baseDir . '/classes/DB.php',
     'Database' => $baseDir . '/classes/Database.php',
+    'Department' => $baseDir . '/classes/AddDepartment.php',
     'Email' => $baseDir . '/classes/Validation/Email.php',
     'ExcelImport' => $baseDir . '/classes/Excel/ExcelImport.php',
     'Helper' => $baseDir . '/classes/Helper.php',

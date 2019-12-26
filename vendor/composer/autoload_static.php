@@ -122,6 +122,7 @@ class ComposerStaticInit6518143538b8c361746bfbe10ba0c5a2
         'Book' => __DIR__ . '/../..' . '/classes/Book.php',
         'DB' => __DIR__ . '/../..' . '/classes/DB.php',
         'Database' => __DIR__ . '/../..' . '/classes/Database.php',
+        'Department' => __DIR__ . '/../..' . '/classes/AddDepartment.php',
         'Email' => __DIR__ . '/../..' . '/classes/Validation/Email.php',
         'ExcelImport' => __DIR__ . '/../..' . '/classes/Excel/ExcelImport.php',
         'Helper' => __DIR__ . '/../..' . '/classes/Helper.php',

@@ -36,15 +36,12 @@ class Session{
         return self::get($key);
     }
 
-    public static function flash($key,$value='')
-    {
-        if(empty($value))
-        {
+    public static function flash($key,$value='') {
+        if(empty($value)) {
             $value = self::get($key);
             self::unset_key($key);
             return $value;    
         }
-
         self::set($key,$value);
     }
 
