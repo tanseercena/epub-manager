@@ -19,7 +19,7 @@ $session = Session::getInstance();
 // // $records = $db::get();
 
 // // $id = 1;
-// // $result = DB::query("UPDATE user SET name='Test' WHERE id=$id");
+// $result = DB::query("UPDATE user SET name='Test' WHERE id=$id");
 
 // // $result = DB:query("SELECT * FROM users LEFT JOIN books ON books.user_id = users.id WHERE users.user_id=1")
 

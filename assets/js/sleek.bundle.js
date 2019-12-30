@@ -9992,9 +9992,9 @@
 
 	  if(toaster.length != 0){
 	    if (document.dir != "rtl") {
-	      callToaster("toast-top-right");
+	      //callToaster("toast-top-right");
 	    } else {
-	      callToaster("toast-top-left");
+	      //callToaster("toast-top-left");
 	    }
 
 	  }
