@@ -19,7 +19,7 @@ public abstract function send();
 
 public function setConnection(){
     $this->connection = Database::getInstance()->getConnection();
-}
+}       
 
 public function getConnection(){
     return $this->connection;
