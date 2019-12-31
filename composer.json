@@ -9,9 +9,17 @@
     },
     "require": {
         "koenpunt/php-inflector": "^1.0",
+<<<<<<< HEAD
         "phpoffice/phpspreadsheet": "^1.10"
     },
     "require-dev": {
       "phpunit/phpunit": "^7"
+=======
+        "phpmailer/phpmailer": "^5.0",
+        "phpoffice/phpspreadsheet": "1.8.2"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "^5"
+>>>>>>> c230c496b8506d57f0e4c8761e5e272644a99031
     }
 }

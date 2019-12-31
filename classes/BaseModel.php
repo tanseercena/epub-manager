@@ -49,7 +49,7 @@ abstract class BaseModel {
         if($this->exists){
             $updated = $this->query->update($this->data['id'],$data);
             $this->data = $this->query->find($this->data['id']);
-        }   
+        }
         return $updated;
     }
 
@@ -88,7 +88,7 @@ abstract class BaseModel {
     public function get(){
         return $this->query->get();
     }
-    
+
     public function getSql(){
         return $this->query->getSql();
     }
@@ -101,7 +101,7 @@ abstract class BaseModel {
         if(isset($this->data[$column])){
             return $this->data[$column];
         }
-        
+
     }
     public function get_numeric($val) {
         if (is_numeric($val)) {
