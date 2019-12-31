@@ -7,7 +7,7 @@ require_once __DIR__ . "/layouts/header.php";
 <div class="content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper breadcrumb-contacts">
-            <h1>Departments</h1>
+            <h1>Statuses</h1>
 
             <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb p-0">
@@ -23,19 +23,19 @@ require_once __DIR__ . "/layouts/header.php";
                 </ol>
             </nav> -->
             <div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-contact"> Add New Department
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-contact"> Add New Status
                 </button>
             </div>
         </div>
 
-
+        
         <!-- Add Department model Button -->
         <div class="modal fade" id="modal-add-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="../actions/add_department.php" method="post">
+                    <form action="../actions/add_status.php" method="post">
                         <div class="modal-header px-4">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Department</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Status</h5>
                         </div>
                         <div class="modal-body px-4">
 
@@ -43,8 +43,8 @@ require_once __DIR__ . "/layouts/header.php";
 
                                 <div class="col-sm-8 col-lg-10">
                                     <div class="form-group">
-                                        <label for="formGroupExampleInput">Add Department</label>
-                                        <input type="text" name="name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Department">
+                                        <label for="formGroupExampleInput">Add Status</label>
+                                        <input type="text" name="title" required class="form-control" id="formGroupExampleInput" placeholder="Add New Status">
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ require_once __DIR__ . "/layouts/header.php";
                 <!-- Recent Order Table -->
                 <div class="card card-table-border-none" id="recent-orders">
                     <div class="card-header justify-content-between">
-                        <h2>All Departments</h2>
+                        <h2>All Statuses</h2>
                         <div class="
                          ">
                             <span></span>
@@ -75,22 +75,22 @@ require_once __DIR__ . "/layouts/header.php";
                         <table class="table card-table table-responsive table-responsive-large" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Department ID</th>
-                                    <th>Department Name</th>
+                                    <th>Status ID</th>
+                                    <th>Status Name</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
 
-                                $query = new Department();
-                                $departments = $query->all();
-                                foreach ($departments as $department) {
+                                $query = new Status();
+                                $statuses = $query->all();
+                                foreach ($statuses as $status) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $department['id']; ?></td>
+                                        <td><?php echo $status['id']; ?></td>
                                         <td>
-                                            <a class="text-dark" href=""> <?php echo $department['name']; ?></a>
+                                            <p class="text-dark" href=""> <?php echo $status['title']; ?></p>
                                         </td>
 
 
@@ -99,10 +99,10 @@ require_once __DIR__ . "/layouts/header.php";
                                                 <a class="dropdown-toggle icon-burger-mini" href="" role="button" id="dropdown-recent-order1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
                                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order1">
                                                     <li class="dropdown-item">
-                                                        <a href="#" onclick="showEditForm(<?php echo $department['id']; ?>,'<?php echo $department['name']; ?>')">Edit</a>
+                                                        <a href="#" onclick="showEditForm(<?php echo $status['id']; ?>,'<?php echo $status['title']; ?>')">Edit</a>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <a href="../actions/delete_department.php?department_id=<?php echo $department['id'] ?>">Delete</a>
+                                                        <a href="../actions/delete_status.php?status_id=<?php echo $status['id'] ?>">Delete</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -200,10 +200,10 @@ require_once __DIR__ . "/layouts/header.php";
 <div class="modal fade" id="modal-add-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form action="../actions/update_department.php" method="post">
-                <input type="hidden" name="department_id" id="department_id">
+            <form action="../actions/update_status.php" method="post">
+                <input type="hidden" name="id" id="status_id">
                 <div class="modal-header px-4">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit Department Name</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit Status Name</h5>
                 </div>
                 <div class="modal-body px-4">
 
@@ -211,8 +211,8 @@ require_once __DIR__ . "/layouts/header.php";
 
                         <div class="col-sm-8 col-lg-10">
                             <div class="form-group">
-                                <label for="formGroupExampleInput">Edit Department Name</label>
-                                <input type="text" name="name" id="dep_name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Department">
+                                <label for="formGroupExampleInput">Edit Status Name</label>
+                                <input type="text" name="title" id="sta_name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Status">
                             </div>
                         </div>
                     </div>
@@ -229,9 +229,9 @@ require_once __DIR__ . "/layouts/header.php";
 </div>
 
 <script>
-    function showEditForm(dep_id, dep_name) {
-        $("#department_id").val(dep_id);
-        $("#dep_name").val(dep_name);
+    function showEditForm(sta_id, sta_name) {
+        $("#status_id").val(sta_id);
+        $("#sta_name").val(sta_name);
         $('#modal-add-edit').modal('show');
     }
 </script>
