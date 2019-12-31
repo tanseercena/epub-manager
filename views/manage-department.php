@@ -28,7 +28,7 @@ require_once __DIR__ . "/layouts/header.php";
             </div>
         </div>
 
-        
+
         <!-- Add Department model Button -->
         <div class="modal fade" id="modal-add-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
