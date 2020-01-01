@@ -19,23 +19,23 @@
   <!-- PLUGINS CSS STYLE -->
   <link href="../assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
 
-  
-  
+
+
   <!-- No Extra plugin used -->
-  
-  
-  
+
+
+
   <link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
-  
-  
-  
+
+
+
   <link href="../assets/plugins/daterangepicker/daterangepicker.css" rel="stylesheet" />
-  
-  
-  
+
+
+
   <link href="../assets/plugins/toastr/toastr.min.css" rel="stylesheet" />
-  
-  
+
+
 
   <!-- SLEEK CSS 123-->
 
@@ -44,7 +44,7 @@
   <!-- FAVICON -->
   <link href="../assets/img/favicon.png" rel="shortcut icon" />
 
-  
+
 
   <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -59,15 +59,15 @@
 
 
 <body class="header-fixed sidebar-fixed sidebar-dark header-light" id="body">
-  
+
   <script>
     NProgress.configure({ showSpinner: false });
     NProgress.start();
   </script>
 
-  
+
   <div id="toaster"></div>
-  
+
 
   <div class="wrapper">
     <!-- Github Link -->
@@ -89,8 +89,8 @@
           ——— LEFT SIDEBAR WITH FOOTER
           =====================================
         -->
-        
-        <?php require_once('sidebar.php'); ?>
+
+        <?php require_once __DIR__."/sidebar.php"; ?>
 
 
     <div class="page-wrapper">

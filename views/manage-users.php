@@ -7,7 +7,7 @@ require_once __DIR__ . "/layouts/header.php";
 <div class="content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper breadcrumb-contacts">
-            <h1>Departments</h1>
+            <h1>Users</h1>
 
             <!-- <nav aria-label="breadcrumb">
                 <ol class="breadcrumb p-0">
@@ -23,37 +23,74 @@ require_once __DIR__ . "/layouts/header.php";
                 </ol>
             </nav> -->
             <div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-contact"> Add New Department
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-add-user"> Add New User
                 </button>
             </div>
         </div>
 
-
-        <!-- Add Department model Button -->
-        <div class="modal fade" id="modal-add-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <!-- Add User Button  -->
+        <div class="modal fade" id="modal-add-user" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="../actions/add_department.php" method="post">
+                    <form action="../actions/add_user.php" method="post">
                         <div class="modal-header px-4">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Department</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New User</h5>
                         </div>
                         <div class="modal-body px-4">
-
-                            <div class="form-group row mb-6">
-
-                                <div class="col-sm-8 col-lg-10">
+                            <div class="row mb-2">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="formGroupExampleInput">Add Department</label>
-                                        <input type="text" name="name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Department">
+                                        <label for="firstName">First name</label>
+                                        <input type="text" name="firstname" class="form-control" id="firstName" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="lastName">Last name</label>
+                                        <input type="text" name="lastname" class="form-control" id="lastName" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-4">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" class="form-control" autocomplete="off" id="email" value="">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb-4">
+                                        <label for="password">Password</label>
+                                        <input type="password" name="password" class="form-control" autocomplete="off" id="email" value="">
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row mb-6">
+                                <label for="coverImage" class="col-sm-4 col-lg-2 col-form-label"> Department</label>
+                                <div class="col-sm-8 col-lg-10">
+                                    <div class="custom-file mb-1">
+                                        <select class="form-control" name="department_id" id="">
+                                            <?php
+                                            $query = new Department();
+                                            $departments = $query->all();
+
+                                            foreach ($departments as $department) {
 
 
+                                                echo  "<option value='" . $department['id'] . "'>" . $department['name'] . "</option>";
+                                            }
+
+                                            ?>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer px-4">
                             <button type="button" class="btn btn-secondary btn-pill" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-pill">Save</button>
+                            <button type="submit" class="btn btn-primary btn-pill">Save Contact</button>
                         </div>
                     </form>
                 </div>
@@ -65,7 +102,7 @@ require_once __DIR__ . "/layouts/header.php";
                 <!-- Recent Order Table -->
                 <div class="card card-table-border-none" id="recent-orders">
                     <div class="card-header justify-content-between">
-                        <h2>All Departments</h2>
+                        <h2>All Users</h2>
                         <div class="
                          ">
                             <span></span>
@@ -75,34 +112,69 @@ require_once __DIR__ . "/layouts/header.php";
                         <table class="table card-table table-responsive table-responsive-large" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Department ID</th>
-                                    <th>Department Name</th>
+                                    <th>User ID</th>
+                                    <th>User Name</th>
+                                    <th>Email</th>
+                                    <th>Department</th>
+                                    <th>Password</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
 
-                                $query = new Department();
-                                $departments = $query->all();
-                                foreach ($departments as $department) {
+                                $query = new User();
+                                $users = $query->all();
+                                // print_r($users);
+                                // exit;
+                                foreach ($users as $user) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $department['id']; ?></td>
+                                        <td><?php echo $user['id']; ?></td>
                                         <td>
-                                            <a class="text-dark" href=""> <?php echo $department['name']; ?></a>
-                                        </td>
+                                            <p class="text-dark"> <?php echo $user['firstname'] . " " .  $user['lastname']; ?></p>
 
+                                        </td>
+                                        <td>
+                                            <p class="text-dark"> <?php echo $user['email']; ?></p>
+
+                                        </td>
+                                        <td>
+                                            <?php $department = new Department();
+
+                                            $department->find($user['department_id']);
+
+                                            ?>
+                                            <p class="text-dark"> <?php echo $department->name; ?></p>
+
+                                        </td>
+                                        <td>
+                                            <p class="text-dark"> <?php echo $user['password']; ?></p>
+
+                                        </td>
+                                        <td>
+                                            <p class="text-dark"> <?php echo $user['status'] == 1 ? "Active" : "Inactive";  ?></p>
+                                        </td>
 
                                         <td class="text-right">
                                             <div class="dropdown show d-inline-block widget-dropdown">
                                                 <a class="dropdown-toggle icon-burger-mini" href="" role="button" id="dropdown-recent-order1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
                                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order1">
                                                     <li class="dropdown-item">
-                                                        <a href="#" onclick="showEditForm(<?php echo $department['id']; ?>,'<?php echo $department['name']; ?>')">Edit</a>
+                                                        <a href="#" onclick="showEditForm(<?php echo $user['id']; ?>,'<?php echo $user['name']; ?>')">Edit</a>
                                                     </li>
                                                     <li class="dropdown-item">
-                                                        <a href="../actions/delete_department.php?department_id=<?php echo $department['id'] ?>">Delete</a>
+                                                        <a href="../actions/delete_user.php?user_id=<?php echo $user['id'] ?>">Delete</a>
+                                                    </li>
+                                                    <li class="dropdown-item">
+                                                        <?php
+                                                        if ($user['status'] == 1) {
+                                                            echo  "<a href='../actions/user_status.php?user_id= " . $user['id'] . "&status=0'>Block</a>";
+                                                        } else {
+                                                            echo  "<a href='../actions/user_status.php?user_id= " . $user['id'] . "&status=1'>Unblock</a>";
+                                                        }
+                                                        ?>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -197,13 +269,14 @@ require_once __DIR__ . "/layouts/header.php";
 
 </div>
 
+<!-- Edit User Name -->
 <div class="modal fade" id="modal-add-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <form action="../actions/update_department.php" method="post">
-                <input type="hidden" name="department_id" id="department_id">
+                <input type="hidden" name="user_id" id="user_id">
                 <div class="modal-header px-4">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit Department Name</h5>
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit User Name</h5>
                 </div>
                 <div class="modal-body px-4">
 
@@ -211,8 +284,8 @@ require_once __DIR__ . "/layouts/header.php";
 
                         <div class="col-sm-8 col-lg-10">
                             <div class="form-group">
-                                <label for="formGroupExampleInput">Edit Department Name</label>
-                                <input type="text" name="name" id="dep_name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Department">
+                                <label for="formGroupExampleInput">Edit User Name</label>
+                                <input type="text" name="name" id="user_name" required class="form-control" id="formGroupExampleInput" placeholder="Add New User">
                             </div>
                         </div>
                     </div>
@@ -229,9 +302,9 @@ require_once __DIR__ . "/layouts/header.php";
 </div>
 
 <script>
-    function showEditForm(dep_id, dep_name) {
-        $("#department_id").val(dep_id);
-        $("#dep_name").val(dep_name);
+    function showEditForm(user_id, user_name) {
+        $("#user_id").val(user_id);
+        $("#user_name").val(user_name);
         $('#modal-add-edit').modal('show');
     }
 </script>

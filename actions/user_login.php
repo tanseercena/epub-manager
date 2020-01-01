@@ -15,7 +15,10 @@ if($_POST){
         if(isset($user_data['id'])){
 
             Session::set('user_id',$user_data['id']);
+<<<<<<< HEAD
             header("Location:../testing/testing1.php");
+=======
+>>>>>>> upstream/master
             
         }
         else 
