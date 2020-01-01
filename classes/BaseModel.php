@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 abstract class BaseModel {
 
