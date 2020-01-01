@@ -9,7 +9,7 @@
   <meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
 
 
-  <title>Sleek - Admin Dashboard Template</title>
+  <title>Epub-Manager Admin Dashboard</title>
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
@@ -71,18 +71,7 @@
 
   <div class="wrapper">
     <!-- Github Link -->
-    <a href="https://github.com/tafcoder/sleek-dashboard" class="github-link">
-      <svg width="70" height="70" viewBox="0 0 250 250" aria-hidden="true">
-        <defs>
-          <linearGradient id="grad1" x1="0%" y1="75%" x2="100%" y2="0%">
-            <stop offset="0%" style="stop-color:#896def;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#482271;stop-opacity:1" />
-          </linearGradient>
-        </defs>
-        <path d="M 0,0 L115,115 L115,115 L142,142 L250,250 L250,0 Z" fill="url(#grad1)"></path>
-      </svg>
-      <i class="mdi mdi-github-circle"></i>
-    </a>
+   
 
             <!--
           ====================================
@@ -97,7 +86,7 @@
 
       <!-- Header -->
       <header class="main-header " id="header">
-            <nav class="navbar navbar-static-top navbar-expand-lg">
+            <nav class="navbar navbar-static-top navbar-expand-lg" style="padding-right: 0px;">
               <!-- Sidebar toggle button -->
               <button id="sidebar-toggler" class="sidebar-toggle">
                 <span class="sr-only">Toggle navigation</span>
@@ -159,9 +148,9 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="right-sidebar-in right-sidebar-2-menu">
+                  <!-- <li class="right-sidebar-in right-sidebar-2-menu">
                     <i class="mdi mdi-settings"></i>
-                  </li>
+                  </li> -->
                   <!-- User Account -->
                   <li class="dropdown user-menu">
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
@@ -182,18 +171,6 @@
                           <i class="mdi mdi-account"></i> My Profile
                         </a>
                       </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-email"></i> Message
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#"> <i class="mdi mdi-diamond-stone"></i> Projects </a>
-                      </li>
-                      <li class="right-sidebar-in">
-                        <a href="javascript:0"> <i class="mdi mdi-settings"></i> Setting </a>
-                      </li>
-
                       <li class="dropdown-footer">
                         <a href="index.html"> <i class="mdi mdi-logout"></i> Log Out </a>
                       </li>
