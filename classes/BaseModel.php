@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 abstract class BaseModel {
 
@@ -88,11 +88,7 @@ abstract class BaseModel {
     public function get(){
         return $this->query->get();
     }
-<<<<<<< HEAD
 
-=======
-
->>>>>>> 0cd863a0aad0823647bdfa63530b0178d2f36e6a
     public function getSql(){
         return $this->query->getSql();
     }
@@ -105,11 +101,7 @@ abstract class BaseModel {
         if(isset($this->data[$column])){
             return $this->data[$column];
         }
-<<<<<<< HEAD
 
-=======
-
->>>>>>> 0cd863a0aad0823647bdfa63530b0178d2f36e6a
     }
     public function get_numeric($val) {
         if (is_numeric($val)) {
@@ -118,8 +110,4 @@ abstract class BaseModel {
         return 0;
       }
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 0cd863a0aad0823647bdfa63530b0178d2f36e6a
