@@ -39,7 +39,7 @@ class Upload
               $filename = $this->file_post['name'][$i]; 
               $filesize = $this->file_post['size'][$i];
 
-              $ext = pathinfo($filename, PATHINFO_EXTENSION);
+              $ext = pathinfo($filename, PATHINFO_EXTENSION); //taking  its extension
 
               if (!in_array($ext, $this->validation_rule['ext'])) {
 		      	 $this->errors[] = "Extension is wrong";

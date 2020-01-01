@@ -6,7 +6,7 @@ class Numeric implements ValidationInterface {
     private $value;
 
     public function __construct($name,$value){
-        $this->name = ucfirst($naame);
+        $this->name = ucfirst($name);
         $this->value = $value;
     }
 

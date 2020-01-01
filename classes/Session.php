@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Session{
 
@@ -9,10 +9,10 @@ class Session{
     }
 
     public static function getInstance(){
-        if (!self::$instance){ 
-            self::$instance = new Session(); 
-        } 
-        return self::$instance; 
+        if (!self::$instance){
+            self::$instance = new Session();
+        }
+        return self::$instance;
     }
 
     public function set($key,$value){
@@ -25,13 +25,13 @@ class Session{
        if(isset($_SESSION[$key])){
         return $_SESSION[$key];
        }
-       return false; 
+       return false;
     }
 
     public function unset_key($key){
         unset($_SESSION[$key]);
     }
-    
+
     public static function has($key){
         return self::get($key);
     }
@@ -40,7 +40,7 @@ class Session{
         if(empty($value)) {
             $value = self::get($key);
             self::unset_key($key);
-            return $value;    
+            return $value;
         }
         self::set($key,$value);
     }
