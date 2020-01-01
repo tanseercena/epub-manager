@@ -33,9 +33,9 @@ require_once __DIR__ . "/layouts/header.php";
         <div class="modal fade" id="modal-add-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
-                    <form action="../actions/add_department.php" method="post">
+                    <form action="../actions/add_book.php" method="post" enctype="multipart/form-data" >
                         <div class="modal-header px-4">
-                            <h5 class="modal-title" id="exampleModalCenterTitle">Create New Department</h5>
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Add New Book</h5>
                         </div>
                         <div class="modal-body px-4">
 
@@ -43,9 +43,33 @@ require_once __DIR__ . "/layouts/header.php";
 
                                 <div class="col-sm-8 col-lg-10">
                                     <div class="form-group">
-                                        <label for="formGroupExampleInput">Add Department</label>
-                                        <input type="text" name="name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Department">
+                                        <label for="formGroupExampleInput">Add Book</label>
+                                        <input type="file" name="fileToUpload"  class="form-control "  id="formGroupExampleInput"  enctype="multipart/form-data">
+                                        <input type="text" name="book_title" required class="form-control mt-2" id="formGroupExampleInput" placeholder="Book Tilte" >
+                                        <input type="text" name="penname" required class="form-control mt-2" id="formGroupExampleInput" placeholder="Penname">
+                                        <input type="text" name="isbn" required class="form-control mt-2" id="formGroupExampleInput" placeholder="Epub ISBN">
+                                        <input type="Date" name="publication_date" required class="form-control mt-2" id="formGroupExampleInput" placeholder="Publication Date">
+                                        <select id="book_origin" name="book_origin"  class="form-control mt-2">
+                                            <option  value="">Select Origin</option>
+                                            <option >UK</option>
+                                            <option >USA</option>
+                                            <option >UAE</option>
+                                        </select>
+                                        <select class="form-control mt-2"  name="status_id" >
+                                            <option  value="">Select Status</option>
+                                            <?php 
+                                               $value = new Status;
+                                               $statuses = $value->all();
+
+                                               foreach ($statuses as $status) {
+                                                   echo "<option value='$status[id]'>".$status["title"]."</option>";
+
+                                               }
+                                            ?>
+                                        </select>
+
                                     </div>
+
                                 </div>
                             </div>
 
@@ -53,53 +77,112 @@ require_once __DIR__ . "/layouts/header.php";
                         </div>
                         <div class="modal-footer px-4">
                             <button type="button" class="btn btn-secondary btn-pill" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary btn-pill">Save</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-pill">Save</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-
+        <div class="row">
+           <form class="form-group" method="POST" action="">
+               
+             <div class="col-md-12 col-lg-12 d-flex">
+                    <input type="text" name="Author_name"   class="form-control " id="formGroupExampleInput" placeholder="Penname/Author Name" >
+                    <input type="date" name="Publication_date_from"   class="form-control " id="formGroupExampleInput" placeholder="Publication Date From" >
+                    <input type="date" name="Publication_date_to"  class="form-control" id="formGroupExampleInput" placeholder="Publication Date To" >
+                   
+                    <button type="submit" name="submit1" class="btn btn-primary btn-pill">Search</button>
+             </div>
+             
+           </form>
+        </div>
         <div class="row">
             <div class="col-12">
                 <!-- Recent Order Table -->
                 <div class="card card-table-border-none" id="recent-orders">
                     <div class="card-header justify-content-between">
-                        <h2>All Departments</h2>
+                        <h2>All Books</h2>
                         <div class="
                          ">
                             <span></span>
                         </div>
                     </div>
                     <div class="card-body pt-0 pb-5">
-                        <table class="table card-table table-responsive table-responsive-large" style="width:100%">
+                        <table class="table card-table table-responsive table-responsive-large " style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>Department ID</th>
-                                    <th>Department Name</th>
-                                    <th></th>
-                                </tr>
+                                    <th>Book ID</th>
+                                    <th>Book Title</th>
+                                    <th>Front Cover</th>
+                                    <th>Penname</th>
+                                    <th>Book ISBN</th>
+                                    <th>Publication Date</th>
+                                    <th>Book Origin</th>
+                                    <th>Status </th>
+                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
+                                    if (isset($_POST["submit1"])) {
+                                       $query = new Book;
+                                       $Author_name = $_POST["Author_name"];
+                                       if (!empty($_POST['Author_name'])) {
+                                            $query->orWhere('book_title','%$Author_name%','LIKE')->orWhere('penname','%$Author_name%','LIKE');
+                                          
+                                       }
+                                       if (!empty($_POST['Publication_date_from'] && $_POST['Publication_date_to'])){
+                                           $sql = $query->Where('publication_date','%Publication_date_from%','<=')->Where('publication_date','%Publication_date_to%','>=');
+                                       }
+                                        echo $query->getSql();
+                                        
+                                        // $check = $query->gexit;et();
 
-                                $query = new Department();
-                                $departments = $query->all();
-                                foreach ($departments as $department) {
+                                    }
+                                $query = new Book();
+                                $books = $query->all();
+                                foreach ($books as $book) {
                                 ?>
                                     <tr>
-                                        <td><?php echo $department['id']; ?></td>
                                         <td>
-                                            <a class="text-dark" href=""> <?php echo $department['name']; ?></a>
+                                            <?php echo $book['id']; ?>
                                         </td>
-
-
+                                        <td>
+                                            <?php echo $book['book_title'];?>
+                                        </td>
+                                        <td>
+                                            <img src="../testing/<?php echo $book['cover'];?>" width="50" height="50">
+                                        </td>
+                                        <td>
+                                             <?php echo $book['penname']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $book['isbn']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $book['publication_date']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $book['book_origin']; ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                              $status_id = $book['status_id'];
+                                              $query = new Status;
+                                              $status = $query->first($status_id);
+                                              echo $status['title'];
+                                            ?>
+                                         </td>
+                                        
+                                        
+                                        
                                         <td class="text-right">
                                             <div class="dropdown show d-inline-block widget-dropdown">
                                                 <a class="dropdown-toggle icon-burger-mini" href="" role="button" id="dropdown-recent-order1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
                                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order1">
                                                     <li class="dropdown-item">
-                                                        <a href="#" onclick="showEditForm(<?php echo $department['id']; ?>,'<?php echo $department['name']; ?>')">Edit</a>
+                                                        <!-- <a href="#" onclick="showEditForm(<?php //echo $department['id']; ?>,'<?php //echo $department['name']; ?>')">Edit</a> -->
+                                                         <a type="button" name="edit_book" data-toggle="modal" data-target="#modal-add-contact"> Edit Book
+                                                   </a>
                                                     </li>
                                                     <li class="dropdown-item">
                                                         <a href="../actions/delete_department.php?department_id=<?php echo $department['id'] ?>">Delete</a>
@@ -108,15 +191,7 @@ require_once __DIR__ . "/layouts/header.php";
                                             </div>
                                         </td>
                                     </tr>
-                                    <!-- Edit Department model Button  -->
-
-                                    <?php
-
-                                    // $departments = $query->find($department['id']);
-
-                                    ?>
-
-
+                                   
                                 <?php } ?>
 
                             </tbody>

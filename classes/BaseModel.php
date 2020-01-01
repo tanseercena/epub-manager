@@ -50,7 +50,11 @@ abstract class BaseModel {
             $updated = $this->query->update($this->data['id'],$data);
             $this->data = $this->query->find($this->data['id']);
 <<<<<<< HEAD
+<<<<<<< HEAD
         }   
+=======
+        }
+>>>>>>> upstream/master
 =======
         }
 >>>>>>> upstream/master
@@ -93,9 +97,16 @@ abstract class BaseModel {
         return $this->query->get();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
 =======
 
+>>>>>>> upstream/master
+=======
+
+=======
+
+>>>>>>> 0cd863a0aad0823647bdfa63530b0178d2f36e6a
 >>>>>>> upstream/master
     public function getSql(){
         return $this->query->getSql();
@@ -110,9 +121,16 @@ abstract class BaseModel {
             return $this->data[$column];
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         
 =======
 
+>>>>>>> upstream/master
+=======
+
+=======
+
+>>>>>>> 0cd863a0aad0823647bdfa63530b0178d2f36e6a
 >>>>>>> upstream/master
     }
     public function get_numeric($val) {
@@ -126,4 +144,8 @@ abstract class BaseModel {
 }
 =======
 }
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
+>>>>>>> 0cd863a0aad0823647bdfa63530b0178d2f36e6a
 >>>>>>> upstream/master

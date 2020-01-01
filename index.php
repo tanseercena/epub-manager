@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php 
 require_once "config/init.php";
 // $user = new User();
@@ -12,6 +13,8 @@ echo "User ID -> ".$user_id;
 
 ?>
 =======
+=======
+>>>>>>> upstream/master
 <?php
 // error_reporting(E_ALL);
 // ini_set('display_errors', 'On');
@@ -19,4 +22,7 @@ require_once "config/init.php";
 echo "Home";
 
 ?>
+<<<<<<< HEAD
+>>>>>>> upstream/master
+=======
 >>>>>>> upstream/master

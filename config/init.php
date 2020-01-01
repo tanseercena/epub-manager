@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?php 
+=======
+<?php
+>>>>>>> upstream/master
 =======
 <?php
 >>>>>>> upstream/master
@@ -17,7 +21,11 @@ $session = Session::getInstance();
 //Design Pattern -> Singleton Pattern
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // // DB Class Testing 
+=======
+// // DB Class Testing
+>>>>>>> upstream/master
 =======
 // // DB Class Testing
 >>>>>>> upstream/master
@@ -30,6 +38,10 @@ $session = Session::getInstance();
 // $result = DB::query("UPDATE user SET name='Test' WHERE id=$id");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 =======
 
 >>>>>>> upstream/master
@@ -42,7 +54,11 @@ $session = Session::getInstance();
 //     'password' => 'sfsdfds'
 // ];
 <<<<<<< HEAD
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> upstream/master
 =======
 
 >>>>>>> upstream/master
@@ -110,7 +126,11 @@ $session = Session::getInstance();
 // $user->delete();
 // // $qnap_track = new QnapTrack();
 <<<<<<< HEAD
+<<<<<<< HEAD
 // // echo $qnap_track->getTable();
+=======
+// // echo $qnap_track->getTable();
+>>>>>>> upstream/master
 =======
 // // echo $qnap_track->getTable();
 >>>>>>> upstream/master
