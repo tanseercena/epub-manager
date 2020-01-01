@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once __DIR__."/../vendor/autoload.php";
 require_once __DIR__."/db_config.php";
@@ -12,18 +12,15 @@ $session = Session::getInstance();
 // $db = Database::getInstance();
 //Design Pattern -> Singleton Pattern
 
-// // DB Class Testing 
+// // DB Class Testing
 // $records = DB::query("SELECT * FROM users WHERE id=1")->first();
 // echo "<pre>";
 // print_r($records);
 // // $records = $db::get();
 
 // // $id = 1;
-<<<<<<< HEAD
 // $result = DB::query("UPDATE user SET name='Test' WHERE id=$id");
-=======
-// // $result = DB::query("UPDATE user SET name='Test' WHERE id=$id");
->>>>>>> c230c496b8506d57f0e4c8761e5e272644a99031
+
 
 // // $result = DB:query("SELECT * FROM users LEFT JOIN books ON books.user_id = users.id WHERE users.user_id=1")
 
@@ -33,7 +30,7 @@ $session = Session::getInstance();
 //     'email' => 'ihsan@gmail.com',
 //     'password' => 'sfsdfds'
 // ];
- 
+
 
 
 // $user = new User();

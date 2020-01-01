@@ -3,4 +3,4 @@ config/db_config.php
 vendor
 **/.DS_Store
 composer.lock
-
+composer.json
