@@ -16,7 +16,7 @@
            Session::flash('success',implode(',', $errors));
            header("Location: ../views/manage-books.php");
            exit;
-            } 
+            }
       }
       $validated = false;
   	  $request = [
@@ -28,7 +28,7 @@
           [
              'name' =>  'penname',
              'value'=>  $_POST['penname'],
-             'rules'=>  'required|alphanumeric'
+             'rules' =>  'required'
           ],
           [
              'name' =>  'isbn',
@@ -38,17 +38,17 @@
           [
              'name' =>  'publication_date',
              'value'=>  $_POST['publication_date'],
-             'rules'=>  'required' 
+             'rules'=>  'required'
           ],
           [
              'name' =>  'status_id',
              'value'=>  $_POST['status_id'],
-             'rules'=>  'required' 
+             'rules'=>  'required'
           ],
           [
              'name' =>  'book_origin',
              'value'=>  $_POST['book_origin'],
-             'rules'=>  'required' 
+             'rules'=>  'required'
           ],
 
   	  ];
@@ -60,7 +60,7 @@
      //...
 
   	if ($validated) {
-  		
+
       // Check if image file is a actual image or fake image
 
   		// $user_id = Session::get('user_id');
@@ -68,8 +68,8 @@
   	 	$books   = new Book;
   	 	// $actions = new Action; //record for action
 
-  	 	
-  	 	$book_data = [ 
+
+  	 	$book_data = [
  						'book_title' => $_POST['book_title'],
  						'penname'    => $_POST['penname'],
  						'isbn'       => $_POST['isbn'],
@@ -90,9 +90,9 @@
   	 		echo "Error while adding book";
   	 	}
   	 }
-  	 else{ 
+  	 else{
   	     Session::flash('errors',implode(',', $errors));
          header("Location: ../views/manage-books.php");
-  	 } 
-  	 
+  	 }
+
   }
