@@ -26,56 +26,7 @@
             <span class="nav-text">Dashboard</span>
             <!-- <b class="caret"></b> -->
           </a>
-          <!-- <ul  class="collapse show"  id="dashboard"
-                      data-parent="#sidebar-menu">
-                      <div class="sub-menu">
-                        
-                        
-                          
-                            <li  class="active" >
-                              <a class="sidenav-item-link" href="index.html">
-                                <span class="nav-text">Ecommerce</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
-                        
-                          
-                            <li >
-                              <a class="sidenav-item-link" href="analytics.html">
-                                <span class="nav-text">Analytics</span>
-                                
-                                <span class="badge badge-success">new</span>
-                                
-                              </a>
-                            </li>
-                          
-                        
-
-                        
-                      </div>
-                    </ul> -->
         </li>
-
-
-
-
-
-        <li class="has-sub">
-          <a class="sidenav-item-link" href="./manage-books.php">
-            <i class="mdi mdi-pencil-box-multiple"></i>
-            <span class="nav-text">Manage Books</span>
-          </a>
-
-        </li>
-
-
-
-
-
         <li class="has-sub">
           <a class="sidenav-item-link" href="./books.php">
             <i class="mdi mdi-library-books"></i>
@@ -83,61 +34,54 @@
           </a>
         </li>
 
+        <?php 
+          $user = new User();
+          $user_id = Session::get("user_id");
+          $user->find($user_id);
+          if($user->admin == 1){
 
-
-
-
+          
+        ?>
         <li class="has-sub">
-          <a class="sidenav-item-link" href="#">
+          <a class="sidenav-item-link" href="./manage-books.php">
+            <i class="mdi mdi-pencil-box-multiple"></i>
+            <span class="nav-text">Manage Books</span>
+          </a>
+
+        </li>
+        <li class="has-sub">
+          <a class="sidenav-item-link" href="./manage-action.php">
             <i class="mdi  mdi-plus-circle"></i>
             <span class="nav-text">Manage Actions</span>
           </a>
         </li>
-
-
-
-
-
         <li class="has-sub">
           <a class="sidenav-item-link" href="./manage-status.php">
             <i class=" mdi mdi-account-alert"></i>
             <span class="nav-text">Manage Status</span> 
           </a>
         </li>
-
-
-
-
-
         <li class="has-sub">
           <a class="sidenav-item-link" href="./manage-users.php">
             <i class="mdi mdi-account-multiple-plus"></i>
             <span class="nav-text">Manage Users</span> 
           </a>
         </li>
-
-
-
-
-
         <li class="has-sub">
           <a class="sidenav-item-link" href="./manage-department.php">
             <i class="mdi mdi-office"></i>
             <span class="nav-text">Manage Departments</span> 
           </a>
         </li>
-
-
-
-
-
         <li class="has-sub">
           <a class="sidenav-item-link" href="#">
             <i class="mdi mdi-run"></i>
             <span class="nav-text">User Actvities</span>
           </a>
         </li>
-
+        <?php 
+          }
+        ?>
         <!-- <li class="has-sub">
           <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#documentation" aria-expanded="false" aria-controls="documentation">
             <i class="mdi mdi-book-open-page-variant"></i>

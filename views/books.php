@@ -64,33 +64,57 @@ require_once __DIR__ . "/layouts/header.php";
         // echo $sql_query->getSql();
     }
     $books = $sql_query->get();
-      
+
+      if (count($books) == 0) {
+          echo "No Books Found";
+      }
+      else{
       foreach ($books as $book) {
+        $status_id = $book['status_id'];
+        $status = new Status();
+        $status->find($status_id);
+
+        $text_class = "text-muted";
+
+        if ($book['status_id'] == 1 || $book['status_id'] == 9) {
+            $text_class  = "bg-primary";
+        }
+        if ($book['status_id'] == 4 || $book['status_id'] == 7) {
+            $text_class  = "bg-danger";
+        }
+        if ($book['status_id'] == 3 || $book['status_id'] == 6) {
+            $text_class  = "bg-warning";
+        }
+        if ($book['status_id'] == 5 || $book['status_id'] == 8) {
+            $text_class  = "bg-success";
+        }
+        if ($book['status_id'] == 10) {
+            $text_class  = "bg-info";
+        }
     ?>
   <div class="col-lg-6 col-xl-4">
     <div class="card card-default p-4">
       <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-book-<?php echo $book['id']; ?>">
-        <img src="assets/img/user/u-xl-1.jpg" class="mr-3 img-fluid rounded" alt="Avatar Image">
+        <img src="../testing/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Avatar Image">
         <div class="media-body">
           <h5 class="mt-0 mb-2 text-dark"><?php echo $book["book_title"]; ?></h5>
           <ul class="list-unstyled">
             <li class="d-flex mb-1">
-              <i class="mdi mdi-map mr-1"></i>
+              <i class="mdi mdi-account mr-1"></i>
               <span><?php echo $book["penname"]; ?></span>
             </li>
             <li class="d-flex mb-1">
-              <i class="mdi mdi-email mr-1"></i>
+              <i class="mdi mdi-barcode mr-1"></i>
               <span><?php echo $book["isbn"]; ?></span>
             </li>
             <li class="d-flex mb-1">
-              <i class="mdi mdi-phone mr-1"></i>
+              <i class="mdi mdi-calendar mr-1"></i>
               <span><?php echo $book["publication_date"]; ?></span>
             </li>
           </ul>
-
         </div>
       </a>
-
+    <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;?></span>
     </div>
   </div>
   
@@ -124,26 +148,25 @@ require_once __DIR__ . "/layouts/header.php";
             <div class="profile-content-left px-4">
               <div class="card text-center widget-profile px-0 border-0">
                 <div class="card-img mx-auto rounded-circle">
-                  <img src="assets/img/user/u6.jpg" alt="user image">
+                  <img src="../testing/<?php echo $book["cover"]; ?>" width="100px" height="100px" alt="user image">
                 </div>
                 <div class="card-body">
                   <h4 class="py-2 text-dark"><?php echo $book['book_title']; ?></h4>
                   <p><?php echo $book['penname']; ?></p>
-                  <a class="btn btn-primary btn-pill btn-lg my-4" href="#">Follow</a>
+                  <a class="btn btn-primary btn-pill btn-lg my-4" href="#">
+                    <?php echo $status->title; ?>
+                  </a>
                 </div>
               </div>
               <div class="d-flex justify-content-between ">
                 <div class="text-center pb-4">
-                  <h6 class="text-dark pb-2">1503</h6>
-                  <p>Friends</p>
+                  <button class="btn btn-danger mx-1">Request File</button>
                 </div>
                 <div class="text-center pb-4">
-                  <h6 class="text-dark pb-2">2905</h6>
-                  <p>Followers</p>
+                  <button class="btn btn-success mx-1">File Recieved</button>
                 </div>
                 <div class="text-center pb-4">
-                  <h6 class="text-dark pb-2">1200</h6>
-                  <p>Following</p>
+                  <a href="book-actions.php?id=<?php echo $book['id']?>" class="btn btn-warning mx-1">View Actions</a>
                 </div>
               </div>
 
@@ -151,15 +174,21 @@ require_once __DIR__ . "/layouts/header.php";
           </div>
           <div class="col-md-6">
             <div class="contact-info px-4">
-              <h4 class="text-dark mb-1">Contact Details</h4>
-              <p class="text-dark font-weight-medium pt-4 mb-2">Email address</p>
-              <p>Albrecht.straub@gmail.com</p>
-              <p class="text-dark font-weight-medium pt-4 mb-2">Phone Number</p>
-              <p>+99 9539 2641 31</p>
-              <p class="text-dark font-weight-medium pt-4 mb-2">Birthday</p>
-              <p>Nov 15, 1990</p>
-              <p class="text-dark font-weight-medium pt-4 mb-2">Event</p>
-              <p>Lorem, ipsum dolor</p>
+              <h4 class="text-dark mb-1">Epub Details</h4>
+              <p class="text-dark font-weight-medium pt-4 mb-2">Assigned To</p>
+              <?php
+                $status_id = $book['user_id']; 
+                $status = new User();
+                $status->find($status_id);
+                
+              ?>
+              <p><?php echo $status->firstname.' '.$status->lastname; ?></p>
+              <p class="text-dark font-weight-medium pt-4 mb-2">File Status</p>
+              <p>abc</p>
+              <p class="text-dark font-weight-medium pt-4 mb-2">Validation Status</p>
+              <p>Validated</p>
+              <p class="text-dark font-weight-medium pt-4 mb-2">QA Status</p>
+              <p>abc</p>
             </div>
           </div>
         </div>
@@ -172,7 +201,9 @@ require_once __DIR__ . "/layouts/header.php";
 
     <?php
          }
+          }
     ?>
+ 
 </div>
 
 

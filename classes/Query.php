@@ -9,6 +9,8 @@ class Query {
 
     private $sql;
 
+    private $order_by = "";
+
     public function __construct($conn,$table = ''){
         $this->connection = $conn;
         $this->table = $table;
@@ -78,7 +80,7 @@ class Query {
 
         $columns = ($columns == '`*`') ? '*' : $columns;
 
-        $this->sql = "SELECT ".$columns." FROM ".$this->table;
+        $this->sql = "SELECT ".$columns." FROM ".$this->table. $this->order_by;
 
         $result = mysqli_query($this->connection,$this->sql);
 
@@ -146,7 +148,7 @@ class Query {
         //SELECT * FROM users WHERE id>1 AND name='test' AND status!=1 
         $where_clause = $this->getWhereClause();
         
-        $this->sql = "SELECT * FROM ".$this->table." ".$where_clause;
+        $this->sql = "SELECT * FROM ".$this->table." ".$where_clause. $this->order_by;
 
         $result = mysqli_query($this->connection,$this->sql);
         if(mysqli_num_rows($result) > 0){
@@ -164,7 +166,7 @@ class Query {
     public function get(){
         $where_clause = $this->getWhereClause();
         
-        $this->sql = "SELECT * FROM ".$this->table." ".$where_clause;
+        $this->sql = "SELECT * FROM ".$this->table." ".$where_clause. $this->order_by;
 
         $result = mysqli_query($this->connection,$this->sql);
 
@@ -175,6 +177,10 @@ class Query {
         }
         
         return $records;
+    }
+
+    public function orderBy($col, $order){
+        $this->order_by = " ORDER BY `$col` $order ";
     }
 
     public function getSql(){
