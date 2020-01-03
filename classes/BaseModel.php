@@ -103,11 +103,10 @@ abstract class BaseModel {
         }
 
     }
-    public function get_numeric($val) {
-        if (is_numeric($val)) {
-          return $val + 0;
-        }
-        return 0;
-      }
+    
+    public function orderBy($col = 'id', $order = 'ASC'){
+        $this->query->orderBy($col,$order);
+        return $this;
+    }
 
 }
