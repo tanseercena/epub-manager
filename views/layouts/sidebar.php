@@ -65,7 +65,7 @@
 
 
         <li class="has-sub">
-          <a class="sidenav-item-link" href="#">
+          <a class="sidenav-item-link" href="./manage-books.php">
             <i class="mdi mdi-pencil-box-multiple"></i>
             <span class="nav-text">Manage Books</span>
           </a>
