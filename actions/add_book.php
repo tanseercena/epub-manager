@@ -20,12 +20,12 @@
           [
              'name' =>  'book_title',
              'value'=>  $_POST['book_title'],
-             'rules' =>  'required|alphanumeric'
+             'rules' =>  'required'
           ],
           [
              'name' =>  'penname',
              'value'=>  $_POST['penname'],
-             'rules' =>  'required|alphanumeric'
+             'rules' =>  'required'
           ],
           [
              'name' =>  'isbn',
@@ -72,10 +72,10 @@
  						'isbn'       => $_POST['isbn'],
  						'status_id'  => $_POST['status_id'],
  						'book_origin'=> $_POST['book_origin'],
-  	 		            'cover'      => $cover,
-                        'user_id'    => $user_id,
-                        'created_at' => date("Y-m-d H:i:s"),
-                        'publication_date' => $_POST['publication_date'],
+  	 		         'cover'      => $cover,
+                  'user_id'    => $user_id,
+                  'created_at' => date("Y-m-d H:i:s"),
+                  'publication_date' => $_POST['publication_date'],
   	 	];
   	 	$check = $books->insert($book_data);
   	 	// $check1 = $actions->insert($book_data);

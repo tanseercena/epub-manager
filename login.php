@@ -1,6 +1,10 @@
 <?php 
 require_once "config/init.php";
-
+$user_id = Session::get("user_id");
+if(!empty($user_id)){
+  header("Location: ".$base_url."views/dashboard.php");
+  exit;
+}
 
 ?>
 <!DOCTYPE html>

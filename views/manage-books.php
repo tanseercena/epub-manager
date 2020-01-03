@@ -51,9 +51,9 @@ require_once __DIR__ . "/layouts/header.php";
                                         <input type="Date" name="publication_date" required class="form-control mt-2" id="formGroupExampleInput" placeholder="Publication Date">
                                         <select id="book_origin" name="book_origin"  class="form-control mt-2">
                                             <option  value="">Select Origin</option>
-                                            <option >UK</option>
-                                            <option >USA</option>
-                                            <option >UAE</option>
+                                            <option value="uk">UK</option>
+                                            <option value="usa">USA</option>
+                                            <option value="uae">UAE</option>
                                         </select>
                                         <select class="form-control mt-2"  name="status_id" >
                                             <option  value="">Select Status</option>
@@ -181,8 +181,7 @@ require_once __DIR__ . "/layouts/header.php";
                                                 <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order1">
                                                     <li class="dropdown-item">
                                                         <!-- <a href="#" onclick="showEditForm(<?php //echo $department['id']; ?>,'<?php //echo $department['name']; ?>')">Edit</a> -->
-                                                         <a type="button" name="edit_book" data-toggle="modal" data-target="#modal-add-contact"> Edit Book
-                                                   </a>
+                                                         <button type="button" onclick="showEditForm(<?php echo $book['id'];?>)"> Edit Book </button>
                                                     </li>
                                                     <li class="dropdown-item">
                                                         <a href="../actions/delete_department.php?department_id=<?php echo $department['id'] ?>">Delete</a>
@@ -272,42 +271,41 @@ require_once __DIR__ . "/layouts/header.php";
 
 </div>
 
-<div class="modal fade" id="modal-add-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form action="../actions/update_department.php" method="post">
-                <input type="hidden" name="department_id" id="department_id">
-                <div class="modal-header px-4">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Edit Department Name</h5>
-                </div>
-                <div class="modal-body px-4">
 
-                    <div class="form-group row mb-6">
+        <div class="modal-header px-4">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Edit Book</h5>
+        </div>
 
-                        <div class="col-sm-8 col-lg-10">
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Edit Department Name</label>
-                                <input type="text" name="name" id="dep_name" required class="form-control" id="formGroupExampleInput" placeholder="Add New Department">
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+        <div class="modal-body px-4">
+        <form action="<?php echo $base_url; ?>actions/update_book.php" method="post" enctype="multipart/form-data">
+                <div id="edit-form"></div>
                 <div class="modal-footer px-4">
                     <button type="button" class="btn btn-secondary btn-pill" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary btn-pill">Save</button>
+                    <button type="submit" class="btn btn-primary btn-pill">Update Book</button>
                 </div>
             </form>
+        </div>
+            
         </div>
     </div>
 </div>
 
 <script>
-    function showEditForm(dep_id, dep_name) {
-        $("#department_id").val(dep_id);
-        $("#dep_name").val(dep_name);
-        $('#modal-add-edit').modal('show');
+    function showEditForm(id) {
+        //console.log(id);
+        $.ajax({
+            url: "<?php echo $base_url ?>actions/ajax/book_edit.php",
+            type: "POST",
+            data: {book_id: id},
+            success: function(resp){
+                $("#edit-form").html(resp);
+                $('#modal-edit').modal('show');
+            }
+        });
+        
     }
 </script>
 <?php require_once __DIR__ . "/layouts/footer.php" ?>
