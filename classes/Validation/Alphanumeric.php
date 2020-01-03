@@ -13,8 +13,8 @@
     }
 
     public function Validate(){
-
-    	if ((!ctype_digit($this->value) && !ctype_alpha($this->value)) || is_numeric($this->value) ) {
+        $this->value = str_replace(' ', '', $this->value);
+    	if ((!ctype_digit($this->value) && !ctype_alpha($this->value) ) || is_numeric($this->value) ) {
 
     		return $this->name.' shouldnot be numeric';
     	}

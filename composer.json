@@ -9,17 +9,8 @@
     },
     "require": {
         "koenpunt/php-inflector": "^1.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-        "phpoffice/phpspreadsheet": "^1.10"
-=======
         "phpoffice/phpspreadsheet": "^1.10",
         "phpmailer/phpmailer": "^5.0"
->>>>>>> upstream/master
-=======
-        "phpoffice/phpspreadsheet": "^1.10",
-        "phpmailer/phpmailer": "^5.0"
->>>>>>> upstream/master
     },
     "require-dev": {
       "phpunit/phpunit": "^7"
