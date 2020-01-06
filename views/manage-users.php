@@ -141,7 +141,8 @@ require_once __DIR__ . "/layouts/header.php";
 
                                         </td>
                                         <td>
-                                            <?php $department = new Department();
+                                            <?php
+                                             $department = new Department();
 
                                             $department->find($user['department_id']);
 

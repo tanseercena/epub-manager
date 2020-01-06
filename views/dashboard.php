@@ -311,7 +311,6 @@ require_once __DIR__ . "/layouts/header.php";
                                     <th>Book ID</th>
                                     <th>Book Title</th>
                                     <th>ISBN</th>
-                                    <th>Book Title</th>
                                     <th>Penname</th>
                                     <th>Publication Date</th>
                                     <th>Status</th>
@@ -329,11 +328,15 @@ require_once __DIR__ . "/layouts/header.php";
                                     <td>
                                         <p class="text-dark" href=""><?php echo $book['book_title'];?></p>
                                     </td>
-                                    <td class="d-none d-lg-table-cell">1 Unit</td>
-                                    <td class="d-none d-lg-table-cell">Oct 20, 2018</td>
-                                    <td class="d-none d-lg-table-cell">$230</td>
+                                    <td class="d-none d-lg-table-cell"><?php echo $book['isbn']; ?></td>
+                                    <td class="d-none d-lg-table-cell"><?php echo $book['penname']; ?></td>
+                                    <td class="d-none d-lg-table-cell"><?php echo $book['publication_date']; ?></td>
                                     <td>
-                                        <span class="badge badge-success">Completed</span>
+                                        <?php 
+                                            $status = new Status();
+                                            $status->find($book['status_id']); 
+                                        ?>
+                                        <span class="badge badge-success"><?php echo $status->title;  ?></span>
                                     </td>
                                     <td class="text-right">
                                         <div class="dropdown show d-inline-block widget-dropdown">
