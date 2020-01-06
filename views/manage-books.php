@@ -123,6 +123,7 @@ require_once __DIR__ . "/layouts/header.php";
                                     <th>Publication Date</th>
                                     <th>Book Origin</th>
                                     <th>Status </th>
+                                    <th>Book Type</th>
                                  </tr>
                             </thead>
                             <tbody>
@@ -190,6 +191,9 @@ require_once __DIR__ . "/layouts/header.php";
                                           $status->find($status_id);
                                           echo $status->title;
                                         ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $book['book_type']; ?>
                                     </td>
                                        <td class="text-right">
                                             <div class="dropdown show d-inline-block widget-dropdown">
