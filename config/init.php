@@ -1,8 +1,9 @@
 <?php
 
-require_once __DIR__."/../vendor/autoload.php";
 require_once __DIR__."/db_config.php";
 require_once __DIR__."/site_config.php";
+require_once __DIR__."/../vendor/autoload.php";
+
 // require_once "models/Database.php";
 $session = Session::getInstance();
 
