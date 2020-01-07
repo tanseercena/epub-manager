@@ -1,11 +1,18 @@
 <?php
 
-require_once __DIR__."/../vendor/autoload.php";
 require_once __DIR__."/db_config.php";
 require_once __DIR__."/site_config.php";
+require_once __DIR__."/../vendor/autoload.php";
+
 // require_once "models/Database.php";
 $session = Session::getInstance();
 
+$user_id = $session->get("user_id");
+$page = basename($_SERVER['PHP_SELF']);
+if(empty($user_id) && $page != "login.php" && $page != "user_login.php"){
+    header("Location: ".$base_url."login.php");
+    exit;
+}
 
 
 // $db = new Database($db_host,$db_username,$db_password,$db_name);

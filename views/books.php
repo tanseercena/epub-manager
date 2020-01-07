@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/layouts/header.php";
+$action = new Action(0,0,0);
 ?>
 
 
@@ -88,7 +89,7 @@ require_once __DIR__ . "/layouts/header.php";
         if ($book['status_id'] == 5 || $book['status_id'] == 8) {
             $text_class  = "bg-success";
         }
-        if ($book['status_id'] == 10) {
+        if ($book['status_id'] == 10 || $book['status_id'] == 2) {
             $text_class  = "bg-info";
         }
     ?>
@@ -112,9 +113,10 @@ require_once __DIR__ . "/layouts/header.php";
               <span><?php echo $book["publication_date"]; ?></span>
             </li>
           </ul>
+          <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;?></span>
         </div>
       </a>
-    <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;?></span>
+  
     </div>
   </div>
   
@@ -159,12 +161,45 @@ require_once __DIR__ . "/layouts/header.php";
                 </div>
               </div>
               <div class="d-flex justify-content-between ">
+                <?php 
+              
+                  $department_id = Session::get("department_id");
+                  $status_id = $book['status_id'];
+                  $next_actions = $action->getNextAction($status_id,$department_id);
+                  if($next_actions)
+                  foreach($next_actions as $action_status_id){
+                    $status_obj = new Status();
+                    $status_obj->find($action_status_id);
+
+                    $file_required = $action->fileRequired($action_status_id,$department_id);
+                    $department_id_to = $action->getToDepartment($action_status_id);
+                    $department_id_to = json_encode($department_id_to);
+                  
+                    $btn_class = "";
+
+                    if ($action_status_id == 1 || $action_status_id == 13 || $action_status_id == 4) {
+                        $btn_class  = "btn-primary";
+                    }
+                    if ($action_status_id == 2 || $action_status_id == 8 || $action_status_id == 10) {
+                      $btn_class  = "btn-danger";
+                    }
+                    if ($action_status_id == 6 || $action_status_id == 3) {
+                      $btn_class  = "btn-warning";
+                    }
+                    if ($action_status_id == 5 || $action_status_id == 9 || $action_status_id == 7 || $action_status_id == 11) {
+                      $btn_class  = "btn-success";
+                    }
+                    if ($action_status_id == 12) {
+                      $btn_class  = "btn-info";
+                    }
+                  
+                ?>
                 <div class="text-center pb-4">
-                  <button class="btn btn-danger mx-1">Request File</button>
+                  <button class="btn <?php echo $btn_class; ?> mx-1" onclick="showNextActionModel(<?php echo $book['id']; ?>,<?php echo  $action_status_id; ?>,<?php echo $file_required; ?>,'<?php echo $department_id_to; ?>')" ><?php echo $status_obj->title; ?></button>
                 </div>
-                <div class="text-center pb-4">
-                  <button class="btn btn-success mx-1">File Recieved</button>
-                </div>
+
+                <?php } ?>
+
                 <div class="text-center pb-4">
                   <a href="book-actions.php?id=<?php echo $book['id']?>" class="btn btn-warning mx-1">View Actions</a>
                 </div>
@@ -206,151 +241,72 @@ require_once __DIR__ . "/layouts/header.php";
  
 </div>
 
+<!-- Button Model -->
+<div class="modal fade" id="button_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <form action="../actions/save_action.php" method="post">
+            <input type="hidden" name="book_id" id="book_id_action" value="">
+            <input type="hidden" name="status_id" id="status_id_action" value="">
+            <input type="hidden" name="department_id" id="department_id_to" value="">
+                <div class="modal-header px-4">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Action</h5>
+                </div>
+                <div class="modal-body px-4">
+
+                  <div class="form-group row mb-6 d-none" id="file_show">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">File</label>
+                            <input type="file" id="action_file" name="file" required class="form-control" placeholder="Add File">
+                        </div>
+                    </div>
+                  </div>
+
+                    <div class="form-group row mb-6">
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="formGroupExampleInput">Notes</label>
+                                <textarea class="form-control" name="notes"></textarea>
+                            </div>
+                        </div>
+                    </div>
 
 
-
-
-<!-- Add Contact Button  -->
-<div class="modal fade" id="modal-add-contact" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <form >
-        <div class="modal-header px-4">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Create New Contact</h5>
+                </div>
+                <div class="modal-footer px-4">
+                    <button type="button" class="btn btn-secondary btn-pill" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary btn-pill">Save</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-body px-4">
-
-          <div class="form-group row mb-6">
-            <label for="coverImage" class="col-sm-4 col-lg-2 col-form-label">User Image</label>
-            <div class="col-sm-8 col-lg-10">
-              <div class="custom-file mb-1">
-                <input type="file" class="custom-file-input" id="coverImage" required>
-                <label class="custom-file-label" for="coverImage">Choose file...</label>
-                <div class="invalid-feedback">Example invalid custom file feedback</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" value="Albrecht">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="form-group">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" value="Straub">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="form-group mb-4">
-                <label for="userName">User name</label>
-                <input type="text" class="form-control" id="userName" value="Doe">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="form-group mb-4">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" value="albrecht.straub@gmail.com">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="form-group mb-4">
-                <label for="Birthday">Birthday</label>
-                <input type="text" class="form-control" id="Birthday" value="01-10-1993">
-              </div>
-            </div>
-
-            <div class="col-lg-6">
-              <div class="form-group mb-4">
-                <label for="event">Event</label>
-                <input type="text" class="form-control" id="event" value="Some value for event">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer px-4">
-          <button type="button" class="btn btn-secondary btn-pill" data-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary btn-pill">Save Contact</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
-</div>
-
-        
-
-        <div class="right-sidebar-2">
-    <div class="right-sidebar-container-2">
-      <div class="slim-scroll-right-sidebar-2">
-
-      <div class="right-sidebar-2-header">
-        <h2>Layout Settings</h2>
-        <p>User Interface Settings</p>
-        <div class="btn-close-right-sidebar-2">
-          <i class="mdi mdi-window-close"></i>
-        </div>
-      </div>
-
-      <div class="right-sidebar-2-body">
-        <span class="right-sidebar-2-subtitle">Header Layout</span>
-        <div class="no-col-space">
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 header-fixed-to btn-right-sidebar-2-active">Fixed</a>
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 header-static-to">Static</a>
-        </div>
-
-        <span class="right-sidebar-2-subtitle">Sidebar Layout</span>
-        <div class="no-col-space">
-          <select class="right-sidebar-2-select" id="sidebar-option-select">
-            <option value="sidebar-fixed">Fixed Default</option>
-            <option value="sidebar-fixed-minified">Fixed Minified</option>
-            <option value="sidebar-fixed-offcanvas">Fixed Offcanvas</option>
-            <option value="sidebar-static">Static Default</option>
-            <option value="sidebar-static-minified">Static Minified</option>
-            <option value="sidebar-static-offcanvas">Static Offcanvas</option>
-          </select>
-        </div>
-
-        <span class="right-sidebar-2-subtitle">Header Background</span>
-        <div class="no-col-space">
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 btn-right-sidebar-2-active header-light-to">Light</a>
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 header-dark-to">Dark</a>
-        </div>
-
-        <span class="right-sidebar-2-subtitle">Navigation Background</span>
-        <div class="no-col-space">
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 btn-right-sidebar-2-active sidebar-dark-to">Dark</a>
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 sidebar-light-to">Light</a>
-        </div>
-
-        <span class="right-sidebar-2-subtitle">Direction</span>
-        <div class="no-col-space">
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 btn-right-sidebar-2-active ltr-to">LTR</a>
-          <a href="javascript:void(0);" class="btn-right-sidebar-2 rtl-to">RTL</a>
-        </div>
-
-        <div class="d-flex justify-content-center" style="padding-top: 30px">
-          <div id="reset-options" style="width: auto; cursor: pointer" class="btn-right-sidebar-2 btn-reset">Reset
-            Settings</div>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
 
 </div>
 
       </div>
 
+<script>
+function showNextActionModel(book_id,status_id, file_required,department_id){
+  console.log("Status -> "+status_id+" => "+file_required);
 
+  $("#book_id_action").val(book_id);
+  $("#status_id_action").val(status_id);
+  $("#department_id_to").val(department_id);
+
+  if(file_required == 1){
+    $("#file_show").removeClass("d-none");
+    $("#action_file").removeAttr("disabled");
+    // $("#file_show").show();
+  }else{
+    $("#action_file").attr("disabled","disabled");
+  }
+
+  $("#button_model").modal();
+ 
+}
+</script>
 
 <?php require_once __DIR__ . "/layouts/footer.php" ?>

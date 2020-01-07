@@ -103,7 +103,7 @@ abstract class BaseModel {
         }
 
     }
-    
+
     public function orderBy($col = 'id', $order = 'ASC'){
         $this->query->orderBy($col,$order);
         return $this;

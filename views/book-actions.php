@@ -55,7 +55,7 @@ if ($_GET["id"]) {
                                     $badge_class = "bg-success";
                                     $text_class  = "text-success";
                                 }
-                                if ($action['status_id'] == 10) {
+                                if ($action['status_id'] == 10 || $action['status_id'] == 2) {
                                     $border_class = "border-info";
                                     $badge_class = "bg-info";
                                     $text_class  = "text-info";

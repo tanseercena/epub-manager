@@ -15,7 +15,9 @@ if($_POST){
         if(isset($user_data['id'])){
 
             Session::set('user_id',$user_data['id']);
-            header("Location:../dashboard.php");
+            Session::set('department_id',$user_data['department_id']);
+            
+            header("Location: ".$base_url."views/dashboard.php");
         }
         else
         {

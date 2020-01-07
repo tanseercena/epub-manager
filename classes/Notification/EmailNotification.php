@@ -27,7 +27,7 @@ class EmailNotification extends Notify {
                 // $mail->addAttachment('/var/tmp/file.tar.gz');         
                 // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    
                 // Content
-                // $mail->isHTML(true);                                  
+                $mail->isHTML(true);                                  
                 $mail->Subject = $this->notification['subject'] ;
                 $mail->Body = $this->notification['message'];
 
