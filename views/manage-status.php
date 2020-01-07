@@ -216,8 +216,6 @@ require_once __DIR__ . "/layouts/header.php";
                             </div>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="modal-footer px-4">
                     <button type="button" class="btn btn-secondary btn-pill" data-dismiss="modal">Cancel</button>
