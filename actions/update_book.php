@@ -74,7 +74,6 @@ if($_POST){
 
     }else{
         Session::flash('errors',$errors);
-        
     }
 
     header("Location: ../views/manage-books.php");

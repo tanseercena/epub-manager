@@ -79,9 +79,19 @@
             <span class="nav-text">User Actvities</span>
           </a>
         </li>
+
+        <li class="has-sub">
+          <a class="sidenav-item-link" href="./manage-excel.php">
+            <i class="mdi mdi-run"></i>
+            <span class="nav-text">Excel Book Import</span>
+          </a>
+        </li>
+
+
         <?php 
           }
         ?>
+
         <!-- <li class="has-sub">
           <a class="sidenav-item-link" href="javascript:void(0)" data-toggle="collapse" data-target="#documentation" aria-expanded="false" aria-controls="documentation">
             <i class="mdi mdi-book-open-page-variant"></i>
