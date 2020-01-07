@@ -135,7 +135,8 @@ class Query {
             $final_where .= '('.$where_clause.')';
         }
         if(!empty($where_clause) && !empty($where_clause_or)){
-            $final_where .=' OR ';
+           // $final_where .=' OR ';
+           $final_where .=' AND ';
         }
         if(!empty($where_clause_or)){
             $final_where .= ' ('.$where_clause_or.')';
