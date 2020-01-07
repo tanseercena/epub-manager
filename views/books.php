@@ -126,27 +126,11 @@ $action = new Action(0,0,0);
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-end border-bottom-0">
-        <button type="button" class="btn-edit-icon" data-dismiss="modal" aria-label="Close">
-          <i class="mdi mdi-pencil"></i>
-        </button>
-        <div class="dropdown">
-          <button class="btn-dots-icon" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-dots-vertical"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
-        <button type="button" class="btn-close-icon" data-dismiss="modal" aria-label="Close">
-          <i class="mdi mdi-close"></i>
-        </button>
+      
       </div>
       <div class="modal-body pt-0">
         <div class="row no-gutters">
-          <div class="col-md-6">
+          <div class="col-md-8">
             <div class="profile-content-left px-4">
               <div class="card text-center widget-profile px-0 border-0">
                 <div class="card-img mx-auto rounded-circle">
@@ -207,23 +191,47 @@ $action = new Action(0,0,0);
 
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <div class="contact-info px-4">
               <h4 class="text-dark mb-1">Epub Details</h4>
               <p class="text-dark font-weight-medium pt-4 mb-2">Assigned To</p>
               <?php
-                $status_id = $book['user_id']; 
-                $status = new User();
-                $status->find($status_id);
+                $user_id = $book['user_id']; 
+                $user = new User();
+                $user->find($user_id);
                 
               ?>
-              <p><?php echo $status->firstname.' '.$status->lastname; ?></p>
+              <p><?php echo $user->firstname.' '.$user->lastname; ?></p>
               <p class="text-dark font-weight-medium pt-4 mb-2">File Status</p>
-              <p>abc</p>
+              <?php
+              $status = new Status(); 
+              $action = new Action(0,0,0,0);
+              $last= $action->where("book_id",$book['id'])->orWhere("status_id",1)->orWhere("status_id",2)->orWhere("status_id",3)->orWhere("status_id",4)->orWhere("status_id",5)->orderBy("created_at","DESC")->first();
+              $last_statusid = $last['status_id'];
+              if(!empty($last_statusid))
+              $status->find($last_statusid);
+              ?>
+              <p><?php echo $status->title ? $status->title : "N/A"; ?> </p>
               <p class="text-dark font-weight-medium pt-4 mb-2">Validation Status</p>
-              <p>Validated</p>
+              <?php
+              $status = new Status(); 
+              $action = new Action(0,0,0,0);
+              $last= $action->where("book_id",$book['id'])->orWhere("status_id",8)->orWhere("status_id",9)->orderBy("created_at","DESC")->first();
+              $last_statusid = $last['status_id'];
+              if(!empty($last_statusid))
+              $status->find($last_statusid);
+              ?>
+               <p><?php  echo $status->title ? $status->title : "N/A"; ?></p>
               <p class="text-dark font-weight-medium pt-4 mb-2">QA Status</p>
-              <p>abc</p>
+              <?php
+              $status = new Status(); 
+              $action = new Action(0,0,0,0);
+              $last= $action->where("book_id",$book['id'])->orWhere("status_id",10)->orWhere("status_id",11)->orderBy("created_at","DESC")->first();
+              $last_statusid = $last['status_id'];
+              if(!empty($last_statusid))
+              $status->find($last_statusid);
+              ?>
+              <p><?php  echo $status->title ? $status->title : "N/A"; ?></p>
             </div>
           </div>
         </div>
