@@ -92,216 +92,14 @@ require_once __DIR__ . "/layouts/header.php";
         </div>
 
 
-       
-
-        <div class="row">
-            <div class="col-xl-4 col-lg-6 col-12">
-
-                 <!-- Doughnut Chart -->
-                 <div class="card card-default" data-scroll-height="675">
-                    <div class="card-header justify-content-center">
-                        <h2>Orders Overview</h2>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="doChart"></canvas>
-                    </div>
-                    <a href="#" class="pb-5 d-block text-center text-muted"><i class="mdi mdi-download mr-2"></i> Download overall report</a>
-                    <div class="card-footer d-flex flex-wrap bg-white p-0">
-                        <div class="col-6">
-                            <div class="py-4 px-4">
-                                <ul class="d-flex flex-column justify-content-between">
-                                    <li class="mb-2"><i class="mdi mdi-checkbox-blank-circle-outline mr-2" style="color: #4c84ff"></i>Order Completed</li>
-                                    <li><i class="mdi mdi-checkbox-blank-circle-outline mr-2" style="color: #80e1c1 "></i>Order Unpaid</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-6 border-left">
-                            <div class="py-4 px-4 ">
-                                <ul class="d-flex flex-column justify-content-between">
-                                    <li class="mb-2"><i class="mdi mdi-checkbox-blank-circle-outline mr-2" style="color: #8061ef"></i>Order Pending</li>
-                                    <li><i class="mdi mdi-checkbox-blank-circle-outline mr-2" style="color: #ffa128"></i>Order Canceled</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-xl-4 col-lg-6 col-12">
-                <!-- Top Sell Table -->
-                <div class="card card-table-border-none" data-scroll-height="674" style="height: 674px !important;overflow: hidden;">
-                    <div class="card-header justify-content-between">
-                        <h2>Sold by Units</h2>
-                        <div>
-                            <button class="text-black-50 mr-2 font-size-20"><i class="mdi mdi-cached"></i></button>
-                            <div class="dropdown show d-inline-block widget-dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdown-units" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
-                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-units">
-                                    <li class="dropdown-item"><a href="#">Action</a></li>
-                                    <li class="dropdown-item"><a href="#">Another action</a></li>
-                                    <li class="dropdown-item"><a href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body slim-scroll py-0">
-                        <table class="table ">
-                            <tbody>
-                                <tr>
-                                    <td class="text-dark">Backpack</td>
-                                    <td class="text-center">9</td>
-                                    <td class="text-right">33% <i class="mdi mdi-arrow-up-bold text-success pl-1 font-size-12"></i> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-dark">T-Shirt</td>
-                                    <td class="text-center">6</td>
-                                    <td class="text-right">150% <i class="mdi mdi-arrow-up-bold text-success pl-1 font-size-12"></i> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-dark">Coat</td>
-                                    <td class="text-center">3</td>
-                                    <td class="text-right">50% <i class="mdi mdi-arrow-up-bold text-success pl-1 font-size-12"></i> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-dark">Necklace</td>
-                                    <td class="text-center">7</td>
-                                    <td class="text-right">150% <i class="mdi mdi-arrow-up-bold text-success pl-1 font-size-12"></i> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-dark">Jeans Pant</td>
-                                    <td class="text-center">10</td>
-                                    <td class="text-right">300% <i class="mdi mdi-arrow-down-bold text-danger pl-1 font-size-12"></i> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-dark">Shoes</td>
-                                    <td class="text-center">5</td>
-                                    <td class="text-right">100% <i class="mdi mdi-arrow-up-bold text-success pl-1 font-size-12"></i> </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-dark">T-Shirt</td>
-                                    <td class="text-center">6</td>
-                                    <td class="text-right">150% <i class="mdi mdi-arrow-up-bold text-success pl-1 font-size-12"></i> </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="card-footer bg-white py-4">
-                        <a href="#" class="btn-link py-3 text-uppercase">View Report</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-12">
-                <!-- Notification Table -->
-                <div class="card card-default" data-scroll-height="674" style="height: 674px !important;overflow: hidden;">
-                    <div class="card-header justify-content-between ">
-                        <h2>Latest Notifications</h2>
-                        <div>
-                            <button class="text-black-50 mr-2 font-size-20"><i class="mdi mdi-cached"></i></button>
-                            <div class="dropdown show d-inline-block widget-dropdown">
-                                <a class="dropdown-toggle icon-burger-mini" href="#" role="button" id="dropdown-notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
-                                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-notification">
-                                    <li class="dropdown-item"><a href="#">Action</a></li>
-                                    <li class="dropdown-item"><a href="#">Another action</a></li>
-                                    <li class="dropdown-item"><a href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="card-body slim-scroll">
-                        <div class="media pb-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-primary text-white">
-                                <i class="mdi mdi-cart-outline font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3 ">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="#">New Order</a>
-                                <p>Selena has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </div>
-
-                        <div class="media py-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-success text-white">
-                                <i class="mdi mdi-email-outline font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="#">New Enquiry</a>
-                                <p>Phileine has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 9 AM</span>
-                        </div>
-
-
-                        <div class="media py-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-warning text-white">
-                                <i class="mdi mdi-stack-exchange font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="#">Support Ticket</a>
-                                <p>Emma has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </div>
-
-                        <div class="media py-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-primary text-white">
-                                <i class="mdi mdi-cart-outline font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="#">New order</a>
-                                <p>Ryan has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </div>
-
-                        <div class="media py-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-info text-white">
-                                <i class="mdi mdi-calendar-blank font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="">Comapny Meetup</a>
-                                <p>Phileine has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </div>
-
-                        <div class="media py-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-warning text-white">
-                                <i class="mdi mdi-stack-exchange font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="#">Support Ticket</a>
-                                <p>Emma has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </div>
-
-                        <div class="media py-3 align-items-center justify-content-between">
-                            <div class="d-flex rounded-circle align-items-center justify-content-center mr-3 media-icon iconbox-45 bg-success text-white">
-                                <i class="mdi mdi-email-outline font-size-20"></i>
-                            </div>
-                            <div class="media-body pr-3">
-                                <a class="mt-0 mb-1 font-size-15 text-dark" href="#">New Enquiry</a>
-                                <p>Phileine has placed an new order</p>
-                            </div>
-                            <span class=" font-size-12 d-inline-block"><i class="mdi mdi-clock-outline"></i> 9 AM</span>
-                        </div>
-
-                    </div>
-                    <div class="mt-3"></div>
-                </div>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-12">
                 <!-- Recent Order Table -->
                 <div class="card card-table-border-none" id="recent-orders">
                     <div class="card-header justify-content-between">
                         <h2>Recent Books</h2>
-                        <div class="date-range-report ">
-                            <span></span>
+                        <div class="">
+                           <a href="books.php" class="btn btn-primary">All Books</a>
                         </div>
                     </div>
                     <div class="card-body pt-0 pb-5">
@@ -334,20 +132,38 @@ require_once __DIR__ . "/layouts/header.php";
                                     <td>
                                         <?php 
                                             $status = new Status();
-                                            $status->find($book['status_id']); 
+                                            $status->find($book['status_id']);
+
+                                            $text_class = "text-muted";
+                                            if ($book['status_id'] == 1 || $book['status_id'] == 9) {
+                                                $text_class  = "badge-primary";
+                                            }
+                                            if ($book['status_id'] == 4 || $book['status_id'] == 7) {
+                                                $text_class  = "badge-danger";
+                                            }
+                                            if ($book['status_id'] == 3 || $book['status_id'] == 6) {
+                                                $text_class  = "badge-warning";
+                                            }
+                                            if ($book['status_id'] == 5 || $book['status_id'] == 8) {
+                                                $text_class  = "badge-success";
+                                            }
+                                            if ($book['status_id'] == 10) {
+                                                $text_class  = "badge-info";
+                                            }
+                                         
                                         ?>
-                                        <span class="badge badge-success"><?php echo $status->title;  ?></span>
+                                        <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;  ?></span>
                                     </td>
                                     <td class="text-right">
                                         <div class="dropdown show d-inline-block widget-dropdown">
                                             <a class="dropdown-toggle icon-burger-mini" href="" role="button" id="dropdown-recent-order1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static"></a>
                                             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-recent-order1">
                                                 <li class="dropdown-item">
-                                                    <a href="#">View</a>
+                                                    <a href="book-actions.php?id=<?php echo $book["id"]; ?>">View Action</a>
                                                 </li>
-                                                <li class="dropdown-item">
+                                                <!-- <li class="dropdown-item">
                                                     <a href="#">Remove</a>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </td>
