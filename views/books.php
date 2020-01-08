@@ -28,6 +28,12 @@ $action = new Action(0,0,0);
   <div>
     <form class="form-inline" action="" method="POST">
         <div class="form-group">
+           <select id="book_origin" name="book_origin"  class="form-control mx-3">
+              <option  value="">Select Origin</option>
+              <option value="uk">UK</option>
+              <option value="usa">USA</option>
+              <option value="uae">UAE</option>
+           </select>
            <input type="text" name="penname_title" class="form-control mx-3" placeholder="Book/Author Name: ">
         
            <input type="date" name="s_date" class="form-control mx-3" placeholder="Date Publication From: ">
@@ -57,6 +63,10 @@ $action = new Action(0,0,0);
             $e_date = date($_POST["e_date"]);
             $sql_query->where("publication_date","$s_date"," >= ")->where("publication_date","$e_date"," <= ");
         } 
+        if (!empty($_POST["book_origin"])) {
+            $book_origin = $_POST["book_origin"];
+            $sql_query->where("book_origin","$book_origin"," = ");
+        }
     }
     else{
         $s_date = date("Y-m-01");
@@ -67,7 +77,7 @@ $action = new Action(0,0,0);
     $books = $sql_query->get();
 
       if (count($books) == 0) {
-          echo "No Books Found";
+          echo "<h4 class='text-center text-danger font-weight-bold'>No Book Found</h4>";
       }
       else{
       foreach ($books as $book) {
@@ -77,19 +87,19 @@ $action = new Action(0,0,0);
 
         $text_class = "text-muted";
 
-        if ($book['status_id'] == 1 || $book['status_id'] == 9) {
+        if ($book['status_id'] == 1 || $book['status_id'] == 13 || $book['status_id'] == 6) {
             $text_class  = "bg-primary";
         }
-        if ($book['status_id'] == 4 || $book['status_id'] == 7) {
+        if ($book['status_id'] == 2 || $book['status_id'] == 8 || $book['status_id'] == 10) {
             $text_class  = "bg-danger";
         }
-        if ($book['status_id'] == 3 || $book['status_id'] == 6) {
+        if ($book['status_id'] == 3 || $book['status_id'] == 7) {
             $text_class  = "bg-warning";
         }
-        if ($book['status_id'] == 5 || $book['status_id'] == 8) {
+        if ($book['status_id'] == 5 || $book['status_id'] == 11 || $book['status_id'] == 9) {
             $text_class  = "bg-success";
         }
-        if ($book['status_id'] == 10 || $book['status_id'] == 2) {
+        if ($book['status_id'] == 12 || $book['status_id'] == 4) {
             $text_class  = "bg-info";
         }
     ?>

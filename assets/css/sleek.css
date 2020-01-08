@@ -10473,7 +10473,7 @@ div.copied {
     white-space: nowrap; }
   .sidebar-footer-content .progress {
     height: 15px;
-    margin-bottom: 1.88rem;
+    margin-bottom: 0.5rem;
     overflow: hidden;
     background-color: #e4eaec;
     border-radius: 0.215rem; }

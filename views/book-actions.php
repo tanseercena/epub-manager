@@ -32,30 +32,30 @@ if ($_GET["id"]) {
                             <?php
                                 $counter = 1; 
                                 foreach($actions as $action){
-                                $border_class = "";
+                                $border_class = "border-light";
                                 $badge_class = "bg-light";
-                                $text_class = "text-muted";
-                                if ($action['status_id'] == 1 || $action['status_id'] == 9) {
+                                $text_class = "text-light";
+                                if ($action['status_id'] == 1 || $action['status_id'] == 13 || $action['status_id'] == 6) {
                                     $border_class = "border-primary";
                                     $badge_class = "bg-primary";
                                     $text_class  = "text-primary";
                                 }
-                                if ($action['status_id'] == 4 || $action['status_id'] == 7) {
+                                if ($action['status_id'] == 2 || $action['status_id'] == 8 || $action['status_id'] == 10) {
                                     $border_class = "border-danger";
                                     $badge_class = "bg-danger";
                                     $text_class  = "text-danger";
                                 }
-                                if ($action['status_id'] == 3 || $action['status_id'] == 6) {
+                                if ($action['status_id'] == 3 || $action['status_id'] == 7 ){
                                     $border_class = "border-warning";
                                     $badge_class = "bg-warning";
                                     $text_class  = "text-warning";
                                 }
-                                if ($action['status_id'] == 5 || $action['status_id'] == 8) {
+                                if ($action['status_id'] == 5 || $action['status_id'] == 11 || $action['status_id'] == 9){
                                     $border_class = "border-success";
                                     $badge_class = "bg-success";
                                     $text_class  = "text-success";
                                 }
-                                if ($action['status_id'] == 10 || $action['status_id'] == 2) {
+                                if ($action['status_id'] == 12 || $action['status_id'] == 4)  {
                                     $border_class = "border-info";
                                     $badge_class = "bg-info";
                                     $text_class  = "text-info";
