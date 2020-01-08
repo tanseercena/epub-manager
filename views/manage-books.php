@@ -90,11 +90,14 @@ require_once __DIR__ . "/layouts/header.php";
         <div class="row ">
             <div class="col-12 ">
                 <form class="form-group form-inline" method="POST" action="">
-                   <label class="form-inline  mr-2" >Penname/Author Name</label>
+                    <select id="book_origin" name="book_origin"  class="form-control mr-5 ml-2 ">
+                        <option  value="">Select Origin</option>
+                        <option value="uk">UK</option>
+                        <option value="usa">USA</option>
+                        <option value="uae">UAE</option>
+                    </select>
                    <input type="text" name="Author_name"   class="form-control " id="formGroupExampleInput" placeholder="Penname/Author Name" >
-                   <label class="form-inline ml-5 mr-2" >Publication Date From</label>
                    <input type="date" name="date_from"   class="form-control " id="formGroupExampleInput" placeholder="Publication Date From" >
-                   <label class="form-inline ml-5 mr-2" >Publication Date To</label>
                    <input type="date" name="date_to"  class="form-control" id="formGroupExampleInput" placeholder="Publication Date To" >
                    <button type="submit" name="submit1" class="btn btn-primary btn-pill ml-5">Search</button>
                 </form>
@@ -140,7 +143,15 @@ require_once __DIR__ . "/layouts/header.php";
                                         $date_to = $_POST["date_to"];
                                         $query->Where("publication_date","$date_to","<=")->Where("publication_date","$date_from",">=");
                                     }
+                                    if (!empty($_POST['book_origin'])){
+                                        $book_origin = $_POST["book_origin"];
+                                        $date_to = $_POST["date_to"];
+                                        $query->Where("book_origin","$book_origin","=");
+                                    }
                                     $books = $query->get();
+                                    if (count($books) == 0) {
+                                      echo "<h4 class='text-center text-danger font-weight-bold'>No Book Found</h4>";
+                                  }
                                  }
                                  else{
                                     $books = $query->all();
