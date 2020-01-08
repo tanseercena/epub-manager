@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 class Query {
     private $connection;
-    
+
     private $table;
 
     private $wheres = [];
@@ -16,14 +16,14 @@ class Query {
         $this->table = $table;
         $this->sql = '';
     }
-    
+
     public function insert($data = ''){
         if(empty($data)){
-            // Insert with default 
+            // Insert with default
             // INSERT INTO users default values
             return true;
         }
-        
+
         // INSERT INTO users(columns) VALUES(...)
 
         // Convert array keys to columns
@@ -34,42 +34,49 @@ class Query {
 
         //Insert into DB
         $this->sql = "INSERT INTO ".$this->table."($columns) VALUES($values)";
+
+        $inserted = mysqli_query($this->connection,$this->sql);
+
+        $insert_id = 0;
+        if($inserted){
+          $insert_id = mysqli_insert_id($this->connection);
+        }
         
-        return mysqli_query($this->connection,$this->sql);
+        return $insert_id;
     }
 
     public function update($id,$data = '')
     {
         if(empty($data)){
-            // Insert with default 
+            // Insert with default
             // INSERT INTO users default values
             return true;
         }
-        
+
         // Convert array keys to columns values
         $cols = array();
- 
+
         foreach($data as $key=>$val) {
             $cols[] = "$key = '$val'";
         }
-        
+
         //Update into DB
         $this->sql = "UPDATE ".$this->table." SET  ".implode(', ', $cols)." WHERE id=".$id;
-        
+
         return mysqli_query($this->connection,$this->sql);
     }
 
     public function find($id){
-        // SELECT * FROM table WHERE id= $id 
+        // SELECT * FROM table WHERE id= $id
         $this->sql = "SELECT * FROM ".$this->table." WHERE id=$id";
-        
+
         $result = mysqli_query($this->connection,$this->sql);
         if(mysqli_num_rows($result) > 0){
             return mysqli_fetch_array($result);
         }
         return false;
     }
-    
+
     public function delete($id){
         $this->sql = "DELETE FROM " .$this->table." WHERE id =" .$id;
         return mysqli_query($this->connection,$this->sql);
@@ -89,7 +96,7 @@ class Query {
         while($row = mysqli_fetch_array($result)){
             $records[] = $row;
         }
-        
+
         return $records;
     }
 
@@ -116,7 +123,7 @@ class Query {
                 $where_arr = array_merge($where_arr,$where_c);
             }
         }
-            
+
         $where_clause .=  implode(' AND ',$where_arr);
 
         $where_arr = [];
@@ -146,9 +153,9 @@ class Query {
     }
 
     public function first(){
-        //SELECT * FROM users WHERE id>1 AND name='test' AND status!=1 
+        //SELECT * FROM users WHERE id>1 AND name='test' AND status!=1
         $where_clause = $this->getWhereClause();
-        
+
         $this->sql = "SELECT * FROM ".$this->table." ".$where_clause. $this->order_by;
 
         $result = mysqli_query($this->connection,$this->sql);
@@ -158,15 +165,15 @@ class Query {
         return false;
 
         // $new = array_map(function($param1,$parm1){
-        //     return 
+        //     return
         // },$arr1,$arr2);
 
-        
+
     }
 
     public function get(){
         $where_clause = $this->getWhereClause();
-        
+
         $this->sql = "SELECT * FROM ".$this->table." ".$where_clause. $this->order_by;
 
         $result = mysqli_query($this->connection,$this->sql);
@@ -176,7 +183,7 @@ class Query {
         while($row = mysqli_fetch_array($result)){
             $records[] = $row;
         }
-        
+
         return $records;
     }
 
