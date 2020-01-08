@@ -134,20 +134,20 @@ require_once __DIR__ . "/layouts/header.php";
                                             $status = new Status();
                                             $status->find($book['status_id']);
 
-                                            $text_class = "text-muted";
-                                            if ($book['status_id'] == 1 || $book['status_id'] == 9) {
+                                            $text_class = "text-primary";
+                                            if ($book['status_id'] == 1 || $book['status_id'] == 13 || $book['status_id'] == 6) {
                                                 $text_class  = "badge-primary";
                                             }
-                                            if ($book['status_id'] == 4 || $book['status_id'] == 7) {
+                                            if ($book['status_id'] == 2 || $book['status_id'] == 8 || $book['status_id'] == 10) {
                                                 $text_class  = "badge-danger";
                                             }
-                                            if ($book['status_id'] == 3 || $book['status_id'] == 6) {
+                                            if ($book['status_id'] == 3 || $book['status_id'] == 7) {
                                                 $text_class  = "badge-warning";
                                             }
-                                            if ($book['status_id'] == 5 || $book['status_id'] == 8) {
+                                            if ($book['status_id'] == 5 || $book['status_id'] == 11 || $book['status_id'] == 9) {
                                                 $text_class  = "badge-success";
                                             }
-                                            if ($book['status_id'] == 10) {
+                                            if ($book['status_id'] == 12 || $book['status_id'] == 4) {
                                                 $text_class  = "badge-info";
                                             }
                                          
