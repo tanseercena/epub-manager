@@ -6,3 +6,5 @@ composer.lock
 composer.json
 assets/img/book-covers
 assets/uploads
+assets/epub_files/*
+!assets/epub_files/.gitkeep
