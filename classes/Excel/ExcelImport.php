@@ -24,22 +24,22 @@ class ExcelImport
     	/** Create a new Xls Reader  **/
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load($this->file);
+        $spreadsheet = $reader->load($this->file); 
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
         foreach ($sheetData as $key => $book) {
         	if ($key == 1) {
         		continue;
         	}
-        	$penname = mysqli_real_escape_string($this->connection,$book["A"]);
+        	$penname = mysqli_real_escape_string($this->connection,$book["A"]); 
         	$title = mysqli_real_escape_string($this->connection,$book["B"]);
-        	$isbn = mysqli_real_escape_string($this->connection,$book["C"]);
+        	$isbn = mysqli_real_escape_string($this->connection,$book["C"]); 
         	$publication_date = $book["D"]; 
-            $origin = $book["E"]; 
+            $book_origin = $book["E"]; 
             $book_type = $book["F"];
 
-            $book = new Book();
-            $book_data = $book->where("isbn",$isbn)->first();
+            $books = new Book();
+            $book_data = $books->where("isbn",$isbn)->first(); 
 
             if (!$book_data) {
             	$book_array = array(
@@ -48,18 +48,24 @@ class ExcelImport
                     "isbn" => $isbn,
                     "publication_date" =>  date("Y-m-d",strtotime($publication_date)),
                     "status_id" => 1,
-                    "origin" => $origin,
+                    "book_origin" => $book_origin,
                     "book_type" => $book_type,
             	);
-              $book = new Book();
-              $check = $book->insert($book_array);
-              $data = $book->where("isbn",$isbn)->first();
+
+              $book1 = new Book();
+              $check = $book1->insert($book_array);
+              $data = $book1->where("isbn",$isbn)->first(); 
               $user_id = Session::get("user_id");
-              $action = new Action($data->id,1,$user_id);
-              $check1 = $action->save();
-              if($check1) {
-                echo "Notification Added";
+
+              if($book_type == 'text'){
+                $department_id = 3;
               }
+              else if($book_type == 'indesign'){
+                $department_id = 2;
+              }
+
+              $action = new Action($data->id,1,$user_id,$department_id);
+              $check1 = $action->save();
             }
             
         }

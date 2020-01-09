@@ -29,7 +29,7 @@ require_once __DIR__ . "/layouts/header.php";
                     </div>
                     <div class="card-body pt-0 pb-5">
                        <form enctype="multipart/form-data" method="POST" action="../actions/excel_file.php">
-                           <input type="file" name="file" >
+                           <input type="file" name="file">
                            <input type="submit" name="submit" class="btn btn-secondary">
                        </form>
                     </div>
