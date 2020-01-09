@@ -1,4 +1,9 @@
-<?php require_once __DIR__."/../../config/init.php"; ?>
+<?php require_once __DIR__."/../../config/init.php";
+  $user_id = Session::get('user_id');
+  $user_detail = new User();
+  $user_detail->find($user_id);
+
+ ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -112,39 +117,32 @@
                       <i class="mdi mdi-bell-outline"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li class="dropdown-header">You have 5 notifications</li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-account-plus"></i> New user registered
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-account-remove"></i> User deleted
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 07 AM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-chart-areaspline"></i> Sales report is ready
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 12 PM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-account-supervisor"></i> New client
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-server-network-off"></i> Server overloaded
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 05 AM</span>
-                        </a>
-                      </li>
+                      <?php
+                        $read_notification = new Notification();
+                        $read_notification->Where("user_id","$user_id")->Where("notification_read","0");
+                        $notifications = $read_notification->get();
+                      ?>
+                      <li class="dropdown-header">You have <?php echo count($notifications);?> Notifications</li>
+                      <?php 
+                         $no_of_notification = 0;
+                         foreach ($notifications as $notification) {
+                          $no_of_notification++;
+                          if ($no_of_notification > 10) {
+                            break;
+                          }
+                         ?>
+                           <li>
+                             <a href="../views/book-actions.php?id=<?php echo $notification['book_id']; ?>&n_id=<?php echo $notification['id'];?>">
+                               <i class="mdi mdi-message-plus"></i> <?php
+                                  echo $notification['title'] ; ?>
+                               <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> <?php echo $notification['notify_at']; ?></span>
+                             </a>
+                           </li>
+                         <?php  
+                         }
+                         ?>
                       <li class="dropdown-footer">
-                        <a class="text-center" href="#"> View All </a>
+                        <a class="text-center" href="../views/all-notification.php"> View All </a>
                       </li>
                     </ul>
                   </li>
@@ -155,19 +153,19 @@
                   <li class="dropdown user-menu">
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                       <img src="../assets/img/user/user.png" class="user-image" alt="User Image" />
-                      <span class="d-none d-lg-inline-block">Abdus Salam</span>
+                      <span class="d-none d-lg-inline-block"><?php echo $user_detail->firstname; ?></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <!-- User image -->
                       <li class="dropdown-header">
                         <img src="../assets/img/user/user.png" class="img-circle" alt="User Image" />
                         <div class="d-inline-block">
-                          Abdus Salam <small class="pt-1">iamabdus@gmail.com</small>
+                          <?php echo $user_detail->firstname; ?> <small class="pt-1"><?php echo $user_detail->email;?></small>
                         </div>
                       </li>
 
                       <li>
-                        <a href="user-profile.html">
+                        <a href="user-profile.html" class="d-none">
                           <i class="mdi mdi-account"></i> My Profile
                         </a>
                       </li>

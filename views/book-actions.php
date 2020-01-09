@@ -7,8 +7,14 @@ if ($_GET["id"]) {
    $book = new Book();
    $book->find($book_id);
 }
+ 
+if ($_GET["n_id"]) {
+    $notification_id = $_GET["n_id"];
+    $read_notification = new Notification();
+    $read_notification->find($notification_id);
+    $read_notification->update(["notification_read"=>1]);
+}
 ?>
-
 
 
 <div class="content-wrapper">
