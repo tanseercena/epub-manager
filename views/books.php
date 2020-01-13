@@ -9,12 +9,12 @@ $action = new Action(0,0,0);
           <div class="breadcrumb-wrapper breadcrumb-contacts">
   <div>
     <h1>Books</h1>
-    
+
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb p-0">
             <li class="breadcrumb-item">
               <a href="index.html">
-                <span class="mdi mdi-home"></span>                
+                <span class="mdi mdi-home"></span>
               </a>
             </li>
             <li class="breadcrumb-item">
@@ -35,17 +35,17 @@ $action = new Action(0,0,0);
               <option value="uae">UAE</option>
            </select>
            <input type="text" name="penname_title" class="form-control mx-3" placeholder="Book/Author Name: ">
-        
+
            <input type="date" name="s_date" class="form-control mx-3" placeholder="Date Publication From: ">
-        
+
            <input type="date" name="e_date" class="form-control mx-3" placeholder="Date Publication To: ">
         </div>
-        
+
         <button type="submit" class="btn btn-primary"> Filter
         </button>
-        
+
     </form>
-    
+
   </div>
 </div>
 
@@ -57,12 +57,12 @@ $action = new Action(0,0,0);
         if (!empty($_POST["penname_title"])) {
             $title = $_POST["penname_title"];
             $sql_query->orWhere("book_title","%$title%"," LIKE ")->orWhere("penname","%$title%"," LIKE ");
-        } 
+        }
         if (!empty($_POST["s_date"]) && !empty($_POST["e_date"])) {
             $s_date = date($_POST["s_date"]);
             $e_date = date($_POST["e_date"]);
             $sql_query->where("publication_date","$s_date"," >= ")->where("publication_date","$e_date"," <= ");
-        } 
+        }
         if (!empty($_POST["book_origin"])) {
             $book_origin = $_POST["book_origin"];
             $sql_query->where("book_origin","$book_origin"," = ");
@@ -126,17 +126,17 @@ $action = new Action(0,0,0);
           <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;?></span>
         </div>
       </a>
-  
+
     </div>
   </div>
-  
+
  <!-- Modal -->
   <div class="modal fade" id="modal-book-<?php echo $book['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header justify-content-end border-bottom-0">
-      
+
       </div>
       <div class="modal-body pt-0">
         <div class="row no-gutters">
@@ -155,8 +155,8 @@ $action = new Action(0,0,0);
                 </div>
               </div>
               <div class="d-flex justify-content-between ">
-                <?php 
-              
+                <?php
+
                   $department_id = Session::get("department_id");
                   $status_id = $book['status_id'];
                   $next_actions = $action->getNextAction($status_id,$department_id);
@@ -168,7 +168,7 @@ $action = new Action(0,0,0);
                     $file_required = $action->fileRequired($action_status_id,$department_id);
                     $department_id_to = $action->getToDepartment($action_status_id);
                     $department_id_to = json_encode($department_id_to);
-                  
+
                     $btn_class = "";
 
                     if ($action_status_id == 1 || $action_status_id == 13 || $action_status_id == 4) {
@@ -186,7 +186,7 @@ $action = new Action(0,0,0);
                     if ($action_status_id == 12) {
                       $btn_class  = "btn-info";
                     }
-                  
+
                 ?>
                 <div class="text-center pb-4">
                   <button class="btn <?php echo $btn_class; ?> mx-1" onclick="showNextActionModel(<?php echo $book['id']; ?>,<?php echo  $action_status_id; ?>,<?php echo $file_required; ?>,'<?php echo $department_id_to; ?>')" ><?php echo $status_obj->title; ?></button>
@@ -206,15 +206,15 @@ $action = new Action(0,0,0);
               <h4 class="text-dark mb-1">Epub Details</h4>
               <p class="text-dark font-weight-medium pt-4 mb-2">Assigned To</p>
               <?php
-                $user_id = $book['user_id']; 
+                $user_id = $book['user_id'];
                 $user = new User();
                 $user->find($user_id);
-                
+
               ?>
               <p><?php echo $user->firstname.' '.$user->lastname; ?></p>
               <p class="text-dark font-weight-medium pt-4 mb-2">File Status</p>
               <?php
-              $status = new Status(); 
+              $status = new Status();
               $action = new Action(0,0,0,0);
               $last= $action->where("book_id",$book['id'])->orWhere("status_id",1)->orWhere("status_id",2)->orWhere("status_id",3)->orWhere("status_id",4)->orWhere("status_id",5)->orderBy("created_at","DESC")->first();
               $last_statusid = $last['status_id'];
@@ -224,7 +224,7 @@ $action = new Action(0,0,0);
               <p><?php echo $status->title ? $status->title : "N/A"; ?> </p>
               <p class="text-dark font-weight-medium pt-4 mb-2">Validation Status</p>
               <?php
-              $status = new Status(); 
+              $status = new Status();
               $action = new Action(0,0,0,0);
               $last= $action->where("book_id",$book['id'])->orWhere("status_id",8)->orWhere("status_id",9)->orderBy("created_at","DESC")->first();
               $last_statusid = $last['status_id'];
@@ -234,7 +234,7 @@ $action = new Action(0,0,0);
                <p><?php  echo $status->title ? $status->title : "N/A"; ?></p>
               <p class="text-dark font-weight-medium pt-4 mb-2">QA Status</p>
               <?php
-              $status = new Status(); 
+              $status = new Status();
               $action = new Action(0,0,0,0);
               $last= $action->where("book_id",$book['id'])->orWhere("status_id",10)->orWhere("status_id",11)->orderBy("created_at","DESC")->first();
               $last_statusid = $last['status_id'];
@@ -256,14 +256,14 @@ $action = new Action(0,0,0);
          }
           }
     ?>
- 
+
 </div>
 
 <!-- Button Model -->
 <div class="modal fade" id="button_model" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <form action="../actions/save_action.php" method="post">
+            <form action="../actions/save_action.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="book_id" id="book_id_action" value="">
             <input type="hidden" name="status_id" id="status_id_action" value="">
             <input type="hidden" name="department_id" id="department_id_to" value="">
@@ -323,7 +323,7 @@ function showNextActionModel(book_id,status_id, file_required,department_id){
   }
 
   $("#button_model").modal();
- 
+
 }
 </script>
 

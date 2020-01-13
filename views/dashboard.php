@@ -9,8 +9,15 @@ require_once __DIR__ . "/layouts/header.php";
             <div class="col-xl-3 col-sm-6">
                 <div class="card card-mini mb-4">
                     <div class="card-body">
-                        <h2 class="mb-1">71,503</h2>
-                        <p>Online Signups</p>
+                        <h2 class="mb-1">
+                          <?php
+                          $book = new Book();
+                      		$uk_all_records = $book->getAllCurrentBooks('uk');
+                          $total_uk = $book->countTotal($uk_all_records);
+                          echo $total_uk;
+                          ?>
+                        </h2>
+                        <p>This week UK Books</p>
                         <div class="chartjs-wrapper">
                             <canvas id="barChart"></canvas>
                         </div>
@@ -21,20 +28,14 @@ require_once __DIR__ . "/layouts/header.php";
                 <div class="card card-mini  mb-4">
                     <div class="card-body">
                         <h2 class="mb-1">
-                            <?php
-
-                            $book_query = new Book();
-                            $s_date = date("Y-m-01");
-                            $e_date = date("Y-m-t");
-                            $book_query->where("publication_date", "$s_date", " >= ")->where("publication_date", "$e_date", " <= ");
-                            $book_query->where("status_id", 10);
-                            $books = $book_query->get();
-                            // print_r($books);
-                            // exit;
-                            echo count($books);
-                            ?>
+                          <?php
+                          $book = new Book();
+                          $usa_all_records = $book->getAllCurrentBooks('usa');
+                          $total_usa = $book->countTotal($usa_all_records);
+                          echo $total_usa;
+                          ?>
                         </h2>
-                        <p>Completed This Month</p>
+                        <p>This week USA Books</p>
                         <div class="chartjs-wrapper">
                             <canvas id="dual-line"></canvas>
                         </div>
@@ -45,20 +46,14 @@ require_once __DIR__ . "/layouts/header.php";
                 <div class="card card-mini mb-4">
                     <div class="card-body">
                         <h2 class="mb-1">
-                            <?php
-
-                            $book_query = new Book();
-                            $s_date = date("Y-m-01");
-                            $e_date = date("Y-m-t");
-                            $book_query->where("publication_date", "$s_date", " >= ")->where("publication_date", "$e_date", " <= ");
-                            $book_query->where("status_id", 6);
-                            $books = $book_query->get();
-                            // print_r($books);
-                            // exit;
-                            echo count($books);
-                            ?>
+                          <?php
+                          $book = new Book();
+                          $uae_all_records = $book->getAllCurrentBooks('uae');
+                          $total_uae = $book->countTotal($uae_all_records);
+                          echo $total_uae;
+                          ?>
                         </h2>
-                        <p>In Progress</p>
+                        <p>This week UAE Books</p>
                         <div class="chartjs-wrapper">
                             <canvas id="area-chart"></canvas>
                         </div>
@@ -71,18 +66,10 @@ require_once __DIR__ . "/layouts/header.php";
                         <h2 class="mb-1">
                             <?php
 
-                            $book_query = new Book();
-                            $s_date = date("Y-m-d");
-                            $e_date = date("Y-m-d");
-                            $book_query->where("publication_date", "$s_date", " >= ")->where("publication_date", "$e_date", " <= ");
-                            $book_query->where("status_id", 10);
-                            $books = $book_query->get();
-                            // print_r($books);
-                            // exit;
-                            echo count($books);
+                            echo $total_uk + $total_usa + $total_uae;
                             ?>
                         </h2>
-                        <p>Today Completed</p>
+                        <p>All Books this week</p>
                         <div class="chartjs-wrapper">
                             <canvas id="line"></canvas>
                         </div>
@@ -116,8 +103,8 @@ require_once __DIR__ . "/layouts/header.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                
+                                <?php
+
                                 $query = new Book();
                                 $books = $query->all();
                                 foreach($books as $book) {?>
@@ -130,7 +117,7 @@ require_once __DIR__ . "/layouts/header.php";
                                     <td class="d-none d-lg-table-cell"><?php echo $book['penname']; ?></td>
                                     <td class="d-none d-lg-table-cell"><?php echo $book['publication_date']; ?></td>
                                     <td>
-                                        <?php 
+                                        <?php
                                             $status = new Status();
                                             $status->find($book['status_id']);
 
@@ -150,7 +137,7 @@ require_once __DIR__ . "/layouts/header.php";
                                             if ($book['status_id'] == 12 || $book['status_id'] == 4) {
                                                 $text_class  = "badge-info";
                                             }
-                                         
+
                                         ?>
                                         <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;  ?></span>
                                     </td>

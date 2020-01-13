@@ -42,10 +42,10 @@ if($_POST){
         //Save file if it is required
         $user_dep_id = Session::get("department_id");
         if($action->fileRequired($_POST['status_id'], $user_dep_id)){
-
           //Create folder with book ISBN if not exists
           if (!file_exists('../assets/epub_files/'.$isbn)) {
-              mkdir('../assets/epub_files/'.$isbn, 0777, true);
+              mkdir('../assets/epub_files/'.$isbn, 0777,true);
+              chmod('../assets/epub_files/'.$isbn, 0777);
           }
 
           //Upload File
@@ -54,19 +54,53 @@ if($_POST){
              $epub_file =  $epub_file->upload();
              if (!$epub_file[0]['errors']) {
             	  $epub_file = $epub_file[0]['filename'];
+
+
                 //Validate Epub using EpubChecker
                 $check_id = EpubChecker::validate('../assets/epub_files/'.$isbn."/".$epub_file,$book_id);
                 if($check_id){
-                  // Successfully Validated
-                  // Update Book Status and Add Action
+                  $epub_check = new Epubcheck();
+                  $epub_check->find($check_id);
+                  $validated = $epub_check->validated;
+                  if($validated){
+                    // Successfully Validated
+                    // Update Book Status and Add Action
+                    $action = new Action($action_data['book_id'],9,$action_data['user_id'],$department_id,"Auto Validated.",$base_url,$check_id);
+                    $action_id = $action->save($action_data);
+                    $book->update(['status_id' => 9]);
+                  }else{
+                    //Validation Faild
+                    // Update Book Status and Add Action
+                    $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. See Checker Logs.",$base_url,$check_id);
+                    $action_id = $action->save($action_data);
+                    $book->update(['status_id' => 8]);
+                  }
+
                 }else{
                   //Validation Faild
                   // Update Book Status and Add Action
+                  $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. See Checker Logs.",$base_url,$check_id);
+                  $action_id = $action->save($action_data);
+                  $book->update(['status_id' => 8]);
                 }
+
+                //Save file to DB
+                $book_file = new BookFile();
+                $book_file->insert([
+                  'filename' => $epub_file,
+                  'book_id' => $action_data['book_id'],
+                  'action_id' => $action_id,
+                  'user_id' => $action_data['user_id'],
+                  'created_at' => date("Y-m-d H:i:s")
+                ]);
+                
              }
              else{
                // Validation Faild due to file size
                // Update Book Status and Add Action
+               $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. File Size Issue.",$base_url,$check_id);
+               $action_id = $action->save($action_data);
+               $book->update(['status_id' => 8]);
              }
           }
         }

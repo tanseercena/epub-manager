@@ -1,4 +1,5 @@
-<?php require_once __DIR__."/../../config/init.php";
+<?php
+require_once __DIR__."/../../config/init.php";
   $user_id = Session::get('user_id');
   $user_detail = new User();
   $user_detail->find($user_id);
@@ -11,10 +12,10 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
+  <meta name="description" content="Epub Tracker by Viralwebbs">
 
 
-  <title>Epub-Manager Admin Dashboard</title>
+  <title>Epub Tracker - Dashboard</title>
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
@@ -47,7 +48,7 @@
   <link id="" rel="stylesheet" href="../assets/css/sleek.css" />
 
   <!-- FAVICON -->
-  <link href="../assets/img/favicon.png" rel="shortcut icon" />
+  <link href="<?php echo $base_url ?>assets/img/logo.png" rel="shortcut icon" />
 
 
 
@@ -76,7 +77,7 @@
 
   <div class="wrapper">
     <!-- Github Link -->
-   
+
 
             <!--
           ====================================
@@ -118,12 +119,22 @@
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <?php
+                        // Read Notification
+                        if ($_GET["n_id"]) {
+                            $notification_id = $_GET["n_id"];
+                            $read_notification = new Notification();
+                            $read_notification->find($notification_id);
+                            $read_notification->update(["notification_read"=>1]);
+                        }
+
                         $read_notification = new Notification();
-                        $read_notification->Where("user_id","$user_id")->Where("notification_read","0");
+                        $read_notification->where("user_id","$user_id")
+                        ->where("notification_read","0")
+                        ->orderBy("notify_at","DESC");
                         $notifications = $read_notification->get();
                       ?>
                       <li class="dropdown-header">You have <?php echo count($notifications);?> Notifications</li>
-                      <?php 
+                      <?php
                          $no_of_notification = 0;
                          foreach ($notifications as $notification) {
                           $no_of_notification++;
@@ -132,13 +143,13 @@
                           }
                          ?>
                            <li>
-                             <a href="../views/book-actions.php?id=<?php echo $notification['book_id']; ?>&n_id=<?php echo $notification['id'];?>">
+                             <a href="<?php echo $base_url; ?>views/book-actions.php?id=<?php echo $notification['book_id']; ?>&n_id=<?php echo $notification['id'];?>#action-<?php echo $notification['action_id']; ?>">
                                <i class="mdi mdi-message-plus"></i> <?php
                                   echo $notification['title'] ; ?>
-                               <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> <?php echo $notification['notify_at']; ?></span>
+                               <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> <?php echo Helper::time_elapsed_string($notification['notify_at']); ?></span>
                              </a>
                            </li>
-                         <?php  
+                         <?php
                          }
                          ?>
                       <li class="dropdown-footer">
@@ -177,6 +188,6 @@
                 </ul>
               </div>
             </nav>
-            
+
 
           </header>

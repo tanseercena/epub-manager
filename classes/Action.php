@@ -8,6 +8,7 @@ class Action extends BaseModel
    private $department_id;
    private $notes;
    private $base_url;
+   private $checker_id;
    private $actions = [
       //Development Department Actions
       '1' => [
@@ -80,9 +81,9 @@ class Action extends BaseModel
    ];
   private $email_status_ids = array( 1, 2, 3, 4, 5, 9, 12);
 
- 
-  
-   public function __construct($book_id,$status_id,$user_id,$department_id = 0, $notes = '',$base_url = '')
+
+
+   public function __construct($book_id,$status_id,$user_id,$department_id = 0, $notes = '',$base_url = '', $checker_id=0)
  	{
  		parent::__construct(); //1st implement the parent constructor
 
@@ -92,6 +93,7 @@ class Action extends BaseModel
        $this->department_id = $department_id;
        $this->notes = $notes;
        $this->base_url = $base_url;
+       $this->checker_id = $checker_id;
  	}
 
     public function save(){
@@ -101,25 +103,26 @@ class Action extends BaseModel
                 'department_id' => $this->department_id,
                 'status_id'  => $this->status_id,
                 'notes'  => $this->notes,
+                'epubcheck_id'   => $this->checker_id,
                 'created_at' => date("Y-m-d H:i:s"),
        ];
        $check=$this->insert($data);
        //Send Notification to DB & Email
       //  if($this->status_id == 1 || $this->status_id == 2 || $this->status_id == 3 || $this->status_id == 4 || $this->status_id == 5 ||
       //  $this->status_id == 9 || $this->status_id == 12)
-     
-      $this->sendNotification();
-      
-      return $check; 
+
+      $this->sendNotification($check);
+
+      return $check;
 
     }
 
-    public function sendNotification()
+    public function sendNotification($action_id)
     {
-      
+
        $book = new Book();
        $book->find($this->book_id);
-       
+
        $status = new Status();
        $status->find($this->status_id);
 
@@ -130,13 +133,13 @@ class Action extends BaseModel
        }
        $user = new User();
        $user->find($this->user_id);
-      
+
        $app_notification = [
-        'title' => "Action Performed on ".$book->book_title,
-        'details'   => "Following action is processed with Book: ".$book->book_title,
-        'user_id' => $user_id, 
-        'book_id' => $this->book_id, 
-        'action_id' => $this->id, 
+        'title' => "<strong>".$status->title."</strong> - ".$book->book_title,
+        'details'   => "<strong>".$status->title."</strong> is processed with Book: ".$book->book_title,
+        'user_id' => $user_id,
+        'book_id' => $this->book_id,
+        'action_id' => $action_id,
         'notify_at' => date("Y-m-d H:i:s")
      ];
      // App Notification
@@ -162,34 +165,34 @@ class Action extends BaseModel
             $this->base_url.'views/book-actions.php?id='.$this->book_id,
             'View Actions'
       );
-      
+
       $email_template = str_replace($search,$replace,$email_template);
 
       $email_notification = [
-            
+
             'to' => $user->email,
             'subject' => 'Epub Action Performed',
             'message' => $email_template,
-         
+
          ];
-      
+
       $emailnotification = new EmailNotification($email_notification);
       $check = $emailnotification->send();
      }
-     
+
 
     }
 
     public function getNextAction($status_id, $department_id)
     {
       $next_actions = isset($this->actions[$department_id][$status_id]) ? $this->actions[$department_id][$status_id] : 0;
-      
+
       return $next_actions;
     }
 
     public function fileRequired($status_id,$department_id){
       $required = isset($this->file_required[$department_id][$status_id]) ? $this->file_required[$department_id][$status_id] : 2;
-      
+
       return $required;
     }
 

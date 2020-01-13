@@ -7294,7 +7294,7 @@
 
 	$(document).ready(function () {
 
-	 
+
 	  /*======== 1. DUAL LINE CHART2 ========*/
 	  var dual3 = document.getElementById("dual-line3");
 	  if (dual3 !== null) {
@@ -7372,7 +7372,7 @@
 	      }
 	    });
 	  }
-	 
+
 	  /*======== 4. LINE CHART1 ========*/
 	  var lchart1 = document.getElementById("linechart1");
 	  if (lchart1 !== null) {
@@ -7730,84 +7730,84 @@
 	    });
 	  }
 	  /*======== 10. GRADIENT LINE CHART ========*/
-	  var line = document.getElementById("line");
-	  if (line !== null) {
-	    line = line.getContext("2d");
-	    var gradientFill = line.createLinearGradient(0, 120, 0, 0);
-	    gradientFill.addColorStop(0, "rgba(41,204,151,0.10196)");
-	    gradientFill.addColorStop(1, "rgba(41,204,151,0.30196)");
-
-	    var lChart = new Chart(line, {
-	      type: "line",
-	      data: {
-	        labels: ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"],
-	        datasets: [
-	          {
-	            label: "Rev",
-	            lineTension: 0,
-	            pointRadius: 4,
-	            pointBackgroundColor: "rgba(255,255,255,1)",
-	            pointBorderWidth: 2,
-	            fill: true,
-	            backgroundColor: gradientFill,
-	            borderColor: "#29cc97",
-	            borderWidth: 2,
-	            data: [0, 4, 3, 5.5, 3, 4.7, 1]
-	          }
-	        ]
-	      },
-	      options: {
-	        responsive: true,
-	        maintainAspectRatio: false,
-	        legend: {
-	          display: false
-	        },
-	        layout: {
-	          padding: {
-	            right: 10
-	          }
-	        },
-	        scales: {
-	          xAxes: [
-	            {
-	              gridLines: {
-	                drawBorder: false,
-	                display: false
-	              },
-	              ticks: {
-	                display: false, // hide main x-axis line
-	                beginAtZero: true
-	              },
-	              barPercentage: 1.8,
-	              categoryPercentage: 0.2
-	            }
-	          ],
-	          yAxes: [
-	            {
-	              gridLines: {
-	                drawBorder: false, // hide main y-axis line
-	                display: false
-	              },
-	              ticks: {
-	                display: false,
-	                beginAtZero: true
-	              }
-	            }
-	          ]
-	        },
-	        tooltips: {
-	          titleFontColor: "#888",
-	          bodyFontColor: "#555",
-	          titleFontSize: 12,
-	          bodyFontSize: 14,
-	          backgroundColor: "rgba(256,256,256,0.95)",
-	          displayColors: true,
-	          borderColor: "rgba(220, 220, 220, 0.9)",
-	          borderWidth: 2
-	        }
-	      }
-	    });
-	  }
+	  // var line = document.getElementById("line");
+	  // if (line !== null) {
+	  //   line = line.getContext("2d");
+	  //   var gradientFill = line.createLinearGradient(0, 120, 0, 0);
+	  //   gradientFill.addColorStop(0, "rgba(41,204,151,0.10196)");
+	  //   gradientFill.addColorStop(1, "rgba(41,204,151,0.30196)");
+		//
+	  //   var lChart = new Chart(line, {
+	  //     type: "line",
+	  //     data: {
+	  //       labels: ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"],
+	  //       datasets: [
+	  //         {
+	  //           label: "Rev",
+	  //           lineTension: 0,
+	  //           pointRadius: 4,
+	  //           pointBackgroundColor: "rgba(255,255,255,1)",
+	  //           pointBorderWidth: 2,
+	  //           fill: true,
+	  //           backgroundColor: gradientFill,
+	  //           borderColor: "#29cc97",
+	  //           borderWidth: 2,
+	  //           data: [0, 4, 3, 5.5, 3, 4.7, 1]
+	  //         }
+	  //       ]
+	  //     },
+	  //     options: {
+	  //       responsive: true,
+	  //       maintainAspectRatio: false,
+	  //       legend: {
+	  //         display: false
+	  //       },
+	  //       layout: {
+	  //         padding: {
+	  //           right: 10
+	  //         }
+	  //       },
+	  //       scales: {
+	  //         xAxes: [
+	  //           {
+	  //             gridLines: {
+	  //               drawBorder: false,
+	  //               display: false
+	  //             },
+	  //             ticks: {
+	  //               display: false, // hide main x-axis line
+	  //               beginAtZero: true
+	  //             },
+	  //             barPercentage: 1.8,
+	  //             categoryPercentage: 0.2
+	  //           }
+	  //         ],
+	  //         yAxes: [
+	  //           {
+	  //             gridLines: {
+	  //               drawBorder: false, // hide main y-axis line
+	  //               display: false
+	  //             },
+	  //             ticks: {
+	  //               display: false,
+	  //               beginAtZero: true
+	  //             }
+	  //           }
+	  //         ]
+	  //       },
+	  //       tooltips: {
+	  //         titleFontColor: "#888",
+	  //         bodyFontColor: "#555",
+	  //         titleFontSize: 12,
+	  //         bodyFontSize: 14,
+	  //         backgroundColor: "rgba(256,256,256,0.95)",
+	  //         displayColors: true,
+	  //         borderColor: "rgba(220, 220, 220, 0.9)",
+	  //         borderWidth: 2
+	  //       }
+	  //     }
+	  //   });
+	  // }
 	  /*======== 11. DOUGHNUT CHART ========*/
 	  var doughnut = document.getElementById("doChart");
 	  if (doughnut !== null) {

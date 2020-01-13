@@ -2,14 +2,9 @@
   <div id="sidebar" class="sidebar sidebar-with-footer">
     <!-- Aplication Brand -->
     <div class="app-brand">
-      <a href="/index.html">
-        <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="30" height="33" viewBox="0 0 30 33">
-          <g fill="none" fill-rule="evenodd">
-            <path class="logo-fill-blue" fill="#7DBCFF" d="M0 4v25l8 4V0zM22 4v25l8 4V0z" />
-            <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
-          </g>
-        </svg>
-        <span class="brand-name">Epub Manager</span>
+      <a href="<?php echo $base_url; ?>">
+        <img src="<?php echo $logo; ?>" style="width: 50px;" >
+        <span class="brand-name">Epub Tracker</span>
       </a>
     </div>
     <!-- begin sidebar scrollbar -->
@@ -17,11 +12,11 @@
 
       <!-- sidebar menu -->
       <ul class="nav sidebar-inner" id="sidebar-menu">
-      <?php 
+      <?php
         $directoryURI = $_SERVER['REQUEST_URI'];
         $path = parse_url($directoryURI, PHP_URL_PATH);
-        $components = explode('/', $path); 
-        $first_part = basename($_SERVER['PHP_SELF'], ".php"); 
+        $components = explode('/', $path);
+        $first_part = basename($_SERVER['PHP_SELF'], ".php");
       ?>
 
         <li class="has-sub <?php if ($first_part=="dashboard") {echo "active"; }?>">
@@ -38,13 +33,13 @@
           </a>
         </li>
 
-        <?php 
+        <?php
           $user = new User();
           $user_id = Session::get("user_id");
           $user->find($user_id);
           if($user->admin == 1){
 
-          
+
         ?>
         <li class="has-sub <?php if ($first_part=="manage-books") {echo "active"; } ?>">
           <a class="sidenav-item-link" href="./manage-books.php">
@@ -62,19 +57,19 @@
         <li class="has-sub <?php if ($first_part=="manage-status") {echo "active"; } ?>">
           <a class="sidenav-item-link" href="./manage-status.php">
             <i class=" mdi mdi-account-alert"></i>
-            <span class="nav-text">Manage Status</span> 
+            <span class="nav-text">Manage Status</span>
           </a>
         </li>
         <li class="has-sub <?php if ($first_part=="manage-users") {echo "active"; } ?>">
           <a class="sidenav-item-link" href="./manage-users.php">
             <i class="mdi mdi-account-multiple-plus"></i>
-            <span class="nav-text">Manage Users</span> 
+            <span class="nav-text">Manage Users</span>
           </a>
         </li>
         <li class="has-sub <?php if ($first_part=="manage-department") {echo "active"; } ?>">
           <a class="sidenav-item-link" href="./manage-department.php">
             <i class="mdi mdi-office"></i>
-            <span class="nav-text">Manage Departments</span> 
+            <span class="nav-text">Manage Departments</span>
           </a>
         </li>
         <li class="has-sub <?php if ($first_part=="manage-excel") {echo "active"; } ?>">
@@ -85,32 +80,35 @@
         </li>
 
 
-        <?php 
+        <?php
           }
         ?>
       </ul>
 
     </div>
     <?php
+      $month_start = date("Y-m-01");
+      $month_end = date("Y-m-t");
+
       $book = new Book();
-      $total_books_uk = $book->where("book_origin","uk")->get(); 
+      $total_books_uk = $book->where("book_origin","uk")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_total_uk = count($total_books_uk);
-      $completed_books_uk = $book->where("status_id","12")->where("book_origin","uk")->get();
-      $count_uk = count($completed_books_uk); 
+      $completed_books_uk = $book->where("status_id","12")->where("book_origin","uk")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
+      $count_uk = count($completed_books_uk);
       $percentage_uk = ($count_uk*100)/$count_total_uk;
-      
+
       $book_usa = new Book();
-      $total_books_usa = $book_usa->where("book_origin","usa")->get();
+      $total_books_usa = $book_usa->where("book_origin","usa")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_total_usa = count($total_books_usa);
-      $completed_books_usa = $book_usa->where("status_id", "12")->where("book_origin","usa")->get();
-      $count_usa = count($completed_books_usa); 
+      $completed_books_usa = $book_usa->where("status_id", "12")->where("book_origin","usa")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
+      $count_usa = count($completed_books_usa);
       $percentage_usa = ($count_usa*100)/$count_total_usa;
 
       $book_uae = new Book();
-      $total_books_uae = $book_uae->where("book_origin","uae")->get();
+      $total_books_uae = $book_uae->where("book_origin","uae")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_total_uae = count($total_books_uae);
-      $completed_books_uae = $book_uae->where("status_id", "12")->where("book_origin","uae")->get();
-      $count_uae = count($completed_books_uae); 
+      $completed_books_uae = $book_uae->where("status_id", "12")->where("book_origin","uae")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
+      $count_uae = count($completed_books_uae);
       $percentage_uae = ($count_uae*100)/$count_total_uae;
     ?>
     <div class="sidebar-footer">
@@ -138,4 +136,3 @@
     </div>
   </div>
 </aside>
-
