@@ -127,12 +127,14 @@ class Action extends BaseModel
        $status->find($this->status_id);
 
        if($this->department_id == 1){
-         $user_id = $book->user_id;
+         //$user_id = $book->user_id;
+         $user_id = 2;  // Development User
        }else{
           $user_id = $this->to_user[$this->department_id];
        }
        $user = new User();
-       $user->find($this->user_id);
+       //$user->find($this->user_id);
+       $user->find($user_id);
 
        $app_notification = [
         'title' => "<strong>".$status->title."</strong> - ".$book->book_title,

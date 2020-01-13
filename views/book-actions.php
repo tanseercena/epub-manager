@@ -130,7 +130,13 @@ if ($_GET["id"]) {
                                                 <p>
                                                   <br />
                                                   <strong>File: </strong>
-                                                  <a href="<?php echo $base_url; ?>views/epub_viewer.php?file_id=<?php echo $action_file['id']; ?>" target="_blank">View File</a> |
+                                                  <?php
+                                                    if($action['status_id'] != 4){  // If not HS file and epub file
+                                                      ?>
+                                                      <a href="<?php echo $base_url; ?>views/epub_viewer.php?file_id=<?php echo $action_file['id']; ?>" target="_blank">View File</a> |
+                                                      <?php
+                                                    }
+                                                  ?>
                                                   <a href="<?php echo $base_url; ?>assets/epub_files/<?php echo $book->isbn; ?>/<?php echo $action_file__; ?>" download>Download File</a>
                                                 </p>
                                                 <?php

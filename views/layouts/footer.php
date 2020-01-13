@@ -123,6 +123,10 @@
 				fill: false,
 				backgroundColor: "rgba(255,255,255,1)",
 				borderColor: "rgb(75, 192, 192)",
+				pointRadius: 4,
+				pointBorderWidth: 2,
+				fill: false,
+				borderWidth: 2,
 				data: [
 					<?php
 					foreach($uk_completed_records as $uk_com_rec){

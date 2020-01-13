@@ -106,7 +106,7 @@ $action = new Action(0,0,0);
   <div class="col-lg-6 col-xl-4">
     <div class="card card-default p-4">
       <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-book-<?php echo $book['id']; ?>">
-        <img src="../testing/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Avatar Image">
+        <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Avatar Image">
         <div class="media-body">
           <h5 class="mt-0 mb-2 text-dark"><?php echo $book["book_title"]; ?></h5>
           <ul class="list-unstyled">

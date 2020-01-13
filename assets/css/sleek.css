@@ -12483,4 +12483,7 @@ html[dir="rtl"] .github-link svg {
   }
 }
 
+.chartjs-wrapper canvas {
+  max-height: 100px;
+}
 /*# sourceMappingURL=sleek.css.map */

@@ -50,24 +50,42 @@ if($_POST){
 
           //Upload File
           if ($_FILES['file'] && $_FILES['file']['size'] != 0) {
-             $epub_file = new Upload($_FILES['file'],'../assets/epub_files/'.$isbn."/",['size' => 10, 'ext' => ['epub']]);
+              if($_POST['status_id'] == 4){
+                $validation = ['size' => 20, 'ext' => ['doc','docx']];
+              }else{
+                $validation = ['size' => 10, 'ext' => ['epub']];
+              }
+             $epub_file = new Upload($_FILES['file'],'../assets/epub_files/'.$isbn."/",$validation);
              $epub_file =  $epub_file->upload();
              if (!$epub_file[0]['errors']) {
             	  $epub_file = $epub_file[0]['filename'];
 
+                if($_POST['status_id'] == 4){ // When HS upload File
 
-                //Validate Epub using EpubChecker
-                $check_id = EpubChecker::validate('../assets/epub_files/'.$isbn."/".$epub_file,$book_id);
-                if($check_id){
-                  $epub_check = new Epubcheck();
-                  $epub_check->find($check_id);
-                  $validated = $epub_check->validated;
-                  if($validated){
-                    // Successfully Validated
-                    // Update Book Status and Add Action
-                    $action = new Action($action_data['book_id'],9,$action_data['user_id'],$department_id,"Auto Validated.",$base_url,$check_id);
-                    $action_id = $action->save($action_data);
-                    $book->update(['status_id' => 9]);
+                }else{  // When Development Upload Epub File
+                  //Validate Epub using EpubChecker
+                  $check_id = EpubChecker::validate('../assets/epub_files/'.$isbn."/".$epub_file,$book_id);
+                  if($check_id){
+                    $epub_check = new Epubcheck();
+                    $epub_check->find($check_id);
+                    $validated = $epub_check->validated;
+                    if($validated){
+                      // Successfully Validated
+                      // Update Book Status and Add Action
+                      $action = new Action($action_data['book_id'],9,$action_data['user_id'],4,"Auto Validated.",$base_url,$check_id);
+                      $action_id = $action->save($action_data);
+                      $book->update(['status_id' => 9]);
+                      if($user_dep_id == 4 && $_POST['status_id'] == 11){ // If QA Passed
+                        $book->update(['status_id' => 11]);
+                      }
+                    }else{
+                      //Validation Faild
+                      // Update Book Status and Add Action
+                      $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. See Checker Logs.",$base_url,$check_id);
+                      $action_id = $action->save($action_data);
+                      $book->update(['status_id' => 8]);
+                    }
+
                   }else{
                     //Validation Faild
                     // Update Book Status and Add Action
@@ -75,14 +93,8 @@ if($_POST){
                     $action_id = $action->save($action_data);
                     $book->update(['status_id' => 8]);
                   }
-
-                }else{
-                  //Validation Faild
-                  // Update Book Status and Add Action
-                  $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. See Checker Logs.",$base_url,$check_id);
-                  $action_id = $action->save($action_data);
-                  $book->update(['status_id' => 8]);
                 }
+
 
                 //Save file to DB
                 $book_file = new BookFile();
@@ -93,14 +105,16 @@ if($_POST){
                   'user_id' => $action_data['user_id'],
                   'created_at' => date("Y-m-d H:i:s")
                 ]);
-                
+
              }
              else{
                // Validation Faild due to file size
                // Update Book Status and Add Action
-               $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. File Size Issue.",$base_url,$check_id);
-               $action_id = $action->save($action_data);
-               $book->update(['status_id' => 8]);
+               if($_POST['status_id'] != 4){
+                   $action = new Action($action_data['book_id'],8,$action_data['user_id'],$department_id,"Validation Fail. File Size Issue.",$base_url,$check_id);
+                   $action_id = $action->save($action_data);
+                   $book->update(['status_id' => 8]);
+                }
              }
           }
         }
