@@ -105,6 +105,7 @@ $action = new Action(0,0,0);
     ?>
   <div class="col-lg-6 col-xl-4">
     <div class="card card-default p-4">
+      <div class="ribbon <?php if($book['book_origin'] == "usa"){echo "blue";}elseif($book['book_origin'] == "uae"){echo "red";} ?>"><span><?php echo ucfirst($book['book_origin']); ?></span></div>
       <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-book-<?php echo $book['id']; ?>">
         <?php
         if (!empty($book['cover'])) {
@@ -146,6 +147,7 @@ $action = new Action(0,0,0);
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
+      <div class="ribbon <?php if($book['book_origin'] == "usa"){echo "blue";}elseif($book['book_origin'] == "uae"){echo "red";} ?>"><span><?php echo ucfirst($book['book_origin']); ?></span></div>
       <div class="modal-header justify-content-end border-bottom-0">
 
       </div>

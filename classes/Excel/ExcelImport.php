@@ -4,7 +4,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 /**
- * 
+ *
  */
 class ExcelImport
 {
@@ -20,41 +20,42 @@ class ExcelImport
 	}
 
     function importBooks(){
-    	
+
     	/** Create a new Xls Reader  **/
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xls();
         $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load($this->file); 
+        $spreadsheet = $reader->load($this->file);
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
         foreach ($sheetData as $key => $book) {
         	if ($key == 1) {
         		continue;
         	}
-        	$penname = mysqli_real_escape_string($this->connection,$book["A"]); 
+        	$penname = mysqli_real_escape_string($this->connection,$book["A"]);
         	$title = mysqli_real_escape_string($this->connection,$book["B"]);
-        	$isbn = mysqli_real_escape_string($this->connection,$book["C"]); 
-        	$publication_date = $book["D"]; 
-            $book_origin = $book["E"]; 
-            $book_type = $book["F"];
+        	$isbn = mysqli_real_escape_string($this->connection,$book["C"]);
+        	$publication_date = $book["D"];
+          $book_origin = $book["E"];
+          $book_type = $book["F"];
 
             $books = new Book();
-            $book_data = $books->where("isbn",$isbn)->first(); 
+            $book_data = $books->where("isbn",$isbn)->first();
 
             if (!$book_data) {
             	$book_array = array(
-            		"book_title" => $title,
+            				"book_title" => $title,
                     "penname" => $penname,
                     "isbn" => $isbn,
                     "publication_date" =>  date("Y-m-d",strtotime($publication_date)),
                     "status_id" => 1,
                     "book_origin" => $book_origin,
                     "book_type" => $book_type,
+										"user_id" => 2,
+										'created_at' => date("Y-m-d H:i:s")
             	);
 
               $book1 = new Book();
-              $check = $book1->insert($book_array);
-              $data = $book1->where("isbn",$isbn)->first(); 
+              $book_id = $book1->insert($book_array);
               $user_id = Session::get("user_id");
 
               if($book_type == 'text'){
@@ -64,10 +65,10 @@ class ExcelImport
                 $department_id = 2;
               }
 
-              $action = new Action($data->id,1,$user_id,$department_id);
+              $action = new Action($book_id,1,$user_id,$department_id);
               $check1 = $action->save();
             }
-            
+
         }
 
     }

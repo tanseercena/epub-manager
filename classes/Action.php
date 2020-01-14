@@ -9,6 +9,7 @@ class Action extends BaseModel
    private $notes;
    private $base_url;
    private $checker_id;
+   private $single_email;
    private $actions = [
       //Development Department Actions
       '1' => [
@@ -83,7 +84,7 @@ class Action extends BaseModel
 
 
 
-   public function __construct($book_id,$status_id,$user_id,$department_id = 0, $notes = '',$base_url = '', $checker_id=0)
+   public function __construct($book_id,$status_id,$user_id,$department_id = 0, $notes = '',$base_url = '', $checker_id=0, $single_email = false)
  	{
  		parent::__construct(); //1st implement the parent constructor
 
@@ -94,6 +95,7 @@ class Action extends BaseModel
        $this->notes = $notes;
        $this->base_url = $base_url;
        $this->checker_id = $checker_id;
+       $this->single_email = $single_email;
  	}
 
     public function save(){
@@ -150,7 +152,7 @@ class Action extends BaseModel
      $check = $appnotification->send();
 
      //Email Notification
-     if (in_array($this->status_id, $this->email_status_ids)){
+     if (in_array($this->status_id, $this->email_status_ids) && !$this->single_email){
 
       $email_template = file_get_contents("../email_templates/basic.html");
       $search = array(
@@ -180,7 +182,7 @@ class Action extends BaseModel
 
       $emailnotification = new EmailNotification($email_notification);
       $check = $emailnotification->send();
-     }
+    }
 
 
     }

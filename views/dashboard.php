@@ -106,8 +106,13 @@ require_once __DIR__ . "/layouts/header.php";
                                 <?php
 
                                 $query = new Book();
-                                $books = $query->all();
-                                foreach($books as $book) {?>
+                                $books = $query->orderBy("created_at","DESC")->all();
+                                $counter = 0;
+                                foreach($books as $book) {
+                                  if($counter == 16){
+                                    break;
+                                  }
+                                  ?>
                                 <tr>
                                     <td><?php echo $book['id']; ?></td>
                                     <td>
@@ -155,7 +160,9 @@ require_once __DIR__ . "/layouts/header.php";
                                         </div>
                                     </td>
                                 </tr>
-                                <?php } ?>
+                                <?php
+                                $counter++;
+                              } ?>
                             </tbody>
                         </table>
                     </div>

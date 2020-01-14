@@ -95,21 +95,21 @@
       $count_total_uk = count($total_books_uk);
       $completed_books_uk = $book->where("status_id","12")->where("book_origin","uk")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_uk = count($completed_books_uk);
-      $percentage_uk = ($count_uk*100)/$count_total_uk;
+      $percentage_uk = round(($count_uk*100)/$count_total_uk,2);
 
       $book_usa = new Book();
       $total_books_usa = $book_usa->where("book_origin","usa")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_total_usa = count($total_books_usa);
       $completed_books_usa = $book_usa->where("status_id", "12")->where("book_origin","usa")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_usa = count($completed_books_usa);
-      $percentage_usa = ($count_usa*100)/$count_total_usa;
+      $percentage_usa = round(($count_usa*100)/$count_total_usa,2);
 
       $book_uae = new Book();
       $total_books_uae = $book_uae->where("book_origin","uae")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_total_uae = count($total_books_uae);
       $completed_books_uae = $book_uae->where("status_id", "12")->where("book_origin","uae")->where("created_at",$month_start,">=")->where("created_at",$month_end,"<=")->get();
       $count_uae = count($completed_books_uae);
-      $percentage_uae = ($count_uae*100)/$count_total_uae;
+      $percentage_uae = round(($count_uae*100)/$count_total_uae,2);
     ?>
     <div class="sidebar-footer">
       <hr class="separator mb-0" />
