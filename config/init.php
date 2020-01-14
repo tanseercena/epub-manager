@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Asia/Karachi");
 require_once __DIR__."/db_config.php";
 require_once __DIR__."/site_config.php";
 require_once __DIR__."/../vendor/autoload.php";

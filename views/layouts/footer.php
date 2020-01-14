@@ -65,7 +65,7 @@
 	if (Session::has('errors')) {
 
 	?>
-		toastr.warning('<?php echo Session::flash('errors'); ?>', "Error!");
+		toastr.error('<?php echo Session::flash('errors'); ?>', "Error!");
 	<?php
 	}
 

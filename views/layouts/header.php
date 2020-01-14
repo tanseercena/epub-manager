@@ -39,7 +39,7 @@ require_once __DIR__."/../../config/init.php";
 
 
 
-  <link href="../assets/plugins/toastr/toastr.min.css" rel="stylesheet" />
+  <link href="../assets/plugins/toastr/toastr.css" rel="stylesheet" />
 
 
 

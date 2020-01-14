@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "../config/init.php";
 
 if($_POST){
@@ -9,10 +9,10 @@ if($_POST){
         if (!$upload_data[0]['error']) {
         	 $cover = $upload_data[0]['filename'];
         }
-       
-        
+
+
     }
-    
+
     $validated = false;
     $request = [
         [
@@ -33,12 +33,12 @@ if($_POST){
         [
             'name' =>  'publication_date',
             'value'=>  $_POST['publication_date'],
-            'rules' =>  'required' 
+            'rules' =>  'required'
         ],
         [
             'name' =>  'book_origin',
             'value'=>  $_POST['book_origin'],
-            'rules' =>  'required' 
+            'rules' =>  'required'
         ]
     ];
 
@@ -51,7 +51,7 @@ if($_POST){
         $book = new Book();
         $book->find($_POST['book_id']);
 
-        $book_data = [ 
+        $book_data = [
             'book_title' => $_POST['book_title'],
             'penname'    => $_POST['penname'],
             'isbn'       => $_POST['isbn'],
@@ -73,7 +73,13 @@ if($_POST){
         }
 
     }else{
-        Session::flash('errors',$errors);
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+        Session::flash('errors',$errors_txt);
     }
 
     header("Location: ../views/manage-books.php");

@@ -25,369 +25,440 @@ if ($_GET["file_id"]) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Epub Viewer</title>
+  <title>EPUB.js Spreads Example</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
   <script src="<?php echo $base_url; ?>assets/js/epub.min.js"></script>
 
-  <!-- <script>
-  window.hypothesisConfig = function () {
-    return {
-      // constructor: this.Annotator.Sidebar,
-      app: 'https://hypothes.is/app.html',
-    };
-  };
-  </script> -->
 
-  <script type="text/javascript">
-    window.hypothesisConfig = function () {
-      return {
-        openSidebar: false,
-        enableMultiFrameSupport: true,
-        onLayoutChange: function(state) {
-          var main = document.querySelector('#main');
-          if (state.expanded === true) {
-            main.classList.add("open");
-          } else {
-            main.classList.remove("open");
-          }
-        }
-      };
-    };
-  </script>
-  <script src="https://cdn.hypothes.is/hypothesis"></script>
+  <style>
+  body {
+  margin: 0;
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
 
-  <style type="text/css">
-    body {
-      margin: 0;
-      background: #fafafa;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      color: #333;
-    }
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  min-height: 800px;
+}
 
-    #navigation {
-      width: 300px;
-      position: absolute;
-      overflow: auto;
-      top: 60px;
-      left: 1000px
-    }
+#title {
+  width: 900px;
+  min-height: 18px;
+  margin: 10px auto;
+  text-align: center;
+  font-size: 16px;
+  color: #E2E2E2;
+  font-weight: 400;
+}
 
-    #navigation.fixed {
-      position: fixed;
-    }
+#title:hover {
+  color: #777;
+}
 
-    #navigation h1 {
-      width: 200px;
-      font-size: 16px;
-      font-weight: normal;
-      color: #777;
-      margin-bottom: 10px;
-    }
+#viewer.spreads {
+  width: 900px;
+  height: 600px;
+  box-shadow: 0 0 4px #ccc;
+  border-radius: 5px;
+  padding: 0;
+  position: relative;
+  margin: 10px auto;
+  background: white url('ajax-loader.gif') center center no-repeat;
+  top: calc(50vh - 400px);
+}
 
-    #navigation h2 {
-      font-size: 14px;
-      font-weight: normal;
-      color: #B0B0B0;
-      margin-bottom: 20px;
-    }
+#viewer.spreads .epub-view > iframe {
+    background: white;
+}
 
-    #navigation ul {
-      padding-left: 18px;
-      margin-left: 0;
-    }
+#viewer.scrolled {
+  overflow: hidden;
+  width: 800px;
+  margin: 0 auto;
+  position: relative;
+  background: url('ajax-loader.gif') center center no-repeat;
+  box-shadow: 0 0 4px #ccc;
+  padding: 20px;
+  background: white;
+}
 
-    #navigation ul li {
-      list-style: decimal;
-      margin-bottom: 10px;
-      color: #cccddd;
-      font-size: 12px;
-      padding-left: 0;
-      margin-left: 0;
-    }
+#viewer.scrolled .epub-view > iframe {
+    background: white;
+}
 
-    #navigation ul li a {
-      color: #ccc;
-      text-decoration: none;
-    }
+#prev {
+  left: 0;
+}
 
-    #navigation ul li a:hover {
-      color: #777;
-      text-decoration: underline;
-    }
+#next {
+  right: 0;
+}
 
-    #navigation ul li a.active {
-      color: #000;
-    }
+#toc {
+  display: block;
+  margin: 10px auto;
+}
 
-    #viewer {
-      overflow: hidden;
-      width: 620px;
-      margin: 0 50px;
-      /*background: url('ajax-loader.gif') center center no-repeat;*/
-      background-color: white;
-      box-shadow: 0 0 4px #ccc;
-      margin: 20px;
-      padding: 40px 80px;
-    }
+@media (min-width: 1000px) {
+  #viewer.spreads:after {
+    position: absolute;
+    width: 1px;
+    border-right: 1px #000 solid;
+    height: 90%;
+    z-index: 1;
+    left: 50%;
+    margin-left: -1px;
+    top: 5%;
+    opacity: .15;
+    box-shadow: -2px 0 15px rgba(0, 0, 0, 1);
+    content:  "";
+  }
 
-    #main {
-      position: absolute;
-      top: 50px;
-      left: 100px;
-      width: 800px;
-      z-index: 2;
-      transition: left .15s cubic-bezier(.55, 0, .2, .8) .08s;
-    }
+  #viewer.spreads.single:after {
+    display: none;
+  }
 
-    #main.open {
-      left: 0;
-    }
+  #prev {
+    left: 40px;
+  }
 
-    #pagination {
-      text-align: center;
-      margin: 20px;
-      /*padding: 0 50px;*/
-    }
+  #next {
+    right: 40px;
+  }
+}
 
-    .arrow {
-      margin: 14px;
-      display: inline-block;
-      text-align: center;
-      text-decoration: none;
-      color: #ccc;
-    }
+.arrow {
+  position: fixed;
+  top: 50%;
+  margin-top: -32px;
+  font-size: 64px;
+  color: #E2E2E2;
+  font-family: arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  text-decoration: none;
+}
 
-    .arrow:hover {
-      color: #777;
-    }
+.navlink {
+  margin: 14px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: #ccc;
+}
 
-    .arrow:active {
-      color: #000;
-    }
+.arrow:hover, .navlink:hover {
+  color: #777;
+}
 
-    #prev {
-      float: left;
-    }
+.arrow:active, .navlink:hover {
+  color: #000;
+}
 
-    #next {
-      float: right;
-    }
+#book-wrapper {
+  width: 480px;
+  height: 640px;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  margin: 28px auto;
+  background: #fff;
+  border-radius: 0 5px 5px 0;
+  position: absolute;
+}
 
-    #toc {
-      display: block;
-      margin: 10px auto;
-    }
+#book-viewer {
+  width: 480px;
+  height: 660px;
+  margin: -30px auto;
+  -moz-box-shadow:      inset 10px 0 20px rgba(0,0,0,.1);
+  -webkit-box-shadow:   inset 10px 0 20px rgba(0,0,0,.1);
+  box-shadow:           inset 10px 0 20px rgba(0,0,0,.1);
+}
 
-    #hypothesis-custom {
-      overflow: hidden;
-      /*position: absolute;*/
-      right: 0;
-      /*top: 0;*/
-      height: 100%;
-      width: 200px;
-      /*z-index: -2;*/
-    }
+#book-viewer iframe {
+  padding: 40px 40px;
+}
 
-    #hypothesis-custom iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-    }
-    #toc{
-      max-height: 500px;
-    }
+#controls {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  width: 400px;
+  margin-left: -200px;
+  text-align: center;
+  display: none;
+}
+
+#controls > input[type=range] {
+    width: 400px;
+}
+
+#navigation {
+  width: 400px;
+  height: 100vh;
+  position: absolute;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  background: #777;
+  -webkit-transition: -webkit-transform .25s ease-out;
+  -moz-transition: -moz-transform .25s ease-out;
+  -ms-transition: -moz-transform .25s ease-out;
+  transition: transform .25s ease-out;
+
+}
+
+#navigation.fixed {
+  position: fixed;
+}
+
+#navigation h1 {
+  width: 200px;
+  font-size: 16px;
+  font-weight: normal;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+#navigation h2 {
+  font-size: 14px;
+  font-weight: normal;
+  color: #B0B0B0;
+  margin-bottom: 20px;
+}
+
+#navigation ul {
+  padding-left: 36px;
+  margin-left: 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  width: 340px;
+}
+
+#navigation ul li {
+  list-style: decimal;
+  margin-bottom: 10px;
+  color: #cccddd;
+  font-size: 12px;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#navigation ul li a {
+  color: #ccc;
+  text-decoration: none;
+}
+
+#navigation ul li a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+#navigation ul li a.active {
+  color: #fff;
+}
+
+#navigation #cover {
+  display: block;
+  margin: 24px auto;
+}
+
+#navigation #closer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 12px;
+  color: #cccddd;
+  width: 24px;
+}
+
+#navigation.closed {
+  -webkit-transform: translate(-400px, 0);
+  -moz-transform: translate(-400px, 0);
+  -ms-transform: translate(-400px, 0);
+}
+
+svg {
+  display: block;
+}
+
+.close-x {
+  stroke: #cccddd;
+  fill: transparent;
+  stroke-linecap: round;
+  stroke-width: 5;
+}
+
+.close-x:hover {
+  stroke: #fff;
+}
+
+#opener {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  stroke: #E2E2E2;
+  fill: #E2E2E2;
+
+}
+
+#opener:hover {
+  stroke: #777;
+  fill: #777;
+}
+
   </style>
+  
 </head>
 <body>
-  <div id="navigation">
-    <h1 id="title">...</h1>
-    <image id="cover" width="150px"/>
-    <h2 id="author">...</h2>
-    <ul id="toc"></ul>
-  </div>
-  <div id="main">
-    <div id="pagination">
-      <a id="prev" href="#prev" class="arrow">...</a>
-      <a id="next" href="#next" class="arrow">...</a>
-    </div>
-    <div id="viewer"></div>
-  </div>
+  <!-- <div id="title"></div> -->
+  <select id="toc"></select>
+  <div id="viewer" class="spreads"></div>
+  <a id="prev" href="#prev" class="arrow">‹</a>
+  <a id="next" href="#next" class="arrow">›</a>
 
   <script>
-    // Load the opf
     var params = URLSearchParams && new URLSearchParams(document.location.search.substring(1));
-    //var url = params && params.get("url") && decodeURIComponent(params.get("url"));
+    var url = params && params.get("url") && decodeURIComponent(params.get("url"));
+    var currentSectionIndex = (params && params.get("loc")) ? params.get("loc") : undefined;
     var url = "<?php echo $base_url; ?>assets/epub_files/<?php echo $isbn; ?>/<?php echo $file; ?>";
 
     // Load the opf
     var book = ePub(url);
     var rendition = book.renderTo("viewer", {
-      flow: "scrolled-doc",
-      ignoreClass: "annotator-hl"
+      manager: "continuous",
+      flow: "paginated",
+      width: "100%",
+      height: "100%"
     });
 
-    // var hash = window.location.hash.slice(2);
-    var loc = window.location.href.indexOf("?loc=");
-    if (loc > -1) {
-      var href =  window.location.href.slice(loc + 5);
-      var hash = decodeURIComponent(href);
-    }
-    rendition.display(hash || undefined);
+    rendition.display(currentSectionIndex);
 
+    book.ready.then(function() {
 
-    var next = document.getElementById("next");
-    next.addEventListener("click", function(e){
-      window.scrollTo(0,0);
-      rendition.next();
-      e.preventDefault();
-    }, false);
+      var next = document.getElementById("next");
 
-    var prev = document.getElementById("prev");
-    prev.addEventListener("click", function(e){
-      window.scrollTo(0,0);
-      rendition.prev();
-      e.preventDefault();
-    }, false);
+      next.addEventListener("click", function(e){
+        book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
+        e.preventDefault();
+      }, false);
+
+      var prev = document.getElementById("prev");
+      prev.addEventListener("click", function(e){
+        book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
+        e.preventDefault();
+      }, false);
+
+      var keyListener = function(e){
+
+        // Left Key
+        if ((e.keyCode || e.which) == 37) {
+          book.package.metadata.direction === "rtl" ? rendition.next() : rendition.prev();
+        }
+
+        // Right Key
+        if ((e.keyCode || e.which) == 39) {
+          book.package.metadata.direction === "rtl" ? rendition.prev() : rendition.next();
+        }
+
+      };
+
+      rendition.on("keyup", keyListener);
+      document.addEventListener("keyup", keyListener, false);
+
+    })
+
+    var title = document.getElementById("title");
 
     rendition.on("rendered", function(section){
-      var nextSection = section.next();
-      var prevSection = section.prev();
+      var current = book.navigation && book.navigation.get(section.href);
 
-      if(nextSection) {
-        nextNav = book.navigation.get(nextSection.href);
-
-        if(nextNav) {
-          nextLabel = nextNav.label;
-        } else {
-          nextLabel = "next";
+      if (current) {
+        var $select = document.getElementById("toc");
+        var $selected = $select.querySelector("option[selected]");
+        if ($selected) {
+          $selected.removeAttribute("selected");
         }
 
-        next.textContent = nextLabel + " »";
-      } else {
-        next.textContent = "";
-      }
-
-      if(prevSection) {
-        prevNav = book.navigation.get(prevSection.href);
-
-        if(prevNav) {
-          prevLabel = prevNav.label;
-        } else {
-          prevLabel = "previous";
+        var $options = $select.querySelectorAll("option");
+        for (var i = 0; i < $options.length; ++i) {
+          let selected = $options[i].getAttribute("ref") === current.href;
+          if (selected) {
+            $options[i].setAttribute("selected", "");
+          }
         }
+      }
 
-        prev.textContent = "« " + prevLabel;
+    });
+
+    rendition.on("relocated", function(location){
+      console.log(location);
+
+      var next = book.package.metadata.direction === "rtl" ?  document.getElementById("prev") : document.getElementById("next");
+      var prev = book.package.metadata.direction === "rtl" ?  document.getElementById("next") : document.getElementById("prev");
+
+      if (location.atEnd) {
+        next.style.visibility = "hidden";
       } else {
-        prev.textContent = "";
+        next.style.visibility = "visible";
       }
 
-      var old = document.querySelectorAll('.active');
-      Array.prototype.slice.call(old, 0).forEach(function (link) {
-        link.classList.remove("active");
-      })
-
-      var active = document.querySelector('a[href="'+section.href+'"]');
-      if (active) {
-        active.classList.add("active");
+      if (location.atStart) {
+        prev.style.visibility = "hidden";
+      } else {
+        prev.style.visibility = "visible";
       }
-      // Add CFI fragment to the history
-      history.pushState({}, '', "?loc=" + encodeURIComponent(section.href));
-      // window.location.hash = "#/"+section.href
+
+    });
+
+    rendition.on("layout", function(layout) {
+      let viewer = document.getElementById("viewer");
+
+      if (layout.spread) {
+        viewer.classList.remove('single');
+      } else {
+        viewer.classList.add('single');
+      }
+    });
+
+    window.addEventListener("unload", function () {
+      console.log("unloading");
+      this.book.destroy();
     });
 
     book.loaded.navigation.then(function(toc){
-      var $nav = document.getElementById("toc"),
-          docfrag = document.createDocumentFragment();
+			var $select = document.getElementById("toc"),
+					docfrag = document.createDocumentFragment();
 
-      toc.forEach(function(chapter, index) {
-        var item = document.createElement("li");
-        var link = document.createElement("a");
-        link.id = "chap-" + chapter.id;
-        link.textContent = chapter.label;
-        link.href = chapter.href;
-        item.appendChild(link);
-        docfrag.appendChild(item);
+			toc.forEach(function(chapter) {
+				var option = document.createElement("option");
+				option.textContent = chapter.label;
+				option.setAttribute("ref", chapter.href);
 
-        link.onclick = function(){
-          var url = link.getAttribute("href");
-          console.log(url)
-          rendition.display(url);
-          return false;
-        };
+				docfrag.appendChild(option);
+			});
 
-      });
+			$select.appendChild(docfrag);
 
-      $nav.appendChild(docfrag);
+			$select.onchange = function(){
+					var index = $select.selectedIndex,
+							url = $select.options[index].getAttribute("ref");
+					rendition.display(url);
+					return false;
+			};
 
-
-    });
-
-    book.loaded.metadata.then(function(meta){
-      var $title = document.getElementById("title");
-      var $author = document.getElementById("author");
-      var $cover = document.getElementById("cover");
-      var $nav = document.getElementById('navigation');
-
-      $title.textContent = meta.title;
-      $author.textContent = meta.creator;
-      if (book.archive) {
-        book.archive.createUrl(book.cover)
-          .then(function (url) {
-            $cover.src = url;
-          })
-      } else {
-        $cover.src = book.cover;
-      }
-
-      if ($nav.offsetHeight + 60 < window.innerHeight) {
-        $nav.classList.add("fixed");
-      }
-
-    });
-
-    function checkForAnnotator(cb, w) {
-     if (!w) {
-       w = window;
-     }
-     setTimeout(function () {
-        if (w && w.annotator) {
-          cb();
-        } else {
-          checkForAnnotator(cb, w);
-        }
-      }, 100);
-    }
-
-    book.rendition.hooks.content.register(function(contents, view) {
-
-        checkForAnnotator(function () {
-
-          var annotator = contents.window.annotator;
-
-          contents.window.addEventListener('scrolltorange', function (e) {
-            var range = e.detail;
-            var cfi = new ePub.CFI(range, contents.cfiBase).toString();
-            if (cfi) {
-              book.rendition.display(cfi);
-            }
-            e.preventDefault();
-          });
+		});
 
 
-          annotator.on("highlightClick", function (annotation) {
-            console.log(annotation);
-            window.annotator.show();
-          })
 
-          annotator.on("beforeAnnotationCreated", function (annotation) {
-            console.log(annotation);
-            window.annotator.show();
-          })
 
-        }, contents.window);
-
-    });
   </script>
 
 </body>

@@ -13,7 +13,7 @@
          else{
         // Redirect back with errors
            $errors = $book_cover[0]['errors'];
-           Session::flash('success',implode(',', $errors));
+           Session::flash('errors',implode(',', $errors));
            header("Location: ../views/manage-books.php");
            exit;
             }
@@ -101,12 +101,19 @@
   	 		header("Location:../views/manage-books.php");
   	 	}
   	 	else{
-  	 		echo "Error while adding book";
+        Session::flash('errors',"Error while adding Book.");
+        header("Location: ../views/manage-books.php");
   	 	}
   	 }
   	 else{
-  	     Session::flash('errors',implode(',', $errors));
-         header("Location: ../views/manage-books.php");
+       $errors_txt = "";
+       foreach($errors as $error){
+         foreach($error as $err){
+           $errors_txt .='<p>'.$err.'</p>';
+         }
+       }
+	     Session::flash('errors',$errors_txt);
+       header("Location: ../views/manage-books.php");
   	 }
 
   }

@@ -41,8 +41,8 @@ require_once __DIR__ . "/layouts/header.php";
                             <div class="form-group row mb-6">
                                  <div class="col-sm-4 col-lg-6">
                                     <div class="form-group">
-                                        <label class="mt-3">Upload File</label>
-                                        <input type="file" name="fileToUpload"  class="form-control "  id="formGroupExampleInput"  enctype="multipart/form-data">
+                                        <label class="mt-3">Book Cover</label>
+                                        <input type="file" name="fileToUpload" accept="image/*"  class="form-control "  id="formGroupExampleInput"  enctype="multipart/form-data">
                                         <label class="mt-3">Penname/Author's Name</label>
                                         <input type="text" name="penname" required class="form-control" id="formGroupExampleInput" >
                                         <label class="mt-3">Publicatoin Date</label>
@@ -178,13 +178,13 @@ require_once __DIR__ . "/layouts/header.php";
                                          <?php
                                            if (!empty($book['cover'])) {
                                               ?>
-                                            <img src="../assets/img/book-covers/<?php
+                                            <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php
                                             echo $book['cover'];?>" width="50" height="50">
                                            <?php
                                            }
                                            else{
                                             ?>
-                                            <img src="../assets/img/book-covers/img-not-found.png" width="50" height="50">
+                                            <img src="<?php echo $base_url; ?>assets/img/book-covers/img-not-found.png" width="50" height="50">
                                             <?php
                                            }
                                          ?>

@@ -3,7 +3,7 @@
 require_once "../config/init.php";
 
 if ($_POST) {
-    //Validation 
+    //Validation
     // print_r($_POST);
     // exit;
     $validated = false;
@@ -48,7 +48,13 @@ if ($_POST) {
         }
     } else {
         // Redirect back with errors
-        Session::flash('errors', $errors);
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+        Session::flash('errors', $errors_txt);
     }
 
     header("Location: ../views/manage-department.php");

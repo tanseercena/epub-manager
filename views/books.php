@@ -106,7 +106,18 @@ $action = new Action(0,0,0);
   <div class="col-lg-6 col-xl-4">
     <div class="card card-default p-4">
       <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-book-<?php echo $book['id']; ?>">
-        <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Avatar Image">
+        <?php
+        if (!empty($book['cover'])) {
+          ?>
+          <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Book Cover">
+          <?php
+        }else{
+          ?>
+          <img src="<?php echo $base_url; ?>assets/img/book-covers/img-not-found.png" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Book Cover">
+          <?php
+        }
+        ?>
+
         <div class="media-body">
           <h5 class="mt-0 mb-2 text-dark"><?php echo $book["book_title"]; ?></h5>
           <ul class="list-unstyled">
@@ -144,7 +155,18 @@ $action = new Action(0,0,0);
             <div class="profile-content-left px-4">
               <div class="card text-center widget-profile px-0 border-0">
                 <div class="card-img mx-auto rounded-circle">
-                  <img src="../testing/<?php echo $book["cover"]; ?>" width="100px" height="100px" alt="user image">
+                  <?php
+                  if (!empty($book['cover'])) {
+                    ?>
+                    <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" width="100px" height="100px" alt="Book Cover">
+                    <?php
+                  }else{
+                    ?>
+                    <img src="<?php echo $base_url; ?>assets/img/book-covers/img-not-found.png" width="100px" height="100px" alt="Book Cover">
+                    <?php
+                  }
+                  ?>
+
                 </div>
                 <div class="card-body">
                   <h4 class="py-2 text-dark"><?php echo $book['book_title']; ?></h4>

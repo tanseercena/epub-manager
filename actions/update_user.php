@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 require_once "../config/init.php";
 
 if($_POST){
-    //Validation 
+    //Validation
     // print_r($_POST);
     // exit;
     $validated = false;
@@ -12,7 +12,7 @@ if($_POST){
             'name'  => 'name',
             'value' => $_POST['name'],
             'rules' => 'required'
-        ],      
+        ],
     ];
 
     $errors = Validator::doValidate($request);
@@ -20,21 +20,21 @@ if($_POST){
         $validated = true;
     }
 
-    
+
 
     //find in DB
     if($validated){
         $user = new User();
         $user->find($_POST['user_id']);
-    
+
      if ($user->id) {
         $user_data = [
             'name' => $_POST['name']
         ];
         // print_r($dep_data);
         // exit;
-       
-        
+
+
         $check = $user->update($user_data);
         // print_r($dep_data);
         // exit;
@@ -50,10 +50,16 @@ if($_POST){
         }
     }else{
         // Redirect back with errors
-         Session::flash('errors',$errors);
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+         Session::flash('errors',$errors_txt);
     }
-    
+
     header("Location: ../views/manage-users.php");
-    
+
 
 }
