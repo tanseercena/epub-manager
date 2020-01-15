@@ -74,8 +74,14 @@
         </li>
         <li class="has-sub <?php if ($first_part=="manage-excel") {echo "active"; } ?>">
           <a class="sidenav-item-link" href="./manage-excel.php">
-            <i class="mdi mdi-run"></i>
+            <i class="mdi mdi-file-excel"></i>
             <span class="nav-text">Excel Book Import</span>
+          </a>
+        </li>
+        <li class="has-sub <?php if ($first_part=="books-import") {echo "active"; } ?>">
+          <a class="sidenav-item-link" href="./books-import.php">
+            <i class="mdi mdi-database-import"></i>
+            <span class="nav-text">Import Books</span>
           </a>
         </li>
 

@@ -35,8 +35,8 @@ class ExcelImport
         	$title = mysqli_real_escape_string($this->connection,$book["B"]);
         	$isbn = mysqli_real_escape_string($this->connection,$book["C"]);
         	$publication_date = $book["D"];
-          $book_origin = $book["E"];
-          $book_type = $book["F"];
+          $book_type = $book["E"];
+          $book_origin = $book["F"];
 
             $books = new Book();
             $book_data = $books->where("isbn",$isbn)->first();
@@ -65,7 +65,7 @@ class ExcelImport
                 $department_id = 2;
               }
 
-              $action = new Action($book_id,1,$user_id,$department_id);
+              $action = new Action($book_id,1,$user_id,$department_id,'',$base_url,0,true);
               $check1 = $action->save();
             }
 
