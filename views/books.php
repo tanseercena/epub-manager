@@ -109,9 +109,15 @@ $action = new Action(0,0,0);
       <a href="javascript:0" class="media text-secondary" data-toggle="modal" data-target="#modal-book-<?php echo $book['id']; ?>">
         <?php
         if (!empty($book['cover'])) {
+          if (strpos($book['cover'], 'https://amp') !== false) {
+              ?>
+              <img data-src="<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded lazy" width="100px" height="100px" alt="Book Cover">
+              <?php
+          }else{
           ?>
-          <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Book Cover">
+            <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" class="mr-3 img-fluid rounded lazy" width="100px" height="100px" alt="Book Cover">
           <?php
+          }
         }else{
           ?>
           <img src="<?php echo $base_url; ?>assets/img/book-covers/img-not-found.png" class="mr-3 img-fluid rounded" width="100px" height="100px" alt="Book Cover">
@@ -159,9 +165,15 @@ $action = new Action(0,0,0);
                 <div class="card-img mx-auto rounded-circle">
                   <?php
                   if (!empty($book['cover'])) {
+                    if (strpos($book['cover'], 'https://amp') !== false) {
+                        ?>
+                        <img data-src="<?php echo $book["cover"]; ?>" class="lazy" width="100px" height="100px" alt="Book Cover">
+                        <?php
+                    }else{
                     ?>
-                    <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" width="100px" height="100px" alt="Book Cover">
+                      <img src="<?php echo $base_url; ?>assets/img/book-covers/<?php echo $book["cover"]; ?>" width="100px" height="100px" alt="Book Cover">
                     <?php
+                    }
                   }else{
                     ?>
                     <img src="<?php echo $base_url; ?>assets/img/book-covers/img-not-found.png" width="100px" height="100px" alt="Book Cover">

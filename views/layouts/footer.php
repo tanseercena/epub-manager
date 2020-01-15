@@ -36,7 +36,7 @@
 
 
 <script src="../assets/plugins/toastr/toastr.min.js"></script>
-
+<script src="../assets/plugins/jquery.lazy.min.js"></script>
 
 
 <script src="../assets/js/sleek.bundle.js"></script>
@@ -486,6 +486,10 @@
 	        $('#search-results').hide();
 	    }
 	});
+
+	$(function() {
+        $('.lazy').Lazy();
+    });
 </script>
 
 </body>

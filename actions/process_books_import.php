@@ -28,6 +28,7 @@ if($_POST){
             "book_origin" => $db,
             "book_type" => $book_type,
             "user_id" => 2,
+            'cover' => $book['cover'],
             'created_at' => date("Y-m-d H:i:s")
       );
 
