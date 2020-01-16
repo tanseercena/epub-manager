@@ -19,15 +19,10 @@
 <script src="../assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
 <script src="../assets/plugins/jekyll-search.min.js"></script>
 
-
-
 <script src="../assets/plugins/charts/Chart.min.js"></script>
-
-
 
 <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
-
 
 
 <script src="../assets/plugins/daterangepicker/moment.min.js"></script>
@@ -38,6 +33,7 @@
 <script src="../assets/plugins/toastr/toastr.min.js"></script>
 <script src="../assets/plugins/jquery.lazy.min.js"></script>
 
+<script src="<?php echo $base_url; ?>assets/plugins/select2/js/select2.min.js"></script>
 
 <script src="../assets/js/sleek.bundle.js"></script>
 
@@ -488,9 +484,36 @@
 	});
 
 	$(function() {
-        $('.lazy').Lazy();
-    });
+			//Lazy loading for images
+      $('.lazy').Lazy();
+
+			//Select 2 Ajax
+			$('#select2_books').select2({
+				minimumInputLength: 2,
+			  ajax: {
+			    url: '<?php echo $base_url; ?>actions/ajax/search_user.php',
+			    dataType: 'json',
+					type: "post",
+					quietMillis: 50,
+					data: function (term, page) {
+              return {
+                  search: term, // search term
+              };
+          },
+					processResults: function (response) {
+	           return {
+	              results: response
+	           };
+	        }
+
+			  }
+			});
+  });
+
+
 </script>
+
+
 
 </body>
 

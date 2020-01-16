@@ -12536,4 +12536,7 @@ html[dir="rtl"] .github-link svg {
 .blue span::before {border-left-color: #1e5799; border-top-color: #1e5799;}
 .blue span::after {border-right-color: #1e5799; border-top-color: #1e5799;}
 
+.select2-container {
+  width: 100% !important;
+}
 /*# sourceMappingURL=sleek.css.map */

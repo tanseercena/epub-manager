@@ -35,22 +35,30 @@ if($_POST){
         $validated = true;
     }
 
+    if($_POST['book_id'] === 0){
+      $validated = false;
+    }
 
 
     //Insert into DB
     if($validated){
-        $action = new Action();
 
         $action_data  = [
             'book_id' => $_POST['book_id'],
             'user_id'    => $_POST['user_id'],
             'status_id'       => $_POST['status_id'],
             'created_at' => date("Y-m-d H:i:s",strtotime($_POST['created_date'])),
-];
+        ];
 
-        $check = $action->insert($action_data);
+        // $check = $action->insert($action_data);
+        $action = new Action($action_data['book_id'],$action_data['status_id'],$action_data['user_id'],1,"",$base_url);
+        $action_id = $action->save($action_data);
 
-        if($check){
+        if($action_id){
+            $book = new Book();
+            $book->find($_POST['book_id']);
+            $book->update(["status_id" => $_POST['status_id']]);
+
             Session::flash('success',"Action added successfully");
         }
         else{

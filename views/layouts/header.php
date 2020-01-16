@@ -27,9 +27,8 @@ require_once __DIR__."/../../config/init.php";
 
 
 
-  <!-- No Extra plugin used -->
-
-
+  <!-- Extra plugin -->
+  <link href="<?php echo $base_url; ?>assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 
   <link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
 
