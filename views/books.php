@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/layouts/header.php";
+
 $action = new Action(0,0,0);
 ?>
 
@@ -248,6 +249,26 @@ $action = new Action(0,0,0);
 
               ?>
               <p><?php echo $user->firstname.' '.$user->lastname; ?></p>
+              <?php
+              $logged_user_id = Session::get("user_id");
+              if($logged_user_id == 1){ // if admin
+                $users_d = new User();
+                $dev_users = $users_d->where("department_id",1)->get();
+
+                ?>
+                <select class="form-control" onchange="assignUser(this,<?php echo $book['id']; ?>)">
+                  <option value="">Assign</option>
+                  <?php
+                    foreach($dev_users as $dev_user){
+                      ?>
+                      <option value="<?php echo $dev_user['id']; ?>"><?php echo $dev_user['firstname'].' '.$dev_user['lastname']; ?></option>
+                      <?php
+                    }
+                  ?>
+                </select>
+                <?php
+              }
+              ?>
               <p class="text-dark font-weight-medium pt-4 mb-2">File Status</p>
               <?php
               $status = new Status();
@@ -360,6 +381,23 @@ function showNextActionModel(book_id,status_id, file_required,department_id){
 
   $("#button_model").modal();
 
+}
+
+function assignUser(el,book_id){
+  var user = $(el).val();
+  if(user != ""){
+    if (confirm("Are you sure?") == true) {
+      $.ajax({
+        url: "<?php echo $base_url; ?>actions/ajax/book_assign.php",
+        type: "POST",
+        data: {user_id: user, book_id: book_id},
+        success: function(resp){
+          location.reload();
+        }
+      });
+     }
+
+  }
 }
 </script>
 
