@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/layouts/header.php";
-
+$logged_user_id = Session::get("user_id");
 $action = new Action(0,0,0);
 ?>
 
@@ -8,46 +8,78 @@ $action = new Action(0,0,0);
 <div class="content-wrapper">
         <div class="content">
           <div class="breadcrumb-wrapper breadcrumb-contacts">
-  <div>
-    <h1>Books</h1>
+            <div>
+              <h1>Books</h1>
 
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb p-0">
-            <li class="breadcrumb-item">
-              <a href="index.html">
-                <span class="mdi mdi-home"></span>
-              </a>
-            </li>
-            <li class="breadcrumb-item">
-              App
-            </li>
-            <li class="breadcrumb-item" aria-current="page">books</li>
-          </ol>
-        </nav>
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb p-0">
+                      <li class="breadcrumb-item">
+                        <a href="index.html">
+                          <span class="mdi mdi-home"></span>
+                        </a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        App
+                      </li>
+                      <li class="breadcrumb-item" aria-current="page">books</li>
+                    </ol>
+                  </nav>
 
+          </div>
+
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card card-default">
+      <div class="card-header card-header-border-bottom">
+        <h2>Filter Books</h2>
+      </div>
+      <div class="card-body">
+
+        <form class="form-inline" action="" method="POST">
+
+
+              <select class="form-control mb-2 mr-sm-2" name="status">
+                <option value="">Select Status</option>
+                <?php
+                $status = new Status();
+                $all_statuses = $status->all();
+                foreach($all_statuses as $sts){
+                  echo '<option value="'.$sts['id'].'">'.$sts['title'].'</option>';
+                }
+                ?>
+              </select>
+
+              <select class="form-control mb-2 mr-sm-2" name="book_type">
+                <option value="">Book Type</option>
+                <option value="text">Text</option>
+                <option value="indesign">Indesign</option>
+              </select>
+
+
+               <select id="book_origin" name="book_origin"  class="form-control mx-3">
+                  <option  value="">Select Origin</option>
+                  <option value="uk">UK</option>
+                  <option value="usa">USA</option>
+                  <option value="uae">UAE</option>
+               </select>
+               <input type="text" name="penname_title" class="form-control mx-3" placeholder="Book/Author Name: ">
+
+               <input type="date" name="s_date" class="form-control mx-3" placeholder="Date Publication From: ">
+
+               <input type="date" name="e_date" class="form-control mx-3" placeholder="Date Publication To: ">
+
+
+            <button type="submit" class="btn btn-primary"> Filter
+            </button>
+
+        </form>
+
+      </div>
+    </div>
   </div>
-  <div>
-    <form class="form-inline" action="" method="POST">
-        <div class="form-group">
-           <select id="book_origin" name="book_origin"  class="form-control mx-3">
-              <option  value="">Select Origin</option>
-              <option value="uk">UK</option>
-              <option value="usa">USA</option>
-              <option value="uae">UAE</option>
-           </select>
-           <input type="text" name="penname_title" class="form-control mx-3" placeholder="Book/Author Name: ">
 
-           <input type="date" name="s_date" class="form-control mx-3" placeholder="Date Publication From: ">
-
-           <input type="date" name="e_date" class="form-control mx-3" placeholder="Date Publication To: ">
-        </div>
-
-        <button type="submit" class="btn btn-primary"> Filter
-        </button>
-
-    </form>
-
-  </div>
 </div>
 
 <div class="row">
@@ -67,6 +99,14 @@ $action = new Action(0,0,0);
         if (!empty($_POST["book_origin"])) {
             $book_origin = $_POST["book_origin"];
             $sql_query->where("book_origin","$book_origin"," = ");
+        }
+        if (!empty($_POST["status"])) {
+            $status_id = $_POST["status"];
+            $sql_query->where("status_id",$status_id);
+        }
+        if (!empty($_POST["book_type"])) {
+            $book_type = $_POST["book_type"];
+            $sql_query->where("book_type",$book_type);
         }
     }
     else{
@@ -250,7 +290,7 @@ $action = new Action(0,0,0);
               ?>
               <p><?php echo $user->firstname.' '.$user->lastname; ?></p>
               <?php
-              $logged_user_id = Session::get("user_id");
+
               if($logged_user_id == 1){ // if admin
                 $users_d = new User();
                 $dev_users = $users_d->where("department_id",1)->get();
@@ -269,16 +309,8 @@ $action = new Action(0,0,0);
                 <?php
               }
               ?>
-              <p class="text-dark font-weight-medium pt-4 mb-2">File Status</p>
-              <?php
-              $status = new Status();
-              $action = new Action(0,0,0,0);
-              $last= $action->where("book_id",$book['id'])->orWhere("status_id",1)->orWhere("status_id",2)->orWhere("status_id",3)->orWhere("status_id",4)->orWhere("status_id",5)->orderBy("created_at","DESC")->first();
-              $last_statusid = $last['status_id'];
-              if(!empty($last_statusid))
-              $status->find($last_statusid);
-              ?>
-              <p><?php echo $status->title ? $status->title : "N/A"; ?> </p>
+              <p class="text-dark font-weight-medium pt-4 mb-2">Book Type</p>
+              <p><?php echo ucfirst($book['book_type']); ?> </p>
               <p class="text-dark font-weight-medium pt-4 mb-2">Validation Status</p>
               <?php
               $status = new Status();

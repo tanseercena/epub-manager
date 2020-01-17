@@ -175,7 +175,7 @@ require_once __DIR__ . "/layouts/header.php";
                                         <td>
                                         <?php
                                             $status = new Status();
-                                            $status->find($action['user_id']);
+                                            $status->find($action['status_id']);
                                         ?>
                                             <a class="text-dark" href=""> <?php echo $status->title; ?></a>
                                         </td>
