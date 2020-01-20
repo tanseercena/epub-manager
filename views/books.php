@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . "/layouts/header.php";
+
 $logged_user_id = Session::get("user_id");
+$department_id = Session::get("department_id");
 $action = new Action(0,0,0);
 ?>
 
@@ -38,7 +40,22 @@ $action = new Action(0,0,0);
       <div class="card-body">
 
         <form class="form-inline" action="" method="POST">
-
+              <?php
+                if($department_id == 1 || $logged_user_id == 1){
+                  ?>
+                  <select class="form-control mb-2 mr-sm-2" name="user_id">
+                    <option value="">Assigned User</option>
+                    <?php
+                    $user = new User();
+                    $all_users = $user->where("department_id",1)->get(); // Only Dev Team
+                    foreach($all_users as $usr){
+                      echo '<option value="'.$usr['id'].'">'.$usr['firstname'].' '.$usr['lastname'].'</option>';
+                    }
+                    ?>
+                  </select>
+                  <?php
+                }
+              ?>
 
               <select class="form-control mb-2 mr-sm-2" name="status">
                 <option value="">Select Status</option>
@@ -64,7 +81,7 @@ $action = new Action(0,0,0);
                   <option value="usa">USA</option>
                   <option value="uae">UAE</option>
                </select>
-               <input type="text" name="penname_title" class="form-control mx-3" placeholder="Book/Author Name: ">
+               <input type="text" name="penname_title" class="form-control mx-3" placeholder="ISBN/Book/Author Name: ">
 
                <input type="date" name="s_date" class="form-control mx-3" placeholder="Date Publication From: ">
 
@@ -82,6 +99,7 @@ $action = new Action(0,0,0);
 
 </div>
 
+
 <div class="row">
     <?php
     $sql_query = new Book();
@@ -89,7 +107,9 @@ $action = new Action(0,0,0);
     if ($_POST) {
         if (!empty($_POST["penname_title"])) {
             $title = $_POST["penname_title"];
-            $sql_query->orWhere("book_title","%$title%"," LIKE ")->orWhere("penname","%$title%"," LIKE ");
+            $sql_query->orWhere("book_title","%$title%"," LIKE ")
+            ->orWhere("penname","%$title%"," LIKE ")
+            ->orWhere("isbn","%$title%"," LIKE ");
         }
         if (!empty($_POST["s_date"]) && !empty($_POST["e_date"])) {
             $s_date = date($_POST["s_date"]);
@@ -108,6 +128,10 @@ $action = new Action(0,0,0);
             $book_type = $_POST["book_type"];
             $sql_query->where("book_type",$book_type);
         }
+        if (!empty($_POST["user_id"])) {
+            $user_id_filter = $_POST["user_id"];
+            $sql_query->where("user_id",$user_id_filter);
+        }
     }
     else{
         $s_date = date("Y-m-01");
@@ -116,7 +140,11 @@ $action = new Action(0,0,0);
         // echo $sql_query->getSql();
     }
     $books = $sql_query->get();
-
+    ?>
+    <div class="col-12">
+    Total Books: <strong><?php echo count($books); ?></strong>
+    </div>
+    <?php
       if (count($books) == 0) {
           echo "<h4 class='text-center text-danger font-weight-bold'>No Book Found</h4>";
       }
@@ -183,6 +211,7 @@ $action = new Action(0,0,0);
             </li>
           </ul>
           <span class="badge <?php echo $text_class; ?>"><?php echo $status->title;?></span>
+          <span class="badge bg-secondary ml-2"><i class="mdi <?php if($book['book_type'] == "text") {echo "mdi-file-word";}else{echo "mdi-image";} ?> mr-1"></i> <?php echo ucfirst($book['book_type']); ?></span>
         </div>
       </a>
 
@@ -234,7 +263,7 @@ $action = new Action(0,0,0);
               <div class="d-flex justify-content-between ">
                 <?php
 
-                  $department_id = Session::get("department_id");
+
                   $status_id = $book['status_id'];
                   $next_actions = $action->getNextAction($status_id,$department_id);
                   if($next_actions)

@@ -14,7 +14,7 @@ if($_POST){
     if (!$book_data) {
       if($book['book_type'] == "text+pic word" || $book['book_type'] == "illustration word" || $book['book_type'] == "text"){
         $book_type = "text";
-      }else if($book['book_type'] == "text+pic indesign" || $book['book_type'] == "text+pic indesign"){
+      }else if($book['book_type'] == "text+pic indesign" || $book['book_type'] == "illustration indesign"){
         $book_type = "indesign";
       }
 

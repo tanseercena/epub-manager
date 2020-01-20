@@ -137,7 +137,7 @@ if ($_GET["id"]) {
                                                       <?php
                                                     }
                                                   ?>
-                                                  <a href="<?php echo $base_url; ?>assets/epub_files/<?php echo $book->isbn; ?>/<?php echo $action_file__; ?>" download>Download File</a>
+                                                  <a href="<?php echo $base_url; ?>assets/epub_files/<?php echo $book->isbn; ?>/<?php echo $action_file__; ?>" >Download File</a>
                                                 </p>
                                                 <?php
                                               }

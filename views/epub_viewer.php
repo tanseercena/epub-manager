@@ -25,7 +25,10 @@ if ($_GET["file_id"]) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>EPUB.js Spreads Example</title>
+  <title>Epub Viewer</title>
+  <!-- FAVICON -->
+  <link href="<?php echo $base_url ?>assets/img/logo.png" rel="shortcut icon" />
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
   <script src="<?php echo $base_url; ?>assets/js/epub.min.js"></script>
@@ -315,7 +318,7 @@ svg {
 }
 
   </style>
-  
+
 </head>
 <body>
   <!-- <div id="title"></div> -->

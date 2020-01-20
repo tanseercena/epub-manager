@@ -39,6 +39,8 @@ if($_POST){
         $action = new Action($action_data['book_id'],$action_data['status_id'],$action_data['user_id'],$department_id,$action_data['notes'],$base_url);
         $action_id = $action->save($action_data);
 
+        sleep(1); // Wait for 1 second to make time difference in file action
+
         //Save file if it is required
         $user_dep_id = Session::get("department_id");
         if($action->fileRequired($_POST['status_id'], $user_dep_id)){
