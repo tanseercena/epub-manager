@@ -19,7 +19,7 @@ class Action extends BaseModel
          '6' =>[7],
          '7' =>[8,9],
          '8' =>[7],
-         '10'=>[7,9],
+         '10'=>[7,9,1,3],
          '11'=> [12],
          '13'=> [1]
       ],
@@ -80,7 +80,7 @@ class Action extends BaseModel
       '3' => 4,
       '4' => 5
    ];
-  private $email_status_ids = array( 1, 2, 3, 4, 5, 9, 12);
+  private $email_status_ids = array( 1, 2, 3, 4, 5, 9, 11, 12);
 
 
 
@@ -136,6 +136,7 @@ class Action extends BaseModel
        }
        $user = new User();
        //$user->find($this->user_id);
+       $user_id = ($this->status_id == 12) ? 10 : $user_id; // if completed then set simon user id
        $user->find($user_id);
 
        $app_notification = [

@@ -136,8 +136,14 @@ if ($_GET["id"]) {
                                                       <a href="<?php echo $base_url; ?>views/epub_viewer.php?file_id=<?php echo $action_file['id']; ?>" target="_blank">View File</a> |
                                                       <?php
                                                     }
+
+                                                    //Check next action if completed then download with isbn.epub file
+                                                    // $action_ch = new Action();
+                                                    // $action_ch = $action_ch->where("id",$action['id'],">")
+                                                    //               ->where("book_id",$book->id)->first();
+
                                                   ?>
-                                                  <a href="<?php echo $base_url; ?>assets/epub_files/<?php echo $book->isbn; ?>/<?php echo $action_file__; ?>" >Download File</a>
+                                                  <a href="<?php echo $base_url; ?>actions/download.php?file=<?php echo $action_file__; ?>&isbn=<?php echo $book->isbn; ?>" >Download File</a>
                                                 </p>
                                                 <?php
                                               }

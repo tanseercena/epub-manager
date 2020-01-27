@@ -39,7 +39,8 @@ $action = new Action(0,0,0);
       </div>
       <div class="card-body">
 
-        <form class="form-inline" action="" method="POST">
+        <form class="form-inline" action="" method="get">
+            <input type="hidden" name="search" value="1" />
               <?php
                 if($department_id == 1 || $logged_user_id == 1){
                   ?>
@@ -104,32 +105,32 @@ $action = new Action(0,0,0);
     <?php
     $sql_query = new Book();
 
-    if ($_POST) {
-        if (!empty($_POST["penname_title"])) {
-            $title = $_POST["penname_title"];
+    if ($_GET['search']) {
+        if (!empty($_GET["penname_title"])) {
+            $title = $_GET["penname_title"];
             $sql_query->orWhere("book_title","%$title%"," LIKE ")
             ->orWhere("penname","%$title%"," LIKE ")
             ->orWhere("isbn","%$title%"," LIKE ");
         }
-        if (!empty($_POST["s_date"]) && !empty($_POST["e_date"])) {
-            $s_date = date($_POST["s_date"]);
-            $e_date = date($_POST["e_date"]);
+        if (!empty($_GET["s_date"]) && !empty($_GET["e_date"])) {
+            $s_date = date($_GET["s_date"]);
+            $e_date = date($_GET["e_date"]);
             $sql_query->where("publication_date","$s_date"," >= ")->where("publication_date","$e_date"," <= ");
         }
-        if (!empty($_POST["book_origin"])) {
-            $book_origin = $_POST["book_origin"];
+        if (!empty($_GET["book_origin"])) {
+            $book_origin = $_GET["book_origin"];
             $sql_query->where("book_origin","$book_origin"," = ");
         }
-        if (!empty($_POST["status"])) {
-            $status_id = $_POST["status"];
+        if (!empty($_GET["status"])) {
+            $status_id = $_GET["status"];
             $sql_query->where("status_id",$status_id);
         }
-        if (!empty($_POST["book_type"])) {
-            $book_type = $_POST["book_type"];
+        if (!empty($_GET["book_type"])) {
+            $book_type = $_GET["book_type"];
             $sql_query->where("book_type",$book_type);
         }
-        if (!empty($_POST["user_id"])) {
-            $user_id_filter = $_POST["user_id"];
+        if (!empty($_GET["user_id"])) {
+            $user_id_filter = $_GET["user_id"];
             $sql_query->where("user_id",$user_id_filter);
         }
     }
@@ -156,10 +157,10 @@ $action = new Action(0,0,0);
 
         $text_class = "text-muted";
 
-        if ($book['status_id'] == 1 || $book['status_id'] == 13 || $book['status_id'] == 6) {
+        if ($book['status_id'] == 13 || $book['status_id'] == 6) {
             $text_class  = "bg-primary";
         }
-        if ($book['status_id'] == 2 || $book['status_id'] == 8 || $book['status_id'] == 10) {
+        if ($book['status_id'] == 1 || $book['status_id'] == 2 || $book['status_id'] == 8 || $book['status_id'] == 10) {
             $text_class  = "bg-danger";
         }
         if ($book['status_id'] == 3 || $book['status_id'] == 7) {
@@ -277,10 +278,10 @@ $action = new Action(0,0,0);
 
                     $btn_class = "";
 
-                    if ($action_status_id == 1 || $action_status_id == 13 || $action_status_id == 4) {
+                    if ($action_status_id == 13 || $action_status_id == 4) {
                         $btn_class  = "btn-primary";
                     }
-                    if ($action_status_id == 2 || $action_status_id == 8 || $action_status_id == 10) {
+                    if ($action_status_id == 1 || $action_status_id == 2 || $action_status_id == 8 || $action_status_id == 10) {
                       $btn_class  = "btn-danger";
                     }
                     if ($action_status_id == 6 || $action_status_id == 3) {
