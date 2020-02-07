@@ -60,6 +60,8 @@ require_once __DIR__."/../../config/init.php";
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script src="../assets/plugins/nprogress/nprogress.js"></script>
+
+  <script src="../assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
 

@@ -51,7 +51,7 @@ if($_POST){
         ];
 
         // $check = $action->insert($action_data);
-        $action = new Action($action_data['book_id'],$action_data['status_id'],$action_data['user_id'],1,"",$base_url);
+        $action = new Action($action_data['book_id'],$action_data['status_id'],$action_data['user_id'],1,"",$base_url,0,true);
         $action_id = $action->save($action_data);
 
         if($action_id){

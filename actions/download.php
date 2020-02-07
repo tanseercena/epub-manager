@@ -1,16 +1,32 @@
 <?php
+require_once "../config/init.php";
+
 if($_GET['file']){
   $isbn = $_GET['isbn'];
   $original_filename = "../assets/epub_files/$isbn/".trim($_GET['file']);
   if(file_exists($original_filename)){
-    $file_org = explode("_",$_GET['file']);
-    $file = $file_org[1];
+
     // headers to send your file
     // header("Content-Type: application/epub+zip");
     // header("Content-Length: " . filesize($original_filename));
     // header('Content-Disposition: attachment; filename="' . $file . '"');
+
+    $book = new Book();
+    $book = $book->where("isbn",$isbn)->first();
+
+    if($book['book_type'] == "text"){ // if doc/docx file
+      $file_org = explode(".",$_GET['file']);
+      $file = $isbn.".".end($file_org);
+
+      header('Content-Type: application/msword');
+    }else{  // epub file
+      $file_org = explode("_",$_GET['file']);
+      $file = $file_org[1];
+      header('Content-Type: application/epub+zip');
+    }
+
+
     header('Content-Description: File Transfer');
-    header('Content-Type: application/epub+zip');
     header('Content-Disposition: attachment; filename="'.$file.'"');
     header('Expires: 0');
     header('Cache-Control: must-revalidate');

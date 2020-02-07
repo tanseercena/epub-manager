@@ -93,8 +93,18 @@ $action = new Action(0,0,0);
             </button>
 
         </form>
+        <hr />
+        <div class="row">
+          <div class="col-12">
+            <form method="post" action="<?php echo $base_url; ?>actions/export.php?<?php echo $_SERVER['QUERY_STRING']; ?>">
+
+              <button class="btn btn-info">Export Books</button>
+            </form>
+          </div>
+        </div>
 
       </div>
+
     </div>
   </div>
 

@@ -53,7 +53,7 @@ if($_POST){
           //Upload File
           if ($_FILES['file'] && $_FILES['file']['size'] != 0) {
               if($_POST['status_id'] == 4){
-                $validation = ['size' => 20, 'ext' => ['doc','docx']];
+                $validation = ['size' => 30, 'ext' => ['doc','docx']];
               }else{
                 $validation = ['size' => 10, 'ext' => ['epub']];
               }
