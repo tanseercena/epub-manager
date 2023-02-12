@@ -42,13 +42,10 @@ class EpubChecker {
         ];
 
         $epub_check = new Epubcheck();
-        $epub_check->insert($data);
+        $last_id = $epub_check->insert($data);
 
         //Remove JSON file
         unlink($validated_json);
-
-        // get inserted record id
-        $last_id = mysqli_insert_id($db_con);
 
         return $last_id;
       }

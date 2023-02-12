@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 require_once "../config/init.php";
 // print_r($_POST);
 // exit;
 if($_POST){
-    //Validation 
+    //Validation
     $validated = false;
     $request = [
         [
@@ -21,13 +21,13 @@ if($_POST){
             'name'  => 'status_id',
             'value' => $_POST['status_id'],
             'rules' => 'required'
-        ], 
+        ],
          [
              'name' =>  'created_at',
              'value'=>  $_POST['created_date'],
               'rules' =>  'required'
-               
-         ],             
+
+         ],
     ];
 
     $errors = Validator::doValidate($request);
@@ -35,22 +35,30 @@ if($_POST){
         $validated = true;
     }
 
-    
+    if($_POST['book_id'] === 0){
+      $validated = false;
+    }
+
 
     //Insert into DB
     if($validated){
-        $action = new Action();
-     
-        $action_data  = [ 
+
+        $action_data  = [
             'book_id' => $_POST['book_id'],
             'user_id'    => $_POST['user_id'],
             'status_id'       => $_POST['status_id'],
-            'created_at' => date("Y-m-d H:i:s",strtotime($_POST['created_date'])),    
-];
-        
-        $check = $action->insert($action_data);
-       
-        if($check){
+            'created_at' => date("Y-m-d H:i:s",strtotime($_POST['created_date'])),
+        ];
+
+        // $check = $action->insert($action_data);
+        $action = new Action($action_data['book_id'],$action_data['status_id'],$action_data['user_id'],1,"",$base_url,0,true);
+        $action_id = $action->save($action_data);
+
+        if($action_id){
+            $book = new Book();
+            $book->find($_POST['book_id']);
+            $book->update(["status_id" => $_POST['status_id']]);
+
             Session::flash('success',"Action added successfully");
         }
         else{
@@ -58,11 +66,16 @@ if($_POST){
         }
     }else{
         // Redirect back with errors
-         Session::flash('errors',$errors);
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+        Session::flash('errors',$errors_txt);
     }
-    
+
     header("Location: ../views/manage-action.php");
-    
+
 
 }
-

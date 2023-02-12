@@ -1,16 +1,16 @@
-<?php 
+<?php
 
 require_once "../config/init.php";
 
 if($_POST){
-    //Validation 
+    //Validation
     $validated = false;
     $request = [
         [
             'name'  => 'title',
             'value' => $_POST['title'],
             'rules' => 'required'
-        ],      
+        ],
     ];
 
     $errors = Validator::doValidate($request);
@@ -18,14 +18,14 @@ if($_POST){
         $validated = true;
     }
 
-    
+
 
     //Insert to DB
     if($validated){
         $status = new Status();
-     
+
         $user_data = $_POST;
- 
+
         $check = $status->insert($user_data);
         if($check){
             Session::flash('success',"Status added successfully");
@@ -35,11 +35,16 @@ if($_POST){
         }
     }else{
         // Redirect back with errors
-         Session::flash('errors',$errors);
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+        Session::flash('errors',$errors_txt);
     }
-    
+
     header("Location: ../views/manage-status.php");
-    
+
 
 }
-

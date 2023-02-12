@@ -1,4 +1,4 @@
-<?php 
+<?php
 require_once "config/init.php";
 $user_id = Session::get("user_id");
 if(!empty($user_id)){
@@ -14,7 +14,7 @@ if(!empty($user_id)){
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
+  <meta name="description" content="Epub Tracker by Viralwebbs">
 
 
   <title>Login - <?php echo $site_name; ?></title>
@@ -27,15 +27,15 @@ if(!empty($user_id)){
   <!-- PLUGINS CSS STYLE -->
   <link href="assets/plugins/nprogress/nprogress.css" rel="stylesheet" />
 
-  
+
 
   <!-- SLEEK CSS -->
   <link id="sleek-css" rel="stylesheet" href="assets/css/sleek.css" />
 
   <!-- FAVICON -->
-  <link href="assets/img/favicon.png" rel="shortcut icon" />
+  <link href="<?php echo $base_url ?>assets/img/logo.png" rel="shortcut icon" />
 
-  
+
 
   <!--
     HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
@@ -56,14 +56,8 @@ if(!empty($user_id)){
           <div class="card">
             <div class="card-header bg-primary">
               <div class="app-brand">
-                <a href="/index.html">
-                  <svg class="brand-icon" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" width="30" height="33"
-                    viewBox="0 0 30 33">
-                    <g fill="none" fill-rule="evenodd">
-                      <path class="logo-fill-blue" fill="#7DBCFF" d="M0 4v25l8 4V0zM22 4v25l8 4V0z" />
-                      <path class="logo-fill-white" fill="#FFF" d="M11 4v25l8 4V0z" />
-                    </g>
-                  </svg>
+                <a href="<?php echo $base_url; ?>">
+                  <img src="<?php echo $logo; ?>" style="width: 50px;" >
                   <span class="brand-name"><?php echo $site_name; ?></span>
                 </a>
               </div>
@@ -72,13 +66,17 @@ if(!empty($user_id)){
 
               <h4 class="text-dark mb-5">Sign In</h4>
               <form action="actions/user_login.php" method="post">
-              <div class="row">
-                <p>
-                  <?php 
-                  if(Session::has('error'))
-                  {
-                       echo Session::flash('error');
-                  } ?></p>
+                <div class="row">
+                  <div class="col-12 mb-2">
+                    <p class="text-danger text-center">
+                      <?php
+                      if(Session::has('error'))
+                      {
+                           echo Session::flash('error');
+                      }
+                      ?>
+                    </p>
+                  </div>
                 </div>
                 <div class="row">
                   <div class="form-group col-md-12 mb-4">
@@ -88,7 +86,7 @@ if(!empty($user_id)){
                     <input type="password" name="password" class="form-control input-lg" id="password" placeholder="Password">
                   </div>
                   <div class="col-md-12">
-                    <div class="d-flex my-2 justify-content-between">
+                    <!-- <div class="d-flex my-2 justify-content-between">
                       <div class="d-inline-block mr-3">
                         <label class="control control-checkbox">Remember me
                           <input type="checkbox" />
@@ -97,11 +95,11 @@ if(!empty($user_id)){
 
                       </div>
                       <p><a class="text-blue" href="#">Forgot Your Password?</a></p>
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-lg btn-primary btn-block mb-4">Sign In</button>
-                    <p>Don't have an account yet ?
+                    <!-- <p>Don't have an account yet ?
                       <a class="text-blue" href="register.php">Sign Up</a>
-                    </p>
+                    </p> -->
                   </div>
                 </div>
               </form>
@@ -110,8 +108,8 @@ if(!empty($user_id)){
         </div>
       </div>
       <div class="copyright pl-0">
-        <p class="text-center">&copy; 2018 Copyright Sleek Dashboard Bootstrap Template by
-          <a class="text-primary" href="http://www.iamabdus.com/" target="_blank">Abdus</a>.
+        <p class="text-center">&copy; <?php echo date("Y"); ?> Copyright Epub Tracker by
+          <a class="text-primary" href="http://www.viralwebbs.com/" target="_blank">Viral Webbs</a>.
         </p>
       </div>
     </div>

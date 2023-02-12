@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 require_once "../config/init.php";
 
 if($_POST){
-    //Validation 
+    //Validation
     $validated = false;
     $request = [
         [
@@ -28,7 +28,7 @@ if($_POST){
         $validated = true;
     }
 
-    
+
 
     //Insert to DB
     if($validated){
@@ -39,10 +39,10 @@ if($_POST){
         //     'email'  => $_POST['email'],
         //     'password' => md5($_POST['password'])
         // ];
-    
+
         $user_data = $_POST;
         unset($user_data['confirm_password']);
- 
+
         $check = $user->insert($user_data);
         if($check){
             echo "User Register";
@@ -52,11 +52,16 @@ if($_POST){
         }
     }else{
         // Redirect back with errors
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+       Session::flash('errors',$errors_txt);
+       header("Location: ../register.php");
 
-         Session::flash('errors',$errors);
-         header("Location: ../register.php");
-        
     }
-    
+
 
 }

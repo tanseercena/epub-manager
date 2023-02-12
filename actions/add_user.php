@@ -1,10 +1,10 @@
-<?php 
+<?php
 
 require_once "../config/init.php";
 // print_r($_POST);
 // exit;
 if($_POST){
-    //Validation 
+    //Validation
     $validated = false;
     $request = [
         [
@@ -26,7 +26,7 @@ if($_POST){
             'name'  => 'department_id',
             'value' => $_POST['department_id'],
             'rules' => 'required'
-        ],               
+        ],
     ];
 
     $errors = Validator::doValidate($request);
@@ -34,16 +34,16 @@ if($_POST){
         $validated = true;
     }
 
-    
+
 
     //Insert into DB
     if($validated){
         $user = new User();
-     
+
         $user_data = $_POST;
-        
+
         $check = $user->insert($user_data);
-        
+
         if($check){
             Session::flash('success',"User added successfully");
         }
@@ -52,11 +52,16 @@ if($_POST){
         }
     }else{
         // Redirect back with errors
-         Session::flash('errors',$errors);
+        $errors_txt = "";
+        foreach($errors as $error){
+          foreach($error as $err){
+            $errors_txt .='<p>'.$err.'</p>';
+          }
+        }
+        Session::flash('errors',$errors_txt);
     }
-    
+
     header("Location: ../views/manage-users.php");
-    
+
 
 }
-

@@ -1,7 +1,7 @@
 <footer class="footer mt-auto">
 	<div class="copyright bg-white">
 		<p>
-			&copy; <span id="copy-year">2019</span> Copyright Epub Dashboard by
+			&copy; <span id="copy-year"><?php echo date("Y"); ?></span> Copyright Epub Tracker by
 			<a class="text-primary" href="http://viralwebbs.com/" target="_blank">ViralWebbs</a>.
 		</p>
 	</div>
@@ -15,19 +15,14 @@
 </div>
 </div>
 
-<script src="../assets/plugins/jquery/jquery.min.js"></script>
+
 <script src="../assets/plugins/slimscrollbar/jquery.slimscroll.min.js"></script>
 <script src="../assets/plugins/jekyll-search.min.js"></script>
 
-
-
 <script src="../assets/plugins/charts/Chart.min.js"></script>
-
-
 
 <script src="../assets/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"></script>
 <script src="../assets/plugins/jvectormap/jquery-jvectormap-world-mill.js"></script>
-
 
 
 <script src="../assets/plugins/daterangepicker/moment.min.js"></script>
@@ -36,8 +31,9 @@
 
 
 <script src="../assets/plugins/toastr/toastr.min.js"></script>
+<script src="../assets/plugins/jquery.lazy.min.js"></script>
 
-
+<script src="<?php echo $base_url; ?>assets/plugins/select2/js/select2.min.js"></script>
 
 <script src="../assets/js/sleek.bundle.js"></script>
 
@@ -65,7 +61,7 @@
 	if (Session::has('errors')) {
 
 	?>
-		toastr.warning('<?php echo Session::flash('errors'); ?>', "Error!");
+		toastr.error('<?php echo Session::flash('errors'); ?>', "Error!");
 	<?php
 	}
 
@@ -78,99 +74,118 @@
 	?>
 </script>
 
+<?php
+	$page = basename($_SERVER['PHP_SELF']);
+	if($page == "dashboard.php"){
+		$book = new Book();
+
+		$uk_all_records = $book->getAllCurrentBooks('uk');
+		$uk_completed_records = $book->getAllCompletedBooks('uk');
+		$total_uk = $book->countTotal($uk_all_records);
+
+		$usa_all_records = $book->getAllCurrentBooks('usa');
+		$usa_completed_records = $book->getAllCompletedBooks('usa');
+		$total_usa = $book->countTotal($usa_all_records);
+
+		$uae_all_records = $book->getAllCurrentBooks('uae');
+		$uae_completed_records = $book->getAllCompletedBooks('uae');
+		$total_uae = $book->countTotal($uae_all_records);
+	}
+?>
+
 <script>
 	/*======== 20. BAR CHART ========*/
 	var barX = document.getElementById("barChart");
 	if (barX !== null) {
-		var myChart = new Chart(barX, {
-			type: "bar",
-			data: {
-				labels: [
-					"Jan",
-					"Feb",
-					"Mar",
-					"Apr",
-					"May",
-					"Jun",
-					"Jul",
-					"Aug",
-					"Sep",
-					"Oct",
-					"Nov",
-					"Dec"
+
+	var config = {
+		type: 'line',
+		data: {
+			labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'],
+			datasets: [{
+				label: 'Not Done',
+				backgroundColor: "rgba(255,255,255,1)",
+				borderColor: "rgb(255, 99, 132)",
+				data: [
+					<?php
+					foreach($uk_all_records as $key => $uk_all_rec){
+						echo $uk_all_rec['total'] > 0 ? ($uk_all_rec['total'] - $uk_completed_records[$key]['total'])."," : "0,";
+					}
+					?>
 				],
-				datasets: [{
-					label: "signup",
-					data: [5, 6, 4.5, 5.5, 3, 6, 4.5, 6, 8, 3, 5.5, 4],
-					// data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
-					backgroundColor: "#4c84ff"
-				}]
+				fill: false,
+			}, {
+				label: 'Done',
+				fill: false,
+				backgroundColor: "rgba(255,255,255,1)",
+				borderColor: "rgb(75, 192, 192)",
+				pointRadius: 4,
+				pointBorderWidth: 2,
+				fill: false,
+				borderWidth: 2,
+				data: [
+					<?php
+					foreach($uk_completed_records as $uk_com_rec){
+						echo $uk_com_rec['total'] > 0 ? $uk_com_rec['total']."," : "0,";
+					}
+					?>
+				],
+			}]
+		},
+		options: {
+			responsive: true,
+			title: {
+				display: false,
+				text: 'Chart.js Line Chart'
 			},
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,
-				legend: {
-					display: false
-				},
-				scales: {
-					xAxes: [{
-						gridLines: {
-							drawBorder: false,
-							display: false
-						},
-						ticks: {
-							display: false, // hide main x-axis line
-							beginAtZero: true
-						},
-						barPercentage: 1.8,
-						categoryPercentage: 0.2
-					}],
-					yAxes: [{
-						gridLines: {
-							drawBorder: false, // hide main y-axis line
-							display: false
-						},
-						ticks: {
-							display: false,
-							beginAtZero: true
-						}
-					}]
-				},
-				tooltips: {
-					titleFontColor: "#888",
-					bodyFontColor: "#555",
-					titleFontSize: 12,
-					bodyFontSize: 15,
-					backgroundColor: "rgba(256,256,256,0.95)",
-					displayColors: false,
-					borderColor: "rgba(220, 220, 220, 0.9)",
-					borderWidth: 2
-				}
+			tooltips: {
+				mode: 'index',
+				intersect: false,
+			},
+			hover: {
+				mode: 'nearest',
+				intersect: true
+			},
+			legend: {
+				display: false
+			},
+			scales: {
+				xAxes: [{
+					display: false,
+					scaleLabel: {
+						display: true,
+						labelString: 'Month'
+					}
+				}],
+				yAxes: [{
+					display: false,
+					scaleLabel: {
+						display: false,
+						labelString: 'Value'
+					},
+					ticks: {
+						min: 0,
+						max: <?php echo ($total_uk) ? $total_uk : 0; ?>,
+
+						// forces step size to be 5 units
+						stepSize: 1
+					}
+				}]
 			}
-		});
+		}
+	};
+		var ukChart = new Chart(barX, config);
 	}
 
-	<?php
-
-	$book_query = new Book();
-	$s_date = date("Y-m-01");
-	$e_date = date("Y-m-t");
-	$book_query->where("publication_date", "$s_date", " >= ")->where("publication_date", "$e_date", " <= ");
-	$book_query->where("status_id", 10);
-	$books = $book_query->get();
-	
-
-
-	?>
 	/*======== 1. DUAL LINE CHART ========*/
 	var dual = document.getElementById("dual-line");
 	if (dual !== null) {
 		var urChart = new Chart(dual, {
 			type: "line",
 			data: {
-				labels: ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"],
+				labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 				datasets: [{
-						label: "Old",
+						label: "Not Done",
 						pointRadius: 4,
 						pointBackgroundColor: "rgba(255,255,255,1)",
 						pointBorderWidth: 2,
@@ -178,10 +193,16 @@
 						backgroundColor: "transparent",
 						borderWidth: 2,
 						borderColor: "#fdc506",
-						data: [0, 4, 3, 5.5, 3, 4.7, 0]
+						data: [
+							<?php
+							foreach($usa_all_records as $key => $usa_all_rec){
+								echo $usa_all_rec['total'] > 0 ? ($usa_all_rec['total'] - $usa_completed_records[$key]['total'])."," : "0,";
+							}
+							?>
+						]
 					},
 					{
-						label: "New",
+						label: "Done",
 						fill: false,
 						pointRadius: 4,
 						pointBackgroundColor: "rgba(255,255,255,1)",
@@ -189,7 +210,13 @@
 						backgroundColor: "transparent",
 						borderWidth: 2,
 						borderColor: "#4c84ff",
-						data: [0, 2, 4.3, 3.8, 5.2, 1.8, 2.2]
+						data: [
+							<?php
+							foreach($usa_completed_records as $usa_com_rec){
+								echo $usa_com_rec['total'] > 0 ? $usa_com_rec['total']."," : "0,";
+							}
+							?>
+						]
 					}
 				]
 			},
@@ -225,7 +252,10 @@
 						},
 						ticks: {
 							display: false,
-							beginAtZero: true
+							beginAtZero: true,
+							min: 0,
+							max: <?php echo ($total_usa) ? $total_usa : 0; ?>,
+							stepSize: 1
 						}
 					}]
 				},
@@ -243,17 +273,6 @@
 		});
 	}
 
-	<?php
-
-	$book_query = new Book();
-	$s_date = date("Y-m-01");
-	$e_date = date("Y-m-t");
-	$book_query->where("publication_date", "$s_date", " >= ")->where("publication_date", "$e_date", " <= ");
-	$book_query->where("status_id", 10);
-	$books = $book_query->get();
-	// print_r($books);
-	// exit;
-	?>
 
 	/*======== 6. AREA CHART ========*/
 	var area = document.getElementById("area-chart");
@@ -261,24 +280,36 @@
 		var areaChart = new Chart(area, {
 			type: "line",
 			data: {
-				labels: ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"],
+				labels: ["Mon", "Tue", "Wed", "Thu","Fri", "Sat", "Sun"],
 				datasets: [{
-						label: "New",
-						pointHitRadius: 10,
-						pointRadius: 0,
-						fill: true,
-						backgroundColor: "rgba(76, 132, 255, 0.9)",
-						borderColor: "rgba(76, 132, 255, 0.9)",
-						data: [0, 4, 2, 6.5, 3, 4.7, 0]
-					},
-					{
-						label: "Old",
+						label: "Not Done",
 						pointHitRadius: 10,
 						pointRadius: 0,
 						fill: true,
 						backgroundColor: "rgba(253, 197, 6, 0.9)",
 						borderColor: "rgba(253, 197, 6, 1)",
-						data: [0, 2, 4.3, 3.8, 5.2, 1.8, 2.2]
+						data: [
+							<?php
+							foreach($uae_all_records as $key => $uae_all_rec){
+								echo $uae_all_rec['total'] > 0 ? ($uae_all_rec['total'] - $uae_completed_records[$key]['total'])."," : "0,";
+							}
+							?>
+						]
+					},
+					{
+						label: "Done",
+						pointHitRadius: 10,
+						pointRadius: 0,
+						fill: true,
+						backgroundColor: "rgba(76, 132, 255, 0.9)",
+						borderColor: "rgba(76, 132, 255, 0.9)",
+						data: [
+							<?php
+							foreach($uae_completed_records as $uae_com_rec){
+								echo $uae_com_rec['total'] > 0 ? $uae_com_rec['total']."," : "0,";
+							}
+							?>
+						]
 					}
 				]
 			},
@@ -313,7 +344,10 @@
 						},
 						ticks: {
 							display: false,
-							beginAtZero: true
+							beginAtZero: true,
+							min: 0,
+							max: <?php echo ($total_uae) ? $total_uae : 0; ?>,
+							stepSize: 1
 						}
 					}]
 				},
@@ -332,58 +366,38 @@
 	}
 
 
-	/*======== 3. LINE CHART ========*/
-	var ctx = document.getElementById("linechart");
-	if (ctx !== null) {
-		var chart = new Chart(ctx, {
-			// The type of chart we want to create
+	var line = document.getElementById("line");
+	if (line !== null) {
+		line = line.getContext("2d");
+		var gradientFill = line.createLinearGradient(0, 120, 0, 0);
+		gradientFill.addColorStop(0, "rgba(41,204,151,0.10196)");
+		gradientFill.addColorStop(1, "rgba(41,204,151,0.30196)");
+
+		var lChart = new Chart(line, {
 			type: "line",
-
-			// The data for our dataset
 			data: {
-				labels: [
-					"Jan",
-					"Feb",
-					"Mar",
-					"Apr",
-					"May",
-					"Jun",
-					"Jul",
-					"Aug",
-					"Sep",
-					"Oct",
-					"Nov",
-					"Dec"
-				],
-				datasets: [{
-					label: "",
-					backgroundColor: "transparent",
-					borderColor: "rgb(82, 136, 255)",
-					data: [
-						100,
-						11000,
-						10000,
-						14000,
-						11000,
-						17000,
-						14500,
-						18000,
-						5000,
-						23000,
-						14000,
-						19000
-					],
-					lineTension: 0.3,
-					pointRadius: 5,
-					pointBackgroundColor: "rgba(255,255,255,1)",
-					pointHoverBackgroundColor: "rgba(255,255,255,1)",
-					pointBorderWidth: 2,
-					pointHoverRadius: 8,
-					pointHoverBorderWidth: 1
-				}]
+				labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+				datasets: [
+					{
+						label: "Book",
+						lineTension: 0,
+						pointRadius: 4,
+						pointBackgroundColor: "rgba(255,255,255,1)",
+						pointBorderWidth: 2,
+						fill: true,
+						backgroundColor: gradientFill,
+						borderColor: "#29cc97",
+						borderWidth: 2,
+						data: [
+							<?php
+								foreach($uk_all_records as $key => $uk_all_rec){
+									echo $uk_all_rec['total']+$usa_all_records[$key]['total']+$uae_all_records[$key]['total'].",";
+								}
+							?>
+						]
+					}
+				]
 			},
-
-			// Configuration options go here
 			options: {
 				responsive: true,
 				maintainAspectRatio: false,
@@ -396,68 +410,42 @@
 					}
 				},
 				scales: {
-					xAxes: [{
-						gridLines: {
-							display: false
+					xAxes: [
+						{
+							gridLines: {
+								drawBorder: false,
+								display: false
+							},
+							ticks: {
+								display: false, // hide main x-axis line
+								beginAtZero: true
+							},
+							barPercentage: 1.8,
+							categoryPercentage: 0.2
 						}
-					}],
-					yAxes: [{
-						gridLines: {
-							display: true,
-							color: "#eee",
-							zeroLineColor: "#eee",
-						},
-						ticks: {
-							callback: function(value) {
-								var ranges = [{
-										divider: 1e6,
-										suffix: "M"
-									},
-									{
-										divider: 1e4,
-										suffix: "k"
-									}
-								];
-
-								function formatNumber(n) {
-									for (var i = 0; i < ranges.length; i++) {
-										if (n >= ranges[i].divider) {
-											return (
-												(n / ranges[i].divider).toString() + ranges[i].suffix
-											);
-										}
-									}
-									return n;
-								}
-								return formatNumber(value);
+					],
+					yAxes: [
+						{
+							gridLines: {
+								drawBorder: false, // hide main y-axis line
+								display: false
+							},
+							ticks: {
+								display: false,
+								beginAtZero: true
 							}
 						}
-					}]
+					]
 				},
 				tooltips: {
-					callbacks: {
-						title: function(tooltipItem, data) {
-							return data["labels"][tooltipItem[0]["index"]];
-						},
-						label: function(tooltipItem, data) {
-							return "$" + data["datasets"][0]["data"][tooltipItem["index"]];
-						}
-					},
-					responsive: true,
-					intersect: false,
-					enabled: true,
 					titleFontColor: "#888",
 					bodyFontColor: "#555",
 					titleFontSize: 12,
-					bodyFontSize: 18,
+					bodyFontSize: 14,
 					backgroundColor: "rgba(256,256,256,0.95)",
-					xPadding: 20,
-					yPadding: 10,
-					displayColors: false,
+					displayColors: true,
 					borderColor: "rgba(220, 220, 220, 0.9)",
-					borderWidth: 2,
-					caretSize: 10,
-					caretPadding: 15
+					borderWidth: 2
 				}
 			}
 		});
@@ -471,7 +459,7 @@
 
 		if(query.length > 2){
 			$('#search-results').show();
-		
+
 			$.ajax({
 				type:'POST',
 				url: '<?php echo $base_url;?>actions/book_filter.php',
@@ -482,9 +470,50 @@
 				}
 			});
 		}
-		
+
 	}
+
+	$(document).click(function (e)
+	{
+	    var container = $("#search-results");
+
+	    if (!container.is(e.target) || !container.child().is(e.target))
+	    {
+	        $('#search-results').hide();
+	    }
+	});
+
+	$(function() {
+			//Lazy loading for images
+      $('.lazy').Lazy();
+
+			//Select 2 Ajax
+			$('#select2_books').select2({
+				minimumInputLength: 2,
+			  ajax: {
+			    url: '<?php echo $base_url; ?>actions/ajax/search_user.php',
+			    dataType: 'json',
+					type: "post",
+					quietMillis: 50,
+					data: function (term, page) {
+              return {
+                  search: term, // search term
+              };
+          },
+					processResults: function (response) {
+	           return {
+	              results: response
+	           };
+	        }
+
+			  }
+			});
+  });
+
+
 </script>
+
+
 
 </body>
 

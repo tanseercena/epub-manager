@@ -1,41 +1,160 @@
 <?php
 require_once __DIR__ . "/layouts/header.php";
 
+if($_POST){
+  $db = $_POST['db'];
+  $date_start = date("Y-m-d",strtotime($_POST['date_start']));
+  $date_end = date("Y-m-d",strtotime($_POST['date_end']));
 
+  if($db == "uk"){
+    $api_url = "https://ampdbuk.viralwebbs.com/api/epub_books.php";
+  }elseif($db == "usa"){
+    $api_url = "https://ampdbusa.viralwebbs.com/api/epub_books.php";
+  }elseif($db == "uae"){
+    $api_url = "https://ampdbuae.viralwebbs.com/api/epub_books.php";
+  }
+  $api_url .= "?date_start=$date_start&date_end=$date_end";
+
+  $api_resp = file_get_contents($api_url);
+
+  $data = json_decode($api_resp,true);
+  $error = $data['error'];
+  if(!$error){
+    $books = $data['data'];
+  }
+}
 ?>
-
-
 
 <div class="content-wrapper">
     <div class="content">
         <div class="breadcrumb-wrapper breadcrumb-contacts">
-            <h1>Import Excel Books</h1>
-            
-        </div>
+            <h1>Import Books</h1>
 
-        <!-- Import Button  -->
-        
+        </div>
 
         <div class="row">
-            <div class="col-12">
-                <!-- Recent Order Table -->
-                <div class="card card-table-border-none" id="recent-orders">
-                    <div class="card-header justify-content-between">
-                        <h2></h2>
-                        <div class="
-                         ">
-                            <span></span>
-                        </div>
+          <div class="col-12">
+            <div class="card card-default">
+              <div class="card-header card-header-border-bottom">
+                <h2>Import Books from AM Database</h2>
+              </div>
+              <div class="card-body">
+
+                <form class="form-inline" method="post" action="">
+                  <label class="sr-only" for="inlineFormInputName2">DB</label>
+                  <select class="form-control mb-2 mr-sm-2" name="db">
+                    <option value="uk">UK DB</option>
+                    <option value="usa">USA DB</option>
+                    <option value="uae">UAE DB</option>
+                  </select>
+
+                  <label class="sr-only" for="inlineFormInputGroupUsername2">Publication Start</label>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Publication Start</div>
                     </div>
-                    <div class="card-body pt-0 pb-5">
-                       <form enctype="multipart/form-data" method="POST" action="../actions/excel_file.php">
-                           <input type="file" name="file">
-                           <input type="submit" name="submit" class="btn btn-secondary">
-                       </form>
+                    <input type="date" name="date_start" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                  </div>
+
+                  <label class="sr-only" for="inlineFormInputGroupUsername2">Publication End</label>
+                  <div class="input-group mb-2 mr-sm-2">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">Publication End</div>
                     </div>
+                    <input type="date" name="date_end" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                  </div>
+
+                  <button type="submit" class="btn btn-primary mb-2">Import</button>
+                </form>
+
+                <?php
+                if($_POST){
+                  ?>
+                <div class="pt-5 mt-4 border-top w-100">
+
+                  <form action="<?php echo $base_url; ?>actions/process_books_import.php" method="post">
+                    <p class="text-primary mb-4">Process Imported Books.</p>
+                    <?php
+                    if($error){
+                      echo "<p class='text-center'>Error while fetching Books or no Book found!</p>";
+                    }else{
+                      ?>
+                      <input type="hidden" value="<?php echo $db; ?>" name="db" />
+                      <input type="hidden" value='<?php echo base64_encode(serialize($books)); ?>' name="books" />
+                      <button type="submit" class="btn btn-primary ml-2">Process Books</button>
+                      <?php
+                    }
+                    ?>
+
+                  </form>
+
+                  <div class="row pt-5">
+                    <div class="col-12">
+
+                        <table class="table card-table table-responsive table-responsive-large" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Book Title</th>
+                                    <th>ISBN</th>
+                                    <th>Penname</th>
+                                    <th>Book Type</th>
+                                    <th>Publication Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              <?php
+                              if(!$error){
+                                foreach($books as $book){
+                                  ?>
+                                  <tr>
+                                    <td><?php echo $book['book_title']; ?></td>
+                                    <td><?php echo $book['isbn']; ?></td>
+                                    <td><?php echo $book['penname']; ?></td>
+                                    <td><?php echo $book['book_type']; ?></td>
+                                    <td><?php echo $book['date_publication']; ?></td>
+
+                                    <td>
+                                      <?php
+                                       $book_ch = new Book();
+                                       $book_ch = $book_ch->where("isbn",$book['isbn'])->first();
+                                       if($book_ch){
+                                         echo "<span class='badge badge-danger'>Already Exists</span>";
+                                       }else{
+                                         echo "<span class='badge badge-success'>New Book</span>";
+                                       }
+                                      ?>
+                                    </td>
+                                  </tr>
+                                  <?php
+                                }
+                              }else{
+                                ?>
+                                <tr>
+                                  <td colspan="5"><p class="text-center">No Book Found or Error while fetching Books Data.</p></td>
+                                </tr>
+                                <?php
+                              }
+                              ?>
+                            </tbody>
+                          </table>
+
+                    </div>
+                  </div>
+
                 </div>
+                <?php
+              }
+              ?>
+
+
+              </div>
             </div>
+          </div>
+
         </div>
+
+
     </div>
 
 

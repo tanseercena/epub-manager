@@ -13,7 +13,7 @@
          else{
         // Redirect back with errors
            $errors = $book_cover[0]['errors'];
-           Session::flash('success',implode(',', $errors));
+           Session::flash('errors',implode(',', $errors));
            header("Location: ../views/manage-books.php");
            exit;
             }
@@ -33,7 +33,7 @@
           [
              'name' =>  'isbn',
              'value'=>  $_POST['isbn'],
-             'rules'=>  'required|numeric|count'
+             'rules'=>  'required|numeric|count|unique:books.isbn'
           ],
           [
              'name' =>  'publication_date',
@@ -75,6 +75,7 @@
  						'isbn'       => $_POST['isbn'],
  						'status_id'  => $_POST['status_id'],
  						'book_origin'=> $_POST['book_origin'],
+            'book_type'  => $_POST['book_type'],
   	 		    'cover'      => $cover,
             'user_id'    => $user_id,
             'created_at' => date("Y-m-d H:i:s"),
@@ -83,16 +84,36 @@
   	 	$check = $books->insert($book_data);
   	 	// $check1 = $actions->insert($book_data);
   	 	if ($check ) {
-  	 		echo "Book added successfully";
+        //Add Action and Send Notification
+        $dep_id = 0;
+        if($_POST['status_id'] == 1){
+          if($_POST['book_type'] == "text"){
+            $dep_id = 3;
+          }else{
+            $dep_id = 2;
+          }
+        }
+
+        $action = new Action($check,$_POST['status_id'],$user_id,$dep_id,'',$base_url);
+        $action_id = $action->save();
+
+        Session::flash('success',"Book added successfully");
   	 		header("Location:../views/manage-books.php");
   	 	}
   	 	else{
-  	 		echo "Error while adding book";
+        Session::flash('errors',"Error while adding Book.");
+        header("Location: ../views/manage-books.php");
   	 	}
   	 }
   	 else{
-  	     Session::flash('errors',implode(',', $errors));
-         header("Location: ../views/manage-books.php");
+       $errors_txt = "";
+       foreach($errors as $error){
+         foreach($error as $err){
+           $errors_txt .='<p>'.$err.'</p>';
+         }
+       }
+	     Session::flash('errors',$errors_txt);
+       header("Location: ../views/manage-books.php");
   	 }
 
   }

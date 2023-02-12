@@ -1,4 +1,10 @@
-<?php require_once __DIR__."/../../config/init.php"; ?>
+<?php
+require_once __DIR__."/../../config/init.php";
+  $user_id = Session::get('user_id');
+  $user_detail = new User();
+  $user_detail->find($user_id);
+
+ ?>
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -6,10 +12,10 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Sleek Dashboard - Free Bootstrap 4 Admin Dashboard Template and UI Kit. It is very powerful bootstrap admin dashboard, which allows you to build products like admin panels, content management systems and CRMs etc.">
+  <meta name="description" content="Epub Tracker by Viralwebbs">
 
 
-  <title>Epub-Manager Admin Dashboard</title>
+  <title>Epub Tracker - Dashboard</title>
 
   <!-- GOOGLE FONTS -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500" rel="stylesheet" />
@@ -21,9 +27,8 @@
 
 
 
-  <!-- No Extra plugin used -->
-
-
+  <!-- Extra plugin -->
+  <link href="<?php echo $base_url; ?>assets/plugins/select2/css/select2.min.css" rel="stylesheet" />
 
   <link href="../assets/plugins/jvectormap/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
 
@@ -33,7 +38,7 @@
 
 
 
-  <link href="../assets/plugins/toastr/toastr.min.css" rel="stylesheet" />
+  <link href="../assets/plugins/toastr/toastr.css" rel="stylesheet" />
 
 
 
@@ -42,7 +47,7 @@
   <link id="" rel="stylesheet" href="../assets/css/sleek.css" />
 
   <!-- FAVICON -->
-  <link href="../assets/img/favicon.png" rel="shortcut icon" />
+  <link href="<?php echo $base_url ?>assets/img/logo.png" rel="shortcut icon" />
 
 
 
@@ -55,6 +60,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <script src="../assets/plugins/nprogress/nprogress.js"></script>
+
+  <script src="../assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
 
@@ -71,7 +78,7 @@
 
   <div class="wrapper">
     <!-- Github Link -->
-   
+
 
             <!--
           ====================================
@@ -112,39 +119,42 @@
                       <i class="mdi mdi-bell-outline"></i>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
-                      <li class="dropdown-header">You have 5 notifications</li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-account-plus"></i> New user registered
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-account-remove"></i> User deleted
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 07 AM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-chart-areaspline"></i> Sales report is ready
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 12 PM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-account-supervisor"></i> New client
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 10 AM</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#">
-                          <i class="mdi mdi-server-network-off"></i> Server overloaded
-                          <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> 05 AM</span>
-                        </a>
-                      </li>
+                      <?php
+                        // Read Notification
+                        if ($_GET["n_id"]) {
+                            $notification_id = $_GET["n_id"];
+                            $read_notification = new Notification();
+                            $read_notification->find($notification_id);
+                            $read_notification->update(["notification_read"=>1]);
+                        }
+
+                        $read_notification = new Notification();
+                        $read_notification->where("user_id","$user_id")
+                        ->where("notification_read","0")
+                        ->orderBy("notify_at","DESC");
+                        $notifications = $read_notification->get();
+                      ?>
+                      <li class="dropdown-header">You have <?php echo count($notifications);?> Notifications</li>
+                      <?php
+                         $no_of_notification = 0;
+                         foreach ($notifications as $notification) {
+                          $no_of_notification++;
+                          if ($no_of_notification > 10) {
+                            break;
+                          }
+                         ?>
+                           <li>
+                             <a href="<?php echo $base_url; ?>views/book-actions.php?id=<?php echo $notification['book_id']; ?>&n_id=<?php echo $notification['id'];?>#action-<?php echo $notification['action_id']; ?>">
+                               <i class="mdi mdi-message-plus"></i> <?php
+                                  echo $notification['title'] ; ?>
+                               <span class=" font-size-12 d-inline-block float-right"><i class="mdi mdi-clock-outline"></i> <?php echo Helper::time_elapsed_string($notification['notify_at']); ?></span>
+                             </a>
+                           </li>
+                         <?php
+                         }
+                         ?>
                       <li class="dropdown-footer">
-                        <a class="text-center" href="#"> View All </a>
+                        <a class="text-center" href="../views/all-notification.php"> View All </a>
                       </li>
                     </ul>
                   </li>
@@ -155,19 +165,19 @@
                   <li class="dropdown user-menu">
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                       <img src="../assets/img/user/user.png" class="user-image" alt="User Image" />
-                      <span class="d-none d-lg-inline-block">Abdus Salam</span>
+                      <span class="d-none d-lg-inline-block"><?php echo $user_detail->firstname; ?></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right">
                       <!-- User image -->
                       <li class="dropdown-header">
                         <img src="../assets/img/user/user.png" class="img-circle" alt="User Image" />
                         <div class="d-inline-block">
-                          Abdus Salam <small class="pt-1">iamabdus@gmail.com</small>
+                          <?php echo $user_detail->firstname; ?> <small class="pt-1"><?php echo $user_detail->email;?></small>
                         </div>
                       </li>
 
                       <li>
-                        <a href="user-profile.html">
+                        <a href="user-profile.html" class="d-none">
                           <i class="mdi mdi-account"></i> My Profile
                         </a>
                       </li>
@@ -179,6 +189,6 @@
                 </ul>
               </div>
             </nav>
-            
+
 
           </header>
